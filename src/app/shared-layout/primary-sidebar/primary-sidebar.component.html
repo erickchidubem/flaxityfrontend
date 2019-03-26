@@ -1,0 +1,173 @@
+ <!--Start sidebar-wrapper-->
+ <div id="sidebar-wrapper" class="bg-theme bg-theme2" data-simplebar="" data-simplebar-auto-hide="true">
+    <div class="brand-logo">
+     <a routerLink="/access/">
+      <img src="../../../external-assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+      <h5 class="logo-text">Flaxity</h5>
+    </a>
+  </div>
+  <div class="user-details">
+   <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#user-dropdown">
+     <div class="avatar"><img class="mr-3 side-user-img" src="../../../external-assets/images/avatars/avatar-13.png" alt="user avatar"></div>
+            <div class="media-body">
+            <h6 class="side-user-name">{{userInfo.firstName}} {{userInfo.lastName}}</h6>
+            </div>
+    </div>
+    <div id="user-dropdown" class="collapse">
+        <ul class="user-setting-menu">
+            <li><a href="javaScript:void();"><i class="icon-user"></i>  My Profile</a></li>
+            <li><a routerLink="/access/users/change-password"><i class="icon-settings"></i> Setting</a></li>
+        <li><a href="javaScript:void();" (click)="utils.Logout()"><i class="icon-power"></i> Logout</a></li>
+        </ul>
+    </div>
+ </div>
+ <ng-container *ngIf="grantAccess">
+  <ul class="sidebar-menu do-nicescrol">
+     <li class="sidebar-header">MAIN NAVIGATION</li>
+    
+     <!---- MENU DROP DOWN ---->
+     <div class="user-details">
+            <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#dashboards-dropdown">
+                     <div class="media-body">
+                     <h6 class="side-user-name"><i class="zmdi zmdi-view-dashboard"></i><span> Dashboard</span></h6>
+                     </div>
+             </div>
+             <div id="dashboards-dropdown" class="collapse">
+                 <ul class="user-setting-menu">
+                     <li><a routerLink="/access/dashboard"><i class="fa fa-bar-chart"></i> Sales</a></li>
+                     <li><a routerLink="/access/dashboard"><i class="fa fa-area-chart"></i> Service</a></li>
+                 <li><a routerLink="/access/dashboard"><i class="fa fa-calculator"></i> Warehouse</a></li>
+                 </ul>
+             </div>
+     </div>
+
+    <!---- END MENU DROP DOWN ---->
+
+     <!---- MENU DROP DOWN ---->
+     <div class="user-details">
+        <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#usermanage-dropdown">
+                 <div class="media-body">
+                 <h6 class="side-user-name"><i class="fa fa-user"></i><span> User Management</span></h6>
+                 </div>
+         </div>
+         <div id="usermanage-dropdown" class="collapse">
+             <ul class="user-setting-menu">
+                 <li><a routerLink="/access/users/"><i class="zmdi zmdi-long-arrow-right"></i> All Internal Users</a></li>              
+                 <li><a routerLink="/access/users/create-user"><i class="zmdi zmdi-long-arrow-right"></i> Create Users</a></li>
+             </ul>
+         </div>
+ </div>
+
+<!---- END MENU DROP DOWN ---->
+
+     <!---- MENU DROP DOWN ---->
+     <div class="user-details">
+            <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#account-dropdown">
+                     <div class="media-body">
+                     <h6 class="side-user-name"><i class="zmdi zmdi-layers"></i><span> Leads and Accounts</span></h6>
+                     </div>
+             </div>
+             <div id="account-dropdown" class="collapse">
+                 <ul class="user-setting-menu">
+                     <li><a routerLink="/access/lead/view-all-lead"><i class="icon-user"></i>View All Leads</a></li>
+                     <li><a routerLink="/access/lead/view-my-lead"><i class="fa fa-address-book"></i>View My Leads</a></li>
+                    <li><a routerLink="/access/lead/view-all-account"><i class="fa fa-address-book-o"></i>View All Accounts</a></li>
+                 
+                    <li><a routerLink="/access/lead/add-lead"><i class="fa fa-user-circle-o"></i>Create Lead</a></li>
+                 </ul>
+             </div>
+     </div>
+
+    <!---- END MENU DROP DOWN ---->
+
+     <!---- MENU DROP DOWN ---->
+     <div class="user-details">
+            <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#machine-dropdown">
+                     <div class="media-body">
+                     <h6 class="side-user-name"><i class="fa fa-forumbee"></i><span> Maintenance</span></h6>
+                     </div>
+             </div>
+             <div id="machine-dropdown" class="collapse">
+                 <ul class="user-setting-menu">
+                     <li><a routerLink="/access/maintenance/view-all-lead"><i class="zmdi zmdi-camera-rear"></i>View Machines</a></li>
+                     <li><a routerLink="/access/maintenance/view-my-lead"><i class="zmdi zmdi-phone-in-talk"></i>Service Calls</a></li>
+                    <li><a routerLink="/access/maintenance/view-all-account"><i class="zmdi zmdi-run"></i>Follow Up Call</a></li>
+                 
+                    <li><a routerLink="/access/maintenance/add-lead"><i class="zmdi zmdi-phone-ring"></i>Create Call</a></li>
+                 </ul>
+             </div>
+     </div>
+
+    <!---- END MENU DROP DOWN ---->
+
+
+     <!---- MENU DROP DOWN ---->
+     <div class="user-details">
+        <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#warehouse-dropdown">
+                 <div class="media-body">
+                 <h6 class="side-user-name"><i class="zmdi zmdi-card-travel"></i><span> Ware House</span></h6>
+                 </div>
+         </div>
+         <div id="warehouse-dropdown" class="collapse">
+             <ul class="user-setting-menu">
+                 <li><a routerLink="/access/products/view-all-products"><i class="zmdi zmdi-long-arrow-right"></i> All Products</a></li>              
+                 <li><a routerLink="/access/products/create-product"><i class="zmdi zmdi-long-arrow-right"></i> Create Product</a></li>
+             </ul>
+         </div>
+ </div>
+
+ 
+<!-- <div class="user-details">
+    <div class="media align-items-center" >
+             <div class="media-body">
+          <a routerLink="/access/expenses">   
+              <h6 class="side-user-name"><i class="zmdi zmdi-coffee text-danger"></i><span> Expenses</span></h6>
+          </a>
+             </div>
+     </div>
+</div> -->
+<!---- MENU DROP DOWN ---->
+<div class="user-details">
+    <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#sales-dropdown">
+             <div class="media-body">
+             <h6 class="side-user-name"><i class="zmdi zmdi-grid"></i><span> Process Sales</span></h6>
+             </div>
+     </div>
+     <div id="sales-dropdown" class="collapse">
+         <ul class="user-setting-menu">
+             <li><a routerLink="/access/sales/make-sales"><i class="zmdi zmdi-long-arrow-right"></i>Make Sales</a></li>              
+             <li><a routerLink="/access/sales/view-collected/4/ALL-COLLECTED"><i class="zmdi zmdi-long-arrow-right"></i>Collected Orders</a></li>              
+             <li><a routerLink="/access/sales/view-uncollected/0"><i class="zmdi zmdi-long-arrow-right"></i>Uncollected Orders</a></li> 
+             <li><a routerLink="/access/products/view-all-products"><i class="zmdi zmdi-long-arrow-right"></i>Payment Reconciliation</a></li>              
+                         
+            
+         </ul>
+     </div>
+</div>
+
+<!---- END MENU DROP DOWN ---->
+
+
+
+  <!---- MENU DROP DOWN ---->
+  <div class="user-details">
+    <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#settings-dropdown">
+             <div class="media-body">
+             <h6 class="side-user-name"><i class="icon-settings icons"></i><span> Settings</span></h6>
+             </div>
+     </div>
+     <div id="settings-dropdown" class="collapse">
+         <ul class="user-setting-menu">
+             <li><a routerLink="/access/settings/product-category"><i class="zmdi zmdi-long-arrow-right"></i>Category Settings</a></li>              
+            
+         </ul>
+     </div>
+</div>
+
+<!---- END MENU DROP DOWN ---->
+
+    
+    </ul>
+  </ng-container>
+  </div>
+  <!--End sidebar-wrapper-->

@@ -1,0 +1,83 @@
+<div class="container-fluid">
+
+  <div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header text-uppercase">Category</div>
+      <div class="card-body">
+
+        <div *ngIf="createNewCategory">
+          <form [formGroup]="form" (ngSubmit)="registerCategory()">
+           
+            <div class="form-group row col-md-12">
+              <label for="input-21" class="col-sm-3 col-form-label">Category Name</label>
+              <div class="col-sm-5">
+                   <input type="text" formControlName="type" class="form-control" 
+                   [ngClass]="{ 'is-invalid': submitted && f.type.errors }"
+                   placeholder="Enter Category Name">
+
+                   <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                      <div *ngIf="f.type.errors.required">this field is required</div>        
+                  </div>
+
+              </div>
+              <div class="col-sm-3"><button class="btn btn-round btn-success">Add</button> </div>
+          </div>
+
+          </form>
+      </div>
+
+      <div *ngIf="createNewSubCategory">
+          <form [formGroup]="form2" (ngSubmit)="registerSubCategory()">
+           
+            <div class="form-group row col-md-12">
+              <label for="input-21" class="col-sm-3 col-form-label">Category Name</label>
+              <div class="col-sm-3">
+                <select class="form-control" formControlName="product_type_id"
+                [ngClass]="{ 'is-invalid': submitted2 && g.product_type_id.errors }">
+                  <option></option>
+                  <ng-container *ngFor="let c of productType">
+                    <option value="{{c.id}}">{{c.type}}</option>
+                  </ng-container>
+                </select>
+                <div *ngIf="submitted2 && g.product_type_id.errors" class="invalid-feedback">
+                   <div *ngIf="g.product_type_id.errors.required">this field is required</div>        
+               </div>
+
+           </div>
+              <div class="col-sm-4">
+                   <input type="text" formControlName="product_sub" class="form-control" 
+                   [ngClass]="{ 'is-invalid': submitted2 && g.product_sub.errors }"
+                   placeholder="Enter Sub Category Name">
+
+                   <div *ngIf="submitted2 && g.product_sub.errors" class="invalid-feedback">
+                      <div *ngIf="g.product_sub.errors.required">this field is required</div>        
+                  </div>
+
+              </div>
+              <div class="col-sm-2"><button class="btn btn-round btn-success">Add</button> </div>
+          </div>
+
+          </form>
+      </div>
+          <br/>
+          <hr/>
+        <table class="table table-sm table-bordered table-striped">
+          <tr>
+            <th colspan="2">Product Category  <button class="btn btn-success" (click)="AddCategory()">Add</button></th>
+            <th colspan="2">Product Sub-Category  <button class="btn btn-success" (click)="AddSubCategory()">Add</button></th>
+           
+          </tr>
+          <tr *ngFor="let c of productType2">
+           
+            <td>{{c.type}}</td> <td><button (click)="EditCategory(c.product_type_id,c.type)" *ngIf="c.product_type_id > 4" class="btn btn-round btn-info"> Edit</button></td>
+            <td>{{c.product_sub}}</td><td><button (click)="EditSubcategory(c.id,c.product_type_id,c.product_sub)" class="btn btn-round btn-warning">Edit</button></td>
+           
+          </tr>
+        </table>
+        
+        </div>
+    </div>
+  </div>
+  </div>
+</div> 

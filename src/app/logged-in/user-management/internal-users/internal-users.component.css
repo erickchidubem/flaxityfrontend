@@ -1,0 +1,16 @@
+
+ul.centered-ul{
+    display :flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+centered-ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 2px solid;
+    outline-offset: -1px;
+    width:200px;
+    height: 100px;
+}

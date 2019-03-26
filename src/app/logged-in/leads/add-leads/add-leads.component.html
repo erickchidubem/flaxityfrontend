@@ -1,0 +1,208 @@
+<div class="container-fluid">
+    <!-- Breadcrumb-->
+   <div class="row pt-2 pb-2">
+      <div class="col-sm-9">
+      <h4 class="page-title">{{editCreateHeader}}</h4>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javaScript:void();">Flaxity</a></li>
+          <li class="breadcrumb-item"><a href="javaScript:void();">Leads and Accounts</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{editCreateHeader}}</li>
+       </ol>
+   </div>
+    <div class="col-sm-3">
+      <div class="btn-group float-sm-right">
+        <button type="button" class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i> Menu</button>
+        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown">
+        <span class="caret"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a routerLink="/access/add-lead" class="dropdown-item">Add New Lead</a>
+          <a href="javaScript:void();" class="dropdown-item">View Accounts</a>
+          
+          <div class="dropdown-divider"></div>
+          <a href="javaScript:void();" class="dropdown-item">Separated link</a>
+        </div>
+      </div>
+    </div>
+   </div>
+  
+   <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header text-uppercase">{{editCreateHeader}}</div>
+              <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="Register()">
+              
+                  <div class="row">
+                   
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Name</label>
+                          <div class="col-sm-9">
+                               <input type="text" formControlName="name" class="form-control" 
+                               [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                               placeholder="Enter Account Name">
+
+                               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                  <div *ngIf="f.name.errors.required">this field is required</div>        
+                              </div>
+
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Source</label>
+                          <div class="col-sm-9 input-group">
+                            <select class="form-control" formControlName="leadSource"
+                            [ngClass]="{ 'is-invalid': submitted && f.leadSource.errors }">
+                              <option></option>
+                              <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option>
+                            </select>  
+                             <div class="input-group-append">
+                                  <span class="input-group-text"><i class="fa fa-plus-square"></i></span>
+                             </div>
+                             <div *ngIf="submitted && f.leadSource.errors" class="invalid-feedback">
+                                <div *ngIf="f.leadSource.errors.required">this field is required</div>        
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Phone</label>
+                          <div class="col-sm-9">
+                               <input type="text" formControlName="phone"  [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+                                class="form-control" placeholder="Enter Account Phone Number" (keypress)="utils.numberOnly($event)">
+                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                    <div *ngIf="f.phone.errors.required">this field is required</div>        
+                                </div>
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Email</label>
+                          <div class="col-sm-9">
+                               <input type="text" formControlName="email"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                               class="form-control" placeholder="Enter Account Email Address">
+
+                               <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                  <div *ngIf="f.email.errors.required">this field is required</div> 
+                                  <div *ngIf="f.email.errors.email">this is not a valid email address</div>       
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Assign (Sales)</label>
+                          <div class="col-sm-9 input-group">
+                            <select class="form-control" formControlName="sales_Assign"
+                              [ngClass]="{ 'is-invalid': submitted && f.sales_Assign.errors }">
+                                <option></option>
+                                <ng-container *ngFor="let c of Users" >
+                                       <option *ngIf="c.departmentId == 1 || c.departmentId == 2 "  value="{{c.id}}">{{c.firstName}} {{c.lastName}}</option>
+                                </ng-container>
+                            </select>  
+                            <div *ngIf="submitted && f.sales_Assign.errors" class="invalid-feedback">
+                                <div *ngIf="f.sales_Assign.errors.required">this field is required</div>        
+                            </div>
+                           
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Assign (Service)</label>
+                          <div class="col-sm-9 input-group">
+                            <select class="form-control" formControlName="service_Assign"
+                            [ngClass]="{ 'is-invalid': submitted && f.service_Assign.errors }">
+                              <option></option>
+                              <ng-container *ngFor="let c of Users" >
+                                  <option *ngIf="c.departmentId == 4 "  value="{{c.id}}">{{c.firstName}} {{c.lastName}}</option>
+                           </ng-container>
+                            </select>  
+                            <div *ngIf="submitted && f.service_Assign.errors" class="invalid-feedback">
+                                <div *ngIf="f.service_Assign.errors.required">this field is required</div>        
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Industry</label>
+                          <div class="col-sm-9 input-group">
+                            <select class="form-control" formControlName="industryId"
+                            [ngClass]="{ 'is-invalid': submitted && f.industryId.errors }">
+                              <option></option>
+                              <option *ngFor="let c of Industry" value="{{c.id}}">{{c.sector}}</option>
+                            </select>  
+
+                            <div *ngIf="submitted && f.industryId.errors" class="invalid-feedback">
+                                <div *ngIf="f.industryId.errors.required">this field is required</div>        
+                            </div>
+                           
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Sale Stage</label>
+                          <div class="col-sm-9 input-group">
+                            <select class="form-control" formControlName="currentSalesStage"
+                            [ngClass]="{ 'is-invalid': submitted && f.currentSalesStage.errors }">
+                              <option></option>
+                              <option *ngFor="let c of SalesStage" value="{{c.sales_percentage}}">{{c.stage_name}} - {{c.sales_percentage}} %</option>
+                            </select> 
+
+                            <div *ngIf="submitted && f.currentSalesStage.errors" class="invalid-feedback">
+                                <div *ngIf="f.currentSalesStage.errors.required">this field is required</div>        
+                            </div>
+                           
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                        <label for="input-21" class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-9 input-group">
+                            
+                          <textarea class="form-control" rows="4" formControlName="address" 
+                           [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
+
+                           <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                              <div *ngIf="f.address.errors.required">this field is required</div>
+                                  
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                            <label for="input-21" class="col-sm-3 col-form-label">Is this an Account?</label>
+                            <div class="col-sm-9 input-group">
+                                
+                                    <select class="form-control" formControlName="account"
+                                    [ngClass]="{ 'is-invalid': submitted && f.account.errors }">
+                                      <option value ="0">NO</option>
+                                      <option value ="1">YES</option>
+                                 </select> 
+        
+                                    <div *ngIf="submitted && f.account.errors" class="invalid-feedback">
+                                        <div *ngIf="f.account.errors.required">this field is required</div>        
+                                    </div>
+                              
+                            </div>
+                          </div>
+                      <hr/>
+
+                  </div>
+                  <div class="row">
+                      <div class="row col-md-10">      
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i> CANCEL</button>
+                                              
+                        </div>       
+                        <div class="col-md-6">
+                            <button class="btn btn-success col-md-6"><i class="fa fa-check-square-o"></i> SAVE</button>                   
+                          </div> 
+                       </div>
+                    </div>
+              
+              </form>
+
+              </div>
+            </div>
+          </div>
+   </div>

@@ -1,0 +1,123 @@
+<div id="accordion1">
+<div class="card mb-2">
+    <div class="card-header">
+        <button class="btn btn-link shadow-none" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+          Lead Story Updates
+        </button>
+    </div>
+
+    <div id="collapse-1" class="collapse show" data-parent="#accordion1">
+      <div class="card-body">
+        <!-- <div class="card-title text-uppercase">Some title example here</div>
+        -->
+        <div class="table-responsive">
+            <table class="table table-sm table-striped table-bordered">
+             <thead>
+               <tr>
+                 <td colspan="4"></td>
+                 <td>
+                    <button data-toggle="modal" (click)="generate()"
+                     data-target="#leadstory" class="btn  btn-primary m-1">
+                       Create 
+                    </button>
+                 </td>
+               </tr>
+               <tr>
+                 <th scope="col">#</th>
+                 <th scope="col">Revist Status</th>
+                 <th scope="col">Created Date</th>
+                
+                 <th scope="col">Proposed Revist</th>
+                 <th scope="col">Initial Sales Stage</th>
+                 
+                 
+               </tr>
+             </thead>
+             <tbody>
+             <ng-container *ngFor="let c of leadStoryInfo; let i = index,lst as isLast">
+               <tr>
+                 <th scope="row">{{i+1}}.</th>
+                 <td>
+                    <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-primary m-1" *ngIf="c.revisit == 0 && c.requiredTimeToUpdate < 72">
+                      Pending Revisit in {{c.whenToRevisit}} hr(s)
+                    </a>
+                    <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-danger m-1" *ngIf="c.revisit == 0 && c.requiredTimeToUpdate > 72">Did not Revisit </a>
+                    <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-success m-1" *ngIf="c.revisit == 1">Visited</a>
+                  </td>
+                 <td>{{c.createdDate | date:'EEEE, d, MMMM, yyyy'}}</td>
+                 <td>{{c.proposedRevisitDate | date:'EEEE, d, MMMM, yyyy'}}</td>
+                 <td>{{c.initial_salesstage}}</td>
+                
+                 
+
+               </tr>
+             </ng-container>
+             </tbody>
+           </table>
+     </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="leadstory">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Lead Revisit Story</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div [innerHTML] = "storyInformation" style="text-align:center"></div>
+
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div *ngIf="formShow" class="modal-body">
+          
+              <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label for="input-1">Sales Stage</label>
+                      <select class="form-control" formControlName="salesstage"
+                      [ngClass]="{ 'is-invalid': submitted && f.salesstage.errors }">
+                        <option></option>
+                        <option *ngFor="let c of SalesStage" value="{{c.sales_percentage}}">{{c.stage_name}} - {{c.sales_percentage}} %</option>
+                      </select> 
+
+                      <div *ngIf="submitted && f.salesstage.errors" class="invalid-feedback">
+                          <div *ngIf="f.salesstage.errors.required">this field is required</div>        
+                      </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                      <label for="input-2">Proposed Date</label>
+                      <input [owlDateTime]="dt1" formControlName ="proposedRevisitDate"
+                      [ngClass]="{ 'is-invalid': submitted && f.proposedRevisitDate.errors }"
+                       class="form-control" [min]="2/24/2019"
+                      [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+                        <owl-date-time #dt1 ></owl-date-time>
+                        <div *ngIf="submitted && f.proposedRevisitDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.proposedRevisitDate.errors.required">this field is required</div>        
+                        </div>
+                    </div>
+              </div>
+                <div class="form-group">
+                  <label for="input-3">Story Update</label>
+                  <textarea class="form-control" formControlName="firstDescription"
+                  [ngClass]="{ 'is-invalid': submitted && f.firstDescription.errors }"
+                  ></textarea>
+                  <div *ngIf="submitted && f.firstDescription.errors" class="invalid-feedback">
+                      <div *ngIf="f.firstDescription.errors.required">this field is required</div>        
+                  </div>
+                </div>
+              
+              
+          
+            </div>
+            <div class="modal-footer">
+              <button type="button" (click)="resetForm()" class="btn btn-inverse-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+              <button *ngIf="formShow" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+            </div>
+      </form>
+      </div>
+    </div>
+  </div>

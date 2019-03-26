@@ -1,0 +1,251 @@
+<div class="row">
+  <div class="col-lg-12">
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{editCreateHeader}}   </h5>
+      <div class="table-responsive">
+             <table class="table table-bordered  table-striped">
+               
+                <tr>
+                    <th scope="row">PRODUCT NAME</th>
+                    <td scope="col" colspan="3">{{productInfo?.productName}}</td>
+                  
+                  </tr>
+                  <tr>
+                    <th scope="row">PRODUCT CODE</th>
+                    <td scope="col">{{productInfo?.code}}</td>
+                    <th scope="row">PRODUCT TYPE</th>
+                    <td scope="col">{{productInfo?.type}} ---  {{productInfo?.product_sub}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">SELLING PRICE</th>
+                      <td scope="col">{{utils.getCurrency()}}{{productInfo?.sellingPrice | number:'.2'}}</td>
+                      <th scope="row">COST PRICE</th>
+                      <td scope="col">{{utils.getCurrency()}}{{productInfo?.costPrice | number:'.2'}}</td>
+                    </tr>
+                  <tr>
+                    <td colspan="3"></td>
+                   
+                    <td> <a routerLink="/access/products/edit-product/{{productInfo?.id}}" class="btn btn-rounded btn-sm btn-warning">Edit Product Info</a></td>
+                  </tr>
+              
+                 
+              </table>
+          </div>
+          </div>
+        </div>
+ 
+        <div class="row mt-3">
+            <div class="col-12 col-lg-6 col-xl-4">
+              <div class="card">
+              <div class="card-body">
+                  <p class="mb-0 text-primary">Total In Store 1 
+                   </p>
+                   <div class="text-center">
+                   <h4 class="mb-0 py-3 text-primary">{{productInfo?.store1}}</h4>
+                   </div>
+                
+                  <div class="row">
+                    <div class="col-md-6"> 
+                      <span class="float-left">
+
+                        <button data-toggle="modal" (click)="showModalInfo(1,productInfo?.store1)" data-target="#addStockToStore" 
+                        class="btn btn-xs btn-outline-primary">
+                          <i class="fa fa-plus-circle"></i> add 
+                        </button>&nbsp; 
+                      </span></div>
+                      <div class="col-md-6">
+                        <span class="float-right">
+                  <button class="btn btn-xs btn-outline-warning"><i class="fa fa-bar-chart"></i> Report </button>&nbsp; 
+                        </span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+        
+        </div>
+
+        <div id="accordion1">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <button class="btn btn-link shadow-none" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+                      Product Report for {{productInfo?.productName}}
+                    </button>
+                </div>
+            
+                <div id="collapse-1" class="collapse show" data-parent="#accordion1">
+                  <div class="card-body">
+                    <!-- <div class="card-title text-uppercase">Some title example here</div>
+                    -->
+                    <div class="table-responsive">
+                         <!--Table start here -->
+          <div class="row">
+              <div class="col-6">
+                <div class="form-inline">
+                  <div class="form-group">
+                    <div class="input-group mr-3">
+                        <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" (click)="searchFormControl.setValue('')">
+                            x
+                          </button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="float-right">
+                  
+                    <ngb-pagination 
+                    [collectionSize]="tableDataSource$.value.length" 
+                    [pageSize]="pageSize$.value"
+                    [page]="currentPage$.value"
+                    (pageChange)="currentPage$.next($event)"
+                    >
+                  </ngb-pagination>
+ 
+                </div>
+              </div>
+            </div>
+           <table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
+ 
+              <!-- "storeId","productName","createdDate","createdBy","added","returned","removed","sold","finalQty","Description" -->
+            <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
+            <tr cdk-row *cdkRowDef="let row; columns : columns"></tr>
+            
+            <ng-container cdkColumnDef="storeId">
+                <th cdk-header-cell *cdkHeaderCellDef>Store</th>
+                <td cdk-cell *cdkCellDef="let row">
+                    {{row.store}}
+                </td>
+            </ng-container>
+
+                <ng-container cdkColumnDef="productName">
+                    <th cdk-header-cell *cdkHeaderCellDef>Product Name</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                          {{row.productName}}
+                    </td>
+                </ng-container>
+            
+                <ng-container cdkColumnDef="createdDate">
+                    <th cdk-header-cell *cdkHeaderCellDef>Date Created</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.createdDate | date:'dd-MMMM-yyyy'}}</td>
+                </ng-container> 
+           
+                
+                <ng-container cdkColumnDef="createdBy">
+                    <th cdk-header-cell *cdkHeaderCellDef>Created By</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.admin_name}}</td>
+                </ng-container>
+
+                <ng-container cdkColumnDef="added">
+                    <th cdk-header-cell *cdkHeaderCellDef>Added</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                        {{row.added}}
+                    </td>
+                </ng-container>
+
+                <ng-container cdkColumnDef="returned">
+                    <th cdk-header-cell *cdkHeaderCellDef>Returned</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                        {{row.returned}}
+                    </td>
+                </ng-container>
+
+                <ng-container cdkColumnDef="removed">
+                    <th cdk-header-cell *cdkHeaderCellDef>Removed</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                        {{row.removed}}
+                    </td>
+                </ng-container>
+
+                <ng-container cdkColumnDef="sold">
+                    <th cdk-header-cell *cdkHeaderCellDef>Sold</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                        {{row.sold}}
+                    </td>
+                </ng-container>
+            
+                <ng-container cdkColumnDef="finalQty">
+                    <th cdk-header-cell *cdkHeaderCellDef>Final Qty</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                        {{row.finalQty}}
+                    </td>
+                </ng-container>
+
+                <ng-container cdkColumnDef="Description">
+                    <th cdk-header-cell *cdkHeaderCellDef>Description</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                        {{row.description}}
+                    </td>
+                </ng-container>
+            
+               
+            
+            </table>
+           
+           <!--table ends here -->
+                       
+                 </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+   </div>
+ 
+ </div>
+
+
+
+
+
+
+
+
+
+
+ <div class="modal fade" id="addStockToStore">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add {{productInfo?.productName}} to Store {{storeCheckId}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+ 
+        <form [formGroup]="formStockAdd" (ngSubmit)="SubmitStock()">
+                  <div class="modal-body">
+                    <h2 class="mb-0 py3 text-primary">{{productInfo?.productName}}</h2>
+                      <h4 class="mb-0 py-3 text-primary">{{ProductStoreQty}}</h4>
+                    <div class="form-group input-group-lg mb-3">
+                      <label for="input-1">New Stock Qty To Add To Store {{storeCheckId}}</label>
+                      <input type="text" class="form-control" formControlName ="qty" 
+                      (keypress)="utils.numberOnly($event)" 
+                      [ngClass]="{ 'is-invalid': stocksubmitted && f.qty.errors }"
+                      placeholder="Enter New Stock">
+                      <div *ngIf="stocksubmitted && f.qty.errors" class="invalid-feedback">
+                          <div *ngIf="f.qty.errors.required">this field is required</div>        
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-1">Description</label>
+                        <textarea class="form-control" formControlName="description"
+                        [ngClass]="{ 'is-invalid': stocksubmitted && f.description.errors }"
+                        placeholder="Enter a good description so you can remember this day ;)"></textarea>
+                        <div *ngIf="stocksubmitted && f.description.errors" class="invalid-feedback">
+                            <div *ngIf="f.description.errors.required">this field is required</div>        
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-inverse-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    <button class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+                  </div>
+      </form>
+      </div>
+    </div>
+  </div>

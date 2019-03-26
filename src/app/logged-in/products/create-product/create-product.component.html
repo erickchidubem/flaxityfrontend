@@ -1,0 +1,174 @@
+<div class="container-fluid">
+  <!-- Breadcrumb
+ <div class="row pt-2 pb-2">
+    <div class="col-sm-9">
+    <h4 class="page-title">{{editCreateHeader}}</h4>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javaScript:void();">Flaxity</a></li>
+        <li class="breadcrumb-item"><a href="javaScript:void();">Leads and Accounts</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{editCreateHeader}}</li>
+     </ol>
+ </div>
+  
+ </div>-->
+
+ <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header text-uppercase">{{editCreateHeader}}</div>
+            <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="Register()">
+            
+                <div class="row">
+                 
+                    <div class="form-group row col-md-6">
+                        <label for="input-21" class="col-sm-3 col-form-label">Product Name</label>
+                        <div class="col-sm-9">
+                             <input type="text" formControlName="productName" class="form-control" 
+                             [ngClass]="{ 'is-invalid': submitted && f.productName.errors }"
+                             placeholder="Enter Product Name">
+
+                             <div *ngIf="submitted && f.productName.errors" class="invalid-feedback">
+                                <div *ngIf="f.productName.errors.required">this field is required</div>        
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-6">
+                        <label for="input-21" class="col-sm-3 col-form-label">Category</label>
+                        <div class="col-sm-4 input-group">
+                          <select class="form-control" formControlName="product_type_id"
+                          (change)="getsubCategory($event.target.value)"
+                          [ngClass]="{ 'is-invalid': submitted && f.product_type_id.errors }">
+                            <option></option>
+                            <option *ngFor="let c of productType" value="{{c.id}}">{{c.type}}</option>
+                          </select>  
+                          
+                           <div *ngIf="submitted && f.product_type_id.errors" class="invalid-feedback">
+                              <div *ngIf="f.product_type_id.errors.required">this field is required</div>        
+                          </div>
+                        </div>
+
+                        <div class="col-sm-5 input-group">
+                            <select class="form-control" formControlName="product_sub_id"
+                            [ngClass]="{ 'is-invalid': submitted && f.product_sub_id.errors }">
+                              <option></option>
+                              <option *ngFor="let c of productTypeLoad" value="{{c.id}}">{{c.product_sub}}</option>
+                            </select>  
+                             
+                             <div *ngIf="submitted && f.product_sub_id.errors" class="invalid-feedback">
+                                <div *ngIf="f.product_sub_id.errors.required">this field is required</div>        
+                            </div>
+                          </div>
+
+                    </div>
+
+                    <div class="form-group row col-md-6">
+                        <label for="input-21" class="col-sm-3 col-form-label">Product Code</label>
+                        <div class="col-sm-9">
+                             <input type="text" formControlName="code"  
+                             [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                              class="form-control" placeholder="Enter Product Code" >
+                              <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                                  <div *ngIf="f.code.errors.required">this field is required</div>        
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-6">
+                      <label for="input-21" class="col-sm-3 col-form-label">Unit</label>
+                      <div class="col-sm-9 input-group">
+                          
+                              <select class="form-control" formControlName="unit"
+                              [ngClass]="{ 'is-invalid': submitted && f.unit.errors }">
+                                <option>Pcs</option>
+                              
+                           </select> 
+  
+                              <div *ngIf="submitted && f.unit.errors" class="invalid-feedback">
+                                  <div *ngIf="f.unit.errors.required">this field is required</div>        
+                              </div>
+                        
+                      </div>
+                    </div>
+
+                    <div class="form-group row col-md-6">
+                        <label for="input-21" class="col-sm-3 col-form-label">Cost Price</label>
+                        <div class="col-sm-9">
+                             <input type="text" formControlName="costPrice"  [ngClass]="{ 'is-invalid': submitted && f.costPrice.errors }"
+                             class="form-control" placeholder="Enter Cost Price"
+                             (keypress)="utils.decimalsOnly($event,f.costPrice)" 
+                             >
+
+                             <div *ngIf="submitted && f.costPrice.errors" class="invalid-feedback">
+                                <div *ngIf="f.costPrice.errors.required">this field is required</div>        
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-6">
+                      <label for="input-21" class="col-sm-3 col-form-label">Selling Price</label>
+                      <div class="col-sm-9">
+                           <input type="text" formControlName="sellingPrice"  [ngClass]="{ 'is-invalid': submitted && f.sellingPrice.errors }"
+                           class="form-control"   (keypress)="utils.decimalsOnly($event,f.sellingPrice)"
+                           placeholder="Enter Selling Price">
+
+                           <div *ngIf="submitted && f.sellingPrice.errors" class="invalid-feedback">
+                              <div *ngIf="f.sellingPrice.errors.required">this field is required</div>        
+                          </div>
+                      </div>
+                  </div>
+
+                  
+
+                    <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Is this active?</label>
+                          <div class="col-sm-9 input-group">
+                              
+                                  <select class="form-control" formControlName="active"
+                                  [ngClass]="{ 'is-invalid': submitted && f.active.errors }">
+                                    <option value ="0">NO</option>
+                                    <option value ="1">YES</option>
+                               </select> 
+      
+                                  <div *ngIf="submitted && f.active.errors" class="invalid-feedback">
+                                      <div *ngIf="f.active.errors.required">this field is required</div>        
+                                  </div>
+                            
+                          </div>
+                        </div>
+                        <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-3 col-form-label">Quantity Alert</label>
+                          <div class="col-sm-9">
+                               <input type="text" formControlName="qtyAlert" 
+                               (keypress)="utils.decimalsOnly($event,f.qtyAlert)" 
+                               [ngClass]="{ 'is-invalid': submitted && f.qtyAlert.errors }"
+                               class="form-control" placeholder="Quantity Alert">
+    
+                               <div *ngIf="submitted && f.qtyAlert.errors" class="invalid-feedback">
+                                  <div *ngIf="f.qtyAlert.errors.required">this field is required</div>        
+                              </div>
+                          </div>
+                      </div>
+                    <hr/>
+
+                </div>
+                <div class="row">
+                    <div class="row col-md-10">      
+                      <div class="col-md-6">
+                          <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i> CANCEL</button>
+                                            
+                      </div>       
+                      <div class="col-md-6">
+                          <button class="btn btn-success col-md-6"><i class="fa fa-check-square-o"></i> SAVE</button>                   
+                        </div> 
+                     </div>
+                  </div>
+            
+            </form>
+
+            </div>
+          </div>
+        </div>
+ </div>

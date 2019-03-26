@@ -20,12 +20,30 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/external-assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/external-assets/plugins/select2/css/select2.min.css",
+              "src/external-assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css",
+              "src/external-assets/plugins/simplebar/css/simplebar.css",
+              "src/external-assets/css/bootstrap.min.css",
+              "src/external-assets/css/animate.css",
+              "src/external-assets/css/icons.css",
+              "src/external-assets/css/sidebar-menu.css",
+              "src/external-assets/css/app-style.css"
             ],
-            "scripts": []
+            "scripts": [
+               "node_modules/jquery/dist/jquery.js",           
+              "src/external-assets/js/jquery.min.js",
+              "src/external-assets/js/popper.min.js",
+              "src/external-assets/js/bootstrap.min.js",
+              "src/external-assets/plugins/simplebar/js/simplebar.js",
+              "src/external-assets/js/sidebar-menu.js",
+              "src/external-assets/js/app-script.js",
+              "src/external-assets/plugins/select2/js/select2.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -35,6 +53,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+
+
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -77,7 +97,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/external-assets"
             ]
           }
         },

@@ -1,0 +1,215 @@
+<div class="container-fluid">
+
+<div class="row">
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-header text-uppercase">Make Sales</div>
+    <div class="card-body">
+    <!-- <form [formGroup]="form" (ngSubmit)="Register()">
+      -->
+      <div class="card">
+        
+          <div class="card-body">
+    <form>
+          <div class="row">
+              <div class="col-sm-6">
+                  <label>ACCOUNT NAME</label>
+                  <select class="form-control" [(ngModel)]="accountId" name="accountId" >
+                      <option value="0"></option>
+                      <ng-container *ngFor="let c of alllead">
+                        <option value="{{c.id}}">{{c.name}}</option>
+                      </ng-container>
+                     
+            </select>
+         
+              </div>
+              <div class="col-sm-6">
+                <label>MACHINE NAME</label>
+                <select class="form-control" [(ngModel)]="machineId" name="machineId" required >
+                   
+                    <option value="0">NO MACHINE</option>
+          </select>
+              </div>
+          </div>
+    </form>
+   
+     </div>
+     </div>
+    
+      <div class="card">
+         <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="addProduct()">
+                  <div class="row">
+                      <div class="col-sm-3">
+                          <label>CATEGORY</label>
+                          <select class="form-control single-select" formControlName="category" 
+                          [ngClass]="{ 'is-invalid': submitted && f.category.errors }"
+                          (change)="getsubCategory($event.target.value)"
+                          >
+                              <option value =""></option>
+                              <ng-container *ngFor="let c of productType">
+                                <option value="{{c.id}}|{{c.type}}" >{{c.type}}</option>
+                              </ng-container>
+                             
+                          </select>
+                      </div>
+
+                      <div class="col-sm-4">
+                          <label>PRODUCT</label>
+                          <select class="form-control single-select" formControlName ="product" 
+                          [ngClass]="{ 'is-invalid': submitted && f.product.errors }"
+                          (change)="getSellingPrice($event.target.value)"
+                          >
+                              <option></option>
+                              <ng-container *ngFor="let c of allProductSelect">
+                                <option value="{{c.id}}|{{c.productName}}|{{c.sellingPrice}}">{{c.productName}}</option>
+                              </ng-container>
+                          </select>
+                      </div>
+
+                      <div class="col-sm-2">
+                          <label>UNIT PRICE</label>
+                          <input class="form-control" type="text" formControlName="unitPrice"
+                          [ngClass]="{ 'is-invalid': submitted && f.unitPrice.errors }"
+                          (keypress)="utils.decimalsOnly($event,f.unitPrice)" >
+                             
+                      </div>
+
+                      <div class="col-sm-2">
+                          <label>QTY</label>
+                          <input class="form-control" type="text" formControlName="qty"
+                          [ngClass]="{ 'is-invalid': submitted && f.qty.errors }"
+                          (keypress)="utils.numberOnly($event)" >
+                      </div>
+
+                      <div class="col-sm-1">
+                        <div class="form-group">
+                            <button class="btn btn-outline-success btn-sm btn-round waves-effect waves-light m-1">
+                                Add
+                              </button>
+                        </div>
+                        
+                      </div>
+
+                     
+                     
+                  </div>
+              
+            </form>
+          </div>
+       </div>
+   
+       <div class="table-responsive">
+          <table class="table table-bordered  table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Category</th>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Qty</th>
+                <th>Total Amount</th>
+                <th width="5%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <ng-container *ngFor="let c of onLineList;let i=index">
+                <tr>
+                    <td>{{i+1}}.</td>
+                    <td>{{c.category}}</td>
+                    <td>{{c.productName}}</td>
+                    <td> {{utils.getCurrency()}} {{c?.unitPrice | number:'.2'}}</td>
+                    <td>{{c.qty}}</td>
+                    <td> {{utils.getCurrency()}} {{c.finalTotal | number :'.2'}}</td>
+                    <td>
+                        <!-- <button (click)="deleteFromArray(c.productId)" type="button" class="btn btn-sm btn-danger waves-effect waves-light m-1"> <i class="fa fa-trash-o"></i> </button> -->
+                    </td>
+                </tr>
+        </ng-container>
+    
+                  <ng-container *ngFor="let c of onArrayList;let i=index">
+                        <tr>
+                            <td>{{countOnline+i+1}}.</td>
+                            <td>{{c.category}}</td>
+                            <td>{{c.productName}}</td>
+                            <td> {{utils.getCurrency()}} {{c?.unitPrice | number:'.2'}}</td>
+                            <td>{{c.qty}}</td>
+                            <td> {{utils.getCurrency()}} {{c.finalTotal | number :'.2'}}</td>
+                            <td>
+                                <button (click)="deleteFromArray(c.productId)" type="button" class="btn btn-sm btn-danger waves-effect waves-light m-1"> <i class="fa fa-trash-o"></i> </button>
+                            </td>
+                        </tr>
+                </ng-container>
+                  <tr>
+                      <td colspan="5" style="text-align:right">Total Amount</td>
+                      
+                      <td> {{utils.getCurrency()}} {{FinalTotalAmount | number :'.2'}}</td>
+                      <td></td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="5" style="text-align:right">Discount</td>
+                      
+                      <td>
+                        <input class="form-control" type="text" [(ngModel)]="discount"
+                        
+                        (keypress)="utils.numberOnly($event)" [required]>
+                           
+                      </td>
+                      <td></td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="5" style="text-align:right">V.A.T </td>
+                      
+                      <td>
+                        
+                        <select class="form-control" [(ngModel)]="vat">
+                          <option value="0">NO VAT</option>
+                          <oPTION value="0.05">VAT INCLUSIVE (5%)</oPTION>
+                        </select>
+                           
+                      </td>
+                      <td></td>
+                    </tr>
+
+                    <!-- <tr>
+                        <td colspan="5" style="text-align:right">Discount</td>
+                        
+                        <td> {{utils.getCurrency()}} {{FinalTotalAmount | number :'.2'}}</td>
+                        <td></td>
+                      </tr> -->
+
+            </tbody>
+         </table>
+      </div>
+
+      <div class="row">
+          <div class="col-md-6">
+            &nbsp;
+          </div>
+          <div class="col-md-6">
+              &nbsp;
+            </div>           
+          </div>
+        </div>
+     
+    <div class="row">
+      <div class="col-md-10">
+        &nbsp;
+      </div>
+      <div class="col-md-2">
+          <button (click)="SubmitSales()" class="btn btn-outline-primary btn-lg waves-effect waves-light m-1">
+              Save
+            </button>
+          
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    
+    </div>
+    </div>
+</div>
+</div>
+    

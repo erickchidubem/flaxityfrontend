@@ -1,0 +1,129 @@
+<div id="accordion2">
+    <div class="card mb-2">
+        <div class="card-header">
+            <button class="btn btn-link shadow-none" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-1">
+              Lead Contact
+            </button>
+        </div>
+    
+        <div id="collapse-2" class="collapse show" data-parent="#accordion2">
+          <div class="card-body">
+            <!-- <div class="card-title text-uppercase">Some title example here</div>
+            -->
+            <div class="table-responsive">
+                <table class="table table-sm table-striped table-bordered">
+                 <thead>
+                   <tr>
+                     <td colspan="5"></td>
+                     <td>
+                        <button data-toggle="modal" (click)="generate()"
+                         data-target="#leadcontact" class="btn  btn-primary m-1">
+                           Create 
+                        </button>
+                     </td>
+                   </tr>
+                   <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Contact Person</th>
+                     <th scope="col">Phone</th>
+                    
+                     <th scope="col">Email</th>
+                     <th scope="col">Designation</th>
+                     <th></th>                                         
+                   </tr>
+
+                   <tr *ngFor="let c of leadContacts;let i = index">
+                      <td scope="col">{{i+1}}.</td>
+                      <td scope="col">{{c.contactPerson}}</td>
+                      <td scope="col">{{c.phone}}</td>
+                     
+                      <td scope="col">{{c.email}}</td>
+                      <td scope="col">{{c.designation}}</td>
+                      <td><a class="btn btn-round btn-warning" data-toggle="modal" 
+                        (click)="EditContact(c.id,c.contactPerson,c.phone,c.email,c.designation)"
+                        data-target="#leadcontact">Edit</a></td>                                         
+                    </tr>
+                 </thead>
+                 <tbody>
+               
+                 </tbody>
+               </table>
+         </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="leadcontact">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Lead Contact Information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+           
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <div class="modal-body">
+              
+                  <div class="row">
+                        <div class="form-group col-lg-6">
+                          <label for="input-1">Contact Person</label>
+                          <input class="form-control" formControlName="contactPerson" 
+                          [ngClass]="{ 'is-invalid': submitted && f.contactPerson.errors }"
+                           placeholder="Contact Person" />
+    
+                          <div *ngIf="submitted && f.contactPerson.errors" class="invalid-feedback">
+                              <div *ngIf="f.contactPerson.errors.required">this field is required</div>        
+                          </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                          <label for="input-2">Phone</label>
+                          <input  formControlName ="phone"
+                          [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+                           class="form-control" placeholder="Phone Number">
+                           
+                            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                <div *ngIf="f.phone.errors.required">this field is required</div>        
+                            </div>
+                        </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="form-group col-lg-6">
+                        <label for="input-1">Email Address</label>
+                        <input class="form-control" formControlName="email" 
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                         placeholder="Email Address" />
+  
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">this field is required</div> 
+                            <div *ngIf="f.email.errors.email">this is not a valid email address</div>        
+                        </div>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label for="input-2">Designation</label>
+                        <input  formControlName ="designation"
+                        [ngClass]="{ 'is-invalid': submitted && f.designation.errors }"
+                         class="form-control" placeholder="Designation">
+                         
+                          <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+                              <div *ngIf="f.designation.errors.required">this field is required</div>        
+                          </div>
+                      </div>
+                </div>
+                   
+                  
+                  
+              
+                </div>
+                <div class="modal-footer">
+                  <button type="button" (click)="resetForm()" class="btn btn-inverse-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                  <button class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+                </div>
+          </form>
+          </div>
+        </div>
+      </div>

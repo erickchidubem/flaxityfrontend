@@ -1,0 +1,142 @@
+<div class="container-fluid">
+  <!-- Breadcrumb-->
+ <div class="row pt-2 pb-2">
+    <div class="col-sm-9">
+    <h4 class="page-title">View All Accounts</h4>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javaScript:void();">Flaxity</a></li>
+        <li class="breadcrumb-item"><a href="javaScript:void();">Leads and Accounts</a></li>
+        <li class="breadcrumb-item active" aria-current="page">All Accounts</li>
+     </ol>
+ </div>
+ <div class="col-sm-3">
+   <div class="btn-group float-sm-right">
+    <button type="button" class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i> Menu</button>
+    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown">
+    <span class="caret"></span>
+    </button>
+    <div class="dropdown-menu">
+      <a routerLink="/access/add-lead" class="dropdown-item">Add New Lead</a>
+      <a href="javaScript:void();" class="dropdown-item">View Accounts</a>
+      
+      <div class="dropdown-divider"></div>
+      <a href="javaScript:void();" class="dropdown-item">Separated link</a>
+    </div>
+  </div>
+ </div>
+ </div>
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header"><i class="fa fa-table"></i>View All Active Accounts</div>
+        <div class="card-body">
+          <div class="table-responsive">
+
+             <!--Table start here -->
+          <div class="row">
+              <div class="col-6">
+                <div class="form-inline">
+                  <div class="form-group">
+                    <div class="input-group mr-3">
+                        <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" (click)="searchFormControl.setValue('')">
+                            x
+                          </button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="float-right">
+                  
+                    <ngb-pagination 
+                    [collectionSize]="tableDataSource$.value.length" 
+                    [pageSize]="pageSize$.value"
+                    [page]="currentPage$.value"
+                    (pageChange)="currentPage$.next($event)"
+                    >
+                  </ngb-pagination>
+ 
+                </div>
+              </div>
+            </div>
+           <table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
+ 
+            <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
+            <tr cdk-row *cdkRowDef="let row; columns : columns"></tr>
+            
+                <ng-container cdkColumnDef="name">
+                    <th cdk-header-cell *cdkHeaderCellDef>Name</th>
+                    <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/lead/view-lead/{{row?.id}}">{{row?.name}}</a></td>
+                </ng-container>
+            
+                <ng-container cdkColumnDef="createdDate">
+                    <th cdk-header-cell *cdkHeaderCellDef>Date Created</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.createdDate | date:'dd-MMMM-yyyy'}}</td>
+                </ng-container> 
+           
+                
+                <ng-container cdkColumnDef="industry">
+                    <th cdk-header-cell *cdkHeaderCellDef>Industry</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.sector}}</td>
+                </ng-container>
+            
+                <ng-container cdkColumnDef="email">
+                    <th cdk-header-cell *cdkHeaderCellDef>Email</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.email}}</td>
+                </ng-container> 
+ 
+                <ng-container cdkColumnDef="phone">
+                <th cdk-header-cell *cdkHeaderCellDef>Phone</th>
+                <td cdk-cell *cdkCellDef="let row">{{row?.phone}}</td>
+                </ng-container>
+ 
+                <ng-container cdkColumnDef="address">
+                   <th cdk-header-cell *cdkHeaderCellDef>Address</th>
+                   <td cdk-cell *cdkCellDef="let row">{{row?.address}}</td>
+                </ng-container>
+
+                <ng-container cdkColumnDef="leadSource">
+                    <th cdk-header-cell *cdkHeaderCellDef>Lead Source</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.leadSource}}</td>
+                 </ng-container>
+ 
+                 <ng-container cdkColumnDef="leadStage">
+                    <th cdk-header-cell *cdkHeaderCellDef>Lead Stage</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                      <span class="text-white btn btn-rounded {{row?.stage_color}}">
+                      {{row?.stage_name}} - {{row?.currentSalesStage}} %
+                      </span>
+                    </td>
+                 </ng-container>
+
+                 <ng-container cdkColumnDef="createdBy">
+                    <th cdk-header-cell *cdkHeaderCellDef>Created By</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.createdByUser}}</td>
+                 </ng-container>
+
+                 <ng-container cdkColumnDef="assignToSales">
+                    <th cdk-header-cell *cdkHeaderCellDef>Assign To (Sales)</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.assignedSales}}</td>
+                 </ng-container>
+                
+                 <ng-container cdkColumnDef="assignToService">
+                    <th cdk-header-cell *cdkHeaderCellDef>Assign To (Service)</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row?.assignedService}}</td>
+                 </ng-container>
+            
+            </table>
+           
+           <!--table ends here -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- End Row-->
+
+</div>

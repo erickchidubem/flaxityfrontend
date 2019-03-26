@@ -1,0 +1,126 @@
+<!-- ["type","productName","code","qtyAlert","sellingPrice","costPrice","store1","store2","store3","action"] -->
+<div class="container-fluid">
+    <!-- Breadcrumb-->
+   <div class="row pt-2 pb-2">
+      <div class="col-sm-9">
+      <h4 class="page-title">{{allProductName}}</h4>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javaScript:void();">Flaxity</a></li>
+          <li class="breadcrumb-item"><a href="javaScript:void();">Products</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{allProductName}}</li>
+       </ol>
+   </div>
+   <div class="col-sm-3">
+     <div class="btn-group float-sm-right">
+      <a  routerLink="/access/products/create-product" class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i> Create New Product</a>
+     
+    </div>
+   </div>
+   </div>
+  
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header"><i class="fa fa-table"></i>{{allProductName}}</div>
+          <div class="card-body">
+            <div class="table-responsive">
+
+               <!--Table start here -->
+            <div class="row">
+                <div class="col-6">
+                  <div class="form-inline">
+                    <div class="form-group">
+                      <div class="input-group mr-3">
+                          <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="searchFormControl.setValue('')">
+                              x
+                            </button>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="float-right">
+                    
+                      <ngb-pagination 
+                      [collectionSize]="tableDataSource$.value.length" 
+                      [pageSize]="pageSize$.value"
+                      [page]="currentPage$.value"
+                      (pageChange)="currentPage$.next($event)"
+                      >
+                    </ngb-pagination>
+   
+                  </div>
+                </div>
+              </div>
+             <table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
+   
+              <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
+              <tr cdk-row *cdkRowDef="let row; columns : columns"></tr>
+              
+              <!-- ["type","productName","code","qtyAlert","sellingPrice","costPrice","store1","store2","store3","action"] -->
+
+                  <ng-container cdkColumnDef="type">
+                      <th cdk-header-cell *cdkHeaderCellDef>Type</th>
+                      <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/products/view-product-category/{{row.product_type_id}}/{{row.type}}">{{row.type}}</a></td>
+                  </ng-container>
+              
+                  <ng-container cdkColumnDef="productName">
+                    <th cdk-header-cell *cdkHeaderCellDef>Name</th>
+                    <td cdk-cell *cdkCellDef="let row"><a  class="btn btn-rounded btn-outline-success" routerLink="/access/products/product-info/{{row.id}}">{{row.productName}}</a></td>
+                </ng-container>
+            
+                  <ng-container cdkColumnDef="code">
+                      <th cdk-header-cell *cdkHeaderCellDef>Code</th>
+                      <td cdk-cell *cdkCellDef="let row">{{row.code}}</td>
+                  </ng-container> 
+             
+                  
+                  <ng-container cdkColumnDef="store1">
+                      <th cdk-header-cell *cdkHeaderCellDef>Store 1</th>
+                      <td cdk-cell *cdkCellDef="let row">{{row.store1 | number:'1.'}}</td>
+                  </ng-container>
+              
+                  <ng-container cdkColumnDef="store2">
+                      <th cdk-header-cell *cdkHeaderCellDef>Store 2</th>
+                      <td cdk-cell *cdkCellDef="let row">{{row.store2 | number:'1.'}}</td>
+                  </ng-container> 
+   
+                  <ng-container cdkColumnDef="store3">
+                  <th cdk-header-cell *cdkHeaderCellDef>Store 3</th>
+                  <td cdk-cell *cdkCellDef="let row">{{row.phone}}</td>
+                  </ng-container>
+   
+                  <ng-container cdkColumnDef="sellingPrice">
+                     <th cdk-header-cell *cdkHeaderCellDef>Selling Price - {{utils.getCurrency()}}</th>
+                     <td cdk-cell *cdkCellDef="let row">{{utils.getCurrency()}} {{row?.sellingPrice | number:'.2'}}</td>
+                  </ng-container>
+
+                   <ng-container cdkColumnDef="qtyAlert">
+                      <th cdk-header-cell *cdkHeaderCellDef>Alert When</th>
+                      <td cdk-cell *cdkCellDef="let row">
+                        <!-- <span class="text-white btn btn-rounded {{row.stage_color}}">
+                        {{row.stage_name}} - {{row.currentSalesStage}} %
+                        </span> -->
+                        {{row.qtyAlert}}
+                      </td>
+                   </ng-container>
+
+                   
+
+                  
+              
+              </table>
+             
+             <!--table ends here -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Row-->
+
+  </div>
