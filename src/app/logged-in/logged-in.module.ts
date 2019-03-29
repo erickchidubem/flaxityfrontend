@@ -19,6 +19,7 @@ const routes: Routes = [
     { path: 'products', loadChildren : './products/products.module#ProductsModule'},
     { path: 'sales', loadChildren : './sales/sales.module#SalesModule'},
     { path: 'settings', loadChildren : './settings/settings.module#SettingsModule'},
+    { path: 'maintenance', loadChildren : './maintenance/maintenance.module#MaintenanceModule'},
 ]; 
 @NgModule({
   imports: [

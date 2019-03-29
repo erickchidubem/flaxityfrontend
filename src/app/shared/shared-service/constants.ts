@@ -1,7 +1,7 @@
 import { HttpHeaders } from "@angular/common/http";
 export class Constants{
-    public static API_URL = "http://flaxity.com/cisburoltd/public/";
-   // public static API_URL ="http://localhost:81/crmapp_/public/";     
+   //public static API_URL = "http://flaxity.com/cisburoltd/public/";
+    public static API_URL ="http://localhost:81/flaxity/public/";     
     public readonly apiUrl = Constants.API_URL; 
  
     GetToken(){
@@ -10,8 +10,7 @@ export class Constants{
 
    GetHttpHeadersToken() : HttpHeaders{
        const headers = new HttpHeaders().set('content-type', 'application/json')
-                                        .set('Authorization', 'Bearer ' + this.GetToken());
-        console.log(this.GetToken())
+                                        .set('Authorization', 'Bearer ' + this.GetToken());      
        return headers;
    }
 
