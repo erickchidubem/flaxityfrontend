@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { LSelect2Module } from 'ngx-select2';
 
 import {Constants} from '../app/shared/shared-service/constants';
 import {Utils} from '../app/shared/shared-service/utils';
@@ -39,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpModule, ToastrModule.forRoot(),
     CdkTableModule,
     NgbModule, SweetAlert2Module.forRoot(),
+    LSelect2Module,
    // OwlDateTimeModule, OwlNativeDateTimeModule,
      
   ],

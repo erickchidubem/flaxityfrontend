@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ContextService } from 'src/app/shared/shared-service/context.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,15 +12,19 @@ declare var $:any;
   styleUrls: ['./lead-contact.component.css']
 })
 export class LeadContactComponent implements OnInit {
-
+  @Input() accountId : any;
+  @Input() machineId : any;
   constructor(private fb : FormBuilder,private context : ContextService,
     private route: ActivatedRoute, private toaster : ToasterService,public utils : Utils) {
-      this.id = this.route.params['value'].id;
+     
      }
 
   id : any;
+  machineid : any;
  
-  ngOnInit() {   
+  ngOnInit() {  
+    this.id = this.accountId; 
+    this.machineid = this.machineId;
     this.generateForm(this.id);
     this.getLeadContacts(this.id);
   }
@@ -43,6 +47,7 @@ export class LeadContactComponent implements OnInit {
     this.form = this.fb.group({
       id : [0],
       accountId : [acc_id],
+      machineId : [this.machineId,Validators.required],
       contactPerson : ['',Validators.required],
       phone : ['',Validators.required],
       email : ['',[Validators.required,Validators.email]],
@@ -58,8 +63,8 @@ export class LeadContactComponent implements OnInit {
    this.form.patchValue({id : 0,contactPerson : "", phone : "" , email : "", designation : ""})
   }
 
-  EditContact(id,contactPerson,phone,email,designation){
-    this.form.patchValue({id:id,contactPerson:contactPerson,phone:phone,email:email,designation:designation})
+  EditContact(id,contactPerson,phone,email,designation,machineId=0){
+    this.form.patchValue({id:id,contactPerson:contactPerson,phone:phone,email:email,designation:designation,machineId:machineId})
   }
   
 

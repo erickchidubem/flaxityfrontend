@@ -1,0 +1,98 @@
+<div class="table-responsive">
+               
+    <!--Table start here -->
+ <div class="row">
+     <div class="col-6">
+       <div class="form-inline">
+         <div class="form-group">
+           <div class="input-group mr-3">
+               <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
+               <div class="input-group-append">
+                 <button class="btn btn-outline-secondary" (click)="searchFormControl.setValue('')">
+                   x
+                 </button>
+               </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-6">
+       <div class="float-right">
+         
+           <ngb-pagination 
+           [collectionSize]="tableDataSource$.value.length" 
+           [pageSize]="pageSize$.value"
+           [page]="currentPage$.value"
+           (pageChange)="currentPage$.next($event)"
+           >
+         </ngb-pagination>
+
+       </div>
+     </div>
+   </div>
+  <table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
+
+   <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
+   <tr cdk-row *cdkRowDef="let row; columns : columns"></tr>
+   
+   <!-- ["accountName","salesid","ordercollectstage","totalAmount","createdDate","ordercollectdate","adminCreated","action"]-->
+       <ng-container cdkColumnDef="accountName">
+           <th cdk-header-cell *cdkHeaderCellDef>Lead Name</th>
+           <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/lead/view-lead/{{row.account_id}}">{{row.name}}</a></td>
+       </ng-container>
+   
+       <ng-container cdkColumnDef="salesid">
+         <th cdk-header-cell *cdkHeaderCellDef>Ticket ID</th>
+         <td cdk-cell *cdkCellDef="let row">
+           <a  class="btn btn-rounded btn-outline-success" routerLink="/access/sales/invoice/{{row.id}}">{{row.salesid}}</a>
+         </td>
+     </ng-container>
+ 
+       <ng-container cdkColumnDef="ordercollectstage">
+           <th cdk-header-cell *cdkHeaderCellDef>Stage</th>
+           <td cdk-cell *cdkCellDef="let row">  
+             <span class="text-white btn btn-round {{row.order_color}}">
+               {{row.ordercollectstage}} 
+               </span></td>
+       </ng-container> 
+  
+       
+       <ng-container cdkColumnDef="totalAmount">
+           <th cdk-header-cell *cdkHeaderCellDef>Total Amount</th>
+           <td cdk-cell *cdkCellDef="let row">{{utils.getCurrency()}} {{row.finalAmount | number:'.2'}}</td>
+       </ng-container>
+   
+       <ng-container cdkColumnDef="createdDate">
+           <th cdk-header-cell *cdkHeaderCellDef>Created Date</th>
+           <td cdk-cell *cdkCellDef="let row">{{row.createdDate | date:'dd-MMM-yyyy'}}</td>
+       </ng-container>
+       
+       <ng-container cdkColumnDef="ordercollectdate">
+           <th cdk-header-cell *cdkHeaderCellDef>Collected Date</th>
+           <td cdk-cell *cdkCellDef="let row"><span *ngIf="row.order_collect > 0">
+             {{row.order_collect_date | date:'dd-MMM-yyyy'}}</span></td>
+       </ng-container>
+
+       <ng-container cdkColumnDef="adminCreated">
+       <th cdk-header-cell *cdkHeaderCellDef>Created By</th>
+       <td cdk-cell *cdkCellDef="let row">{{row.adminCreateSales}}</td>
+       </ng-container>
+
+       <ng-container cdkColumnDef="action">
+          <th cdk-header-cell *cdkHeaderCellDef></th>
+          <td cdk-cell *cdkCellDef="let row">
+             <!-- <button></button> -->
+          </td>
+       </ng-container>
+
+       
+
+        
+
+       
+   
+   </table>
+  
+  <!--table ends here -->
+
+ </div>

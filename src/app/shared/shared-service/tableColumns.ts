@@ -4,6 +4,13 @@ export const DataPerPageI = 10;
 export const leadsColumn =
 ["name","industry","email","phone","address","leadSource","leadStage","createdDate","createdBy","assignToSales","assignToService"]
 
+
+export const machineColumn =
+["accountname","machinetype","code","serialno","salesadmin","address","action"]
+
+
+
+
 export const productsColumn =
 ["type","productName","code","sellingPrice","store1","store2","store3","qtyAlert"]
 

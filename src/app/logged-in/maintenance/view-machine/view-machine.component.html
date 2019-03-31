@@ -1,3 +1,104 @@
-<p>
-  view-machine works!
-</p>
+<div class="container-fluid">
+  <!-- Breadcrumb-->
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header"><i class="fa fa-table"></i>View All Machines</div>
+        <div class="card-body">
+          <div class="table-responsive">
+
+             <!--Table start here -->
+          <div class="row">
+              <div class="col-6">
+                <div class="form-inline">
+                  <div class="form-group">
+                    <div class="input-group mr-3">
+                        <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" (click)="searchFormControl.setValue('')">
+                            x
+                          </button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="float-right">
+                  
+                    <ngb-pagination 
+                    [collectionSize]="tableDataSource$.value.length" 
+                    [pageSize]="pageSize$.value"
+                    [page]="currentPage$.value"
+                    (pageChange)="currentPage$.next($event)"
+                    >
+                  </ngb-pagination>
+ 
+                </div>
+              </div>
+            </div>
+           <table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
+ 
+            <!-- "accountname","machinetype","code","serialno","salesadmin","address","action" -->
+            <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
+            <tr cdk-row *cdkRowDef="let row; columns : columns"></tr>
+            
+                <ng-container cdkColumnDef="accountname">
+                    <th cdk-header-cell *cdkHeaderCellDef>Account</th>
+                    <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/lead/view-lead/{{row.accountid}}">{{row.name}}</a></td>
+                </ng-container>
+            
+                <ng-container cdkColumnDef="machinetype">
+                    <th cdk-header-cell *cdkHeaderCellDef>Machine</th>
+                    <td cdk-cell *cdkCellDef="let row">{{row.productName}}</td>
+                </ng-container> 
+           
+                
+                <ng-container cdkColumnDef="code">
+                    <th cdk-header-cell *cdkHeaderCellDef>Machine Code</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                    <a routerLink="/access/maintenance/machine-info/{{row.id}}" class="btn btn-round btn-outline-success">
+                        {{row.code}}
+                    </a> 
+                    </td>
+                </ng-container>
+            
+                <ng-container cdkColumnDef="serialno">
+                    <th cdk-header-cell *cdkHeaderCellDef>SerialNo</th>
+                    <td cdk-cell *cdkCellDef="let row">
+                        <a routerLink="/access/maintenance/machine-info/{{row.id}}" class="btn btn-round btn-outline-success">
+                    
+                      {{row.serialNo}}
+                    </a>
+                    </td>
+                </ng-container> 
+ 
+                <ng-container cdkColumnDef="salesadmin">
+                <th cdk-header-cell *cdkHeaderCellDef>Sales Admin</th>
+                <td cdk-cell *cdkCellDef="let row">{{row.salesAdmin}}</td>
+                </ng-container>
+ 
+                <ng-container cdkColumnDef="address">
+                   <th cdk-header-cell *cdkHeaderCellDef>Address</th>
+                   <td cdk-cell *cdkCellDef="let row">{{row.address}}</td>
+                </ng-container>
+
+               
+                
+                 <ng-container cdkColumnDef="action">
+                    <th cdk-header-cell *cdkHeaderCellDef></th>
+                    <td cdk-cell *cdkCellDef="let row"></td>
+                 </ng-container>
+            
+            </table>
+           
+           <!--table ends here -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- End Row-->
+
+</div>

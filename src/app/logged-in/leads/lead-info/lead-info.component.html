@@ -1,66 +1,112 @@
 <div class="container-fluid">
   
-    <hr>
     <div class="row">
         <div class="col-lg-12">
         <div class="card">
-        <div class="card-body"> 
-            <h6 class="text-uppercase">Lead Basic Information</h6>
-            <hr>
-         <div class="row">            
-                      <div class="table-responsive">
-                            <table class="table table-bordered table-sm">
+         
+    <div class="card-body"> 
+        <ul class="nav nav-tabs nav-tabs-success nav-justified top-icon">
+          <li class="nav-item">
+            <a class="nav-link active show" data-toggle="tab" href="#tabe-17"><i class="icon-home"></i> <span class="hidden-xs">Home</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tabe-18"><i class="icon-user"></i> <span class="hidden-xs">Sales</span></a>
+          </li>
+         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tabe-19"><i class="icon-envelope-open"></i> <span class="hidden-xs">Machines</span></a>
+          </li>
+         
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:void();"><i class="icon-settings"></i> <span class="hidden-xs">Others</span></a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" data-toggle="tab" href="#tabe-20">Service Calls</a>
+              <!-- <a class="dropdown-item" href="javascript:void();">Link 2</a>
+              <a class="dropdown-item" href="javascript:void();">Link 3</a> -->
+            </div>
+          </li>
+        </ul>
 
-                                <tr>
-                                    <td colspan="3"><b>{{leadInfo.name | uppercase}} </b></td>
-                                    <td><a routerLink="/access/lead/edit-lead/{{leadInfo.id}}" class="btn btn-sm btn-round  waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
-                                </tr>
-                              <tr>
-                                <td style=" width:30%"><b>SALES STAGE : </b></td>
-                                <td><span class="text-white btn btn-rounded btn-sm {{leadInfo.stage_color}}">
-                                    {{leadInfo.stage_name}} - {{leadInfo.currentSalesStage}} %
-                                    </span>
-                                  </td>
-                                  <td><b>ACCOUNT SECTOR : </b></td>
-                                  <td>{{leadInfo.sector}}</td>
-                              </tr>
-                            
-                              <tr>
-                                <td><b>PHONE : </b></td>
-                                <td>{{leadInfo.phone}}</td>
-                                <td><b>EMAIL : </b></td>
-                                <td>{{leadInfo.email}}</td>                          
-                             </tr> 
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div id="tabe-17" class="container tab-pane active show">
+              <div class="table-responsive">
+                  <table class="table table-bordered table-sm">
 
-                             <tr>
-                                <td><b>CREATED BY : </b></td>
-                                <td>{{leadInfo.createdByUser}}</td>
-                                <td><b>LEAD SOURCE : </b></td>
-                                <td>{{leadInfo.leadSource}}</td>
-                             </tr> 
-                            
-                             <tr>
-                                <td><b>ASSIGNED (SALES) : </b></td>
-                                <td>{{leadInfo.assignedSales}}</td>
-                                <td><b>ASSIGNED (SERVICE) : </b></td>
-                                <td>{{leadInfo.assignedService}}</td>
-                             </tr> 
-                             
-                             <tr>
-                                <td><b>ADDRESS : </b></td>
-                                <td colspan="3">{{leadInfo.address}}</td>
-                             </tr>
-                            
+                      <tr>
+                          <td colspan="3"><h4>{{leadInfo.name | uppercase}} </h4></td>
+                          <td><a routerLink="/access/lead/edit-lead/{{leadInfo.id}}" class="btn btn-sm btn-round  waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
+                      </tr>
+                    <tr>
+                      <td style=" width:30%"><b>SALES STAGE : </b></td>
+                      <td><span class="text-white btn btn-rounded btn-sm {{leadInfo.stage_color}}">
+                          {{leadInfo.stage_name}} - {{leadInfo.currentSalesStage}} %
+                          </span>
+                        </td>
+                        <td><b>ACCOUNT SECTOR : </b></td>
+                        <td>{{leadInfo.sector}}</td>
+                    </tr>
+                  
+                    <tr>
+                      <td><b>PHONE : </b></td>
+                      <td>{{leadInfo.phone}}</td>
+                      <td><b>EMAIL : </b></td>
+                      <td>{{leadInfo.email}}</td>                          
+                   </tr> 
+
+                   <tr>
+                      <td><b>CREATED BY : </b></td>
+                      <td>{{leadInfo.createdByUser}}</td>
+                      <td><b>LEAD SOURCE : </b></td>
+                      <td>{{leadInfo.leadSource}}</td>
+                   </tr> 
+                  
+                   <tr>
+                      <td><b>ASSIGNED (SALES) : </b></td>
+                      <td>{{leadInfo.assignedSales}}</td>
+                      <td><b>ASSIGNED (SERVICE) : </b></td>
+                      <td>{{leadInfo.assignedService}}</td>
+                   </tr> 
+                   
+                   <tr>
+                      <td><b>ADDRESS : </b></td>
+                      <td colspan="3">{{leadInfo.address}}</td>
+                   </tr>
+                  
 
 
-                           </table>
-                    </div>
-        </div> 
+                 </table>
+
+                 
+                 <app-lead-contact [accountId]="id" [machineId]="0"></app-lead-contact>
+                 <app-lead-story></app-lead-story>
+          </div>
+          
+          </div>
+          <div id="tabe-18" class="container tab-pane fade">
+            <div class="table-responsive">
+               <app-lead-sales [userId]="0" [accountId]="id"></app-lead-sales>
+            </div>
+          
+          </div>
+        <div id="tabe-19" class="container tab-pane fade">
+            <div class="table-responsive">
+              
+              </div> 
+        </div>
+          <div id="tabe-20" class="container tab-pane fade">
+           
+              <div class="table-responsive">
+              
+                </div>
+          </div>
+        </div>
+      </div>
+
       </div>
       </div>
- 
+      </div>
+
+
+    <hr>
     
-      <app-lead-story></app-lead-story>
-      <app-lead-contact></app-lead-contact>
-    
-  </div>
+   

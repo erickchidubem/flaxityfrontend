@@ -19,6 +19,9 @@ import { ViewMyLeadsComponent } from './view-my-leads/view-my-leads.component';
 import { ViewAllAccountsComponent } from './view-all-accounts/view-all-accounts.component';
 import { LeadStoryComponent } from './lead-info/lead-story/lead-story.component';
 import { LeadContactComponent } from './lead-info/lead-contact/lead-contact.component';
+import { AccountMachineComponent } from './lead-info/account-machine/account-machine.component';
+import { LeadSalesComponent } from './lead-info/lead-sales/lead-sales.component';
+import { LeadSalesComponentComponent } from './lead-info/lead-sales/lead-sales-component/lead-sales-component.component';
 const routes: Routes = [
   
     { path: 'add-lead', component : AddLeadsComponent },
@@ -45,7 +48,7 @@ const routes: Routes = [
   declarations: [
     AddLeadsComponent,ViewAllLeadsComponent,
     LeadInfoComponent, ViewMyLeadsComponent, 
-    ViewAllAccountsComponent, LeadStoryComponent, LeadContactComponent,
+    ViewAllAccountsComponent, LeadStoryComponent, LeadContactComponent, AccountMachineComponent, LeadSalesComponent, LeadSalesComponentComponent,
     
 ],
 

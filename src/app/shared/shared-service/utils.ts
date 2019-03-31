@@ -2,15 +2,21 @@ import { Router } from "@angular/router";
 import { ToasterService } from "./toaster.service";
 import { Injectable } from "@angular/core";
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-
+import {Location} from '@angular/common';
 declare var $:any;
 
 @Injectable()
 export class Utils {
 
     constructor(private Spinner : NgxUiLoaderService,private router:Router,
+        public location : Location,
         private toaster : ToasterService){
 
+    }
+
+
+    goBack(){
+        this.location.back();
     }
 
     Logout(){  

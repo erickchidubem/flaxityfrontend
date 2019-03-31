@@ -10,16 +10,21 @@ import {CdkTableModule } from '@angular/cdk/table';
 import {CdkTableService} from '../../shared/shared-service/cdk-table';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { LSelect2Module } from 'ngx-select2';
+
+
 
 import { ToastrModule } from 'ngx-toastr';
 import { AddMachineComponent } from './add-machine/add-machine.component';
 import { ViewMachineComponent } from './view-machine/view-machine.component';
+import { MachineInfoComponent } from './machine-info/machine-info.component';
  
 const routes: Routes = [
   
-    { path: 'view-machine', component : ViewMachineComponent },
+    {path : 'view-machine', component : ViewMachineComponent },
     {path : 'add-machine', component : AddMachineComponent},
     {path : 'edit-machine/:id', component : AddMachineComponent},
+    {path : 'machine-info/:id', component : MachineInfoComponent}
   
  ]; 
 @NgModule({
@@ -32,7 +37,7 @@ const routes: Routes = [
     CdkTableModule,
     OwlDateTimeModule, OwlNativeDateTimeModule,
     PasswordStrengthMeterModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),LSelect2Module,
     
   ],
   exports : [RouterModule],
@@ -40,7 +45,9 @@ const routes: Routes = [
       
 AddMachineComponent,
       
-ViewMachineComponent],
+ViewMachineComponent,
+      
+MachineInfoComponent],
 
 })
 export class MaintenanceModule { }

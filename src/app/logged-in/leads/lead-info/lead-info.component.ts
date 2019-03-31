@@ -14,10 +14,11 @@ export class LeadInfoComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   leadInfo : any=[];
+  id : any = this.route.params['value'].id;
+
   tbPercentage ="30%";
   ngOnInit() {
-    let id = this.route.params['value'].id;
-    this.getLeadInformation(id);
+    this.getLeadInformation(this.id);
   }
 
   getLeadInformation(id){

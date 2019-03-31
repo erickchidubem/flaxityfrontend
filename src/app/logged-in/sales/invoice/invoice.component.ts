@@ -23,6 +23,7 @@ export class InvoiceComponent implements OnInit {
   subTotal : any;
   finalTotal : any;
   userid : any;
+  amountDue : any;
 
   formcloseorder : FormGroup;
   ngOnInit() {
@@ -68,6 +69,9 @@ getSalesInfo(id){
     }
     this.subTotal = this.salesInfo.TotalPrice - this.salesInfo.discount;
     this.finalTotal =  this.subTotal + (+this.vat);
+    let dt = new Date (this.salesInfo.order_collect_date);
+    dt.setDate(dt.getDate() + 30);
+    this.amountDue = dt;
     console.log(d)
   });
 } 

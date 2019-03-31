@@ -1,4 +1,4 @@
-<div id="accordion2">
+<!--<div id="accordion2">
     <div class="card mb-2">
         <div class="card-header">
             <button class="btn btn-link shadow-none" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-1">
@@ -8,16 +8,20 @@
     
         <div id="collapse-2" class="collapse show" data-parent="#accordion2">
           <div class="card-body">
-            <!-- <div class="card-title text-uppercase">Some title example here</div>
+             <div class="card-title text-uppercase">Some title example here</div>
             -->
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-bordered">
+                <table style="font-size: 12px" class="table table-sm table-striped table-bordered">
                  <thead>
                    <tr>
-                     <td colspan="5"></td>
+                     <td colspan="6">&nbsp;</td>
+                   </tr>
+                  
+                   <tr>
+                     <td colspan="5"><h5>Contact Details</h5></td>
                      <td>
                         <button data-toggle="modal" (click)="generate()"
-                         data-target="#leadcontact" class="btn  btn-primary m-1">
+                         data-target="#leadcontact" class="btn btn-sm  btn-primary m-1">
                            Create 
                         </button>
                      </td>
@@ -39,8 +43,8 @@
                      
                       <td scope="col">{{c.email}}</td>
                       <td scope="col">{{c.designation}}</td>
-                      <td><a class="btn btn-round btn-warning" data-toggle="modal" 
-                        (click)="EditContact(c.id,c.contactPerson,c.phone,c.email,c.designation)"
+                      <td><a class="btn btn-round btn-warning btn-sm" data-toggle="modal" 
+                        (click)="EditContact(c.id,c.contactPerson,c.phone,c.email,c.designation,c.machineId)"
                         data-target="#leadcontact">Edit</a></td>                                         
                     </tr>
                  </thead>
@@ -49,10 +53,10 @@
                  </tbody>
                </table>
          </div>
-          </div>
+         <!-- </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
 
     <div class="modal fade" id="leadcontact">
