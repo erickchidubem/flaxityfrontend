@@ -1,3 +1,73 @@
-<p>
-  machine-info works!
-</p>
+<div class="container-fluid">
+  
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="card">
+         
+    <div class="card-body"> 
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+
+                <tr>
+                    <td colspan="3"><h4>{{leadInfo.name | uppercase}} </h4></td>
+                    <td><a routerLink="/access/lead/edit-lead/{{leadInfo.id}}" class="btn btn-sm btn-round  waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
+                </tr>
+              <tr>
+                <td style=" width:30%"><b>SALES STAGE : </b></td>
+                <td><span class="text-white btn btn-rounded btn-sm {{leadInfo.stage_color}}">
+                    {{leadInfo.stage_name}} - {{leadInfo.currentSalesStage}} %
+                    </span>
+                  </td>
+                  <td><b>ACCOUNT SECTOR : </b></td>
+                  <td>{{leadInfo.sector}}</td>
+              </tr>
+            
+              <tr>
+                <td><b>PHONE : </b></td>
+                <td>{{leadInfo.phone}}</td>
+                <td><b>EMAIL : </b></td>
+                <td>{{leadInfo.email}}</td>                          
+             </tr> 
+
+             <tr>
+                <td><b>CREATED BY : </b></td>
+                <td>{{leadInfo.createdByUser}}</td>
+                <td><b>LEAD SOURCE : </b></td>
+                <td>{{leadInfo.leadSource}}</td>
+             </tr> 
+            
+             <tr>
+                <td><b>ASSIGNED (SALES) : </b></td>
+                <td>{{leadInfo.assignedSales}}</td>
+                <td><b>ASSIGNED (SERVICE) : </b></td>
+                <td>{{leadInfo.assignedService}}</td>
+             </tr> 
+             
+             <tr>
+                <td><b>ADDRESS : </b></td>
+                <td colspan="3">{{leadInfo.address}}</td>
+             </tr>
+            
+
+
+           </table>
+
+           
+           <!-- <app-lead-contact [accountId]="id" [machineId]="0"></app-lead-contact>
+           <app-lead-sales [userId]="0" [accountId]="id"></app-lead-sales> -->
+    </div>
+
+
+
+       
+      </div>
+
+      </div>
+      </div>
+      </div>
+
+
+    <hr>
+    
+   
