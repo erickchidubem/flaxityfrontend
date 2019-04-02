@@ -41,8 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     CdkTableModule,
     NgbModule, SweetAlert2Module.forRoot(),
     LSelect2Module,
-   // OwlDateTimeModule, OwlNativeDateTimeModule,
-     
+   
   ],
   providers: [
     Constants,

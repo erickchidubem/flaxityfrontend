@@ -26,13 +26,13 @@ export class LeadContactComponent implements OnInit {
     this.id = this.accountId; 
     this.machineid = this.machineId;
     this.generateForm(this.id);
-    this.getLeadContacts(this.id);
+    this.getLeadContacts(this.id,this.machineId);
   }
  
 
   leadContacts : any;
-  getLeadContacts(id){
-      this.context.getWithToken(id,'account/accountcontact/').
+  getLeadContacts(id,machineid){
+      this.context.getWithToken(id+'/'+machineid,'account/accountcontact/').
       subscribe( data => {
         let d = <any>data;
         this.leadContacts = d.data;

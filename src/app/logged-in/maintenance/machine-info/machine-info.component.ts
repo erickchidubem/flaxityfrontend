@@ -15,6 +15,7 @@ export class MachineInfoComponent implements OnInit {
 
   leadInfo : any=[];
   id : any = this.route.params['value'].id;
+  myaccountId : any;
 
   tbPercentage ="30%";
   ngOnInit() {
@@ -23,10 +24,11 @@ export class MachineInfoComponent implements OnInit {
 
   getLeadInformation(id){
     this.utils.StartSpinner();
-      this.context.getWithToken(id,'account/viewleadinfo/').
+      this.context.getWithToken(id,'machine/getmachine/').
       subscribe( data => {
         let d = <any>data;
         this.leadInfo = d.data;
+        this.myaccountId = d.data.account_id;
         console.log(d.data)
         this.utils.StopSpinner();
       }); 

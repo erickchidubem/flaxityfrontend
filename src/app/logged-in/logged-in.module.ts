@@ -33,8 +33,7 @@ const routes: Routes = [
   ],
   exports : [RouterModule],
   declarations: [
-      DashboardComponent
-      
+      DashboardComponent,
     ],
 
 })

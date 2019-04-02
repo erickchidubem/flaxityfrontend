@@ -1,16 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {SharedModule} from '../../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
-import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
-import {CdkTableModule } from '@angular/cdk/table';
-import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
-import {CdkTableService} from '../../shared/shared-service/cdk-table';
-import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
-import { CreateProductComponent } from './create-product/create-product.component';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { ToastrModule } from 'ngx-toastr';
+import { CreateProductComponent } from './create-product/create-product.component';
 import { ViewAllProductsComponent } from './view-all-products/view-all-products.component';
 import { ProductInfoComponent } from './product-info/product-info.component';
 
@@ -24,14 +17,10 @@ const routes: Routes = [
  ]; 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     RouterModule.forChild(routes),
-    NgxUiLoaderModule,
-    ReactiveFormsModule,FormsModule,
-    NgbModule,// SweetAlert2Module.forRoot(),
-    CdkTableModule,DlDateTimePickerDateModule,
-    PasswordStrengthMeterModule,
-    ToastrModule.forRoot()
+    SweetAlert2Module.forRoot(),
+    ToastrModule.forRoot(), 
     
   ],
   exports : [RouterModule],

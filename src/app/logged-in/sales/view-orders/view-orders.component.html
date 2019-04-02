@@ -69,6 +69,17 @@
                       <th cdk-header-cell *cdkHeaderCellDef>Total Amount</th>
                       <td cdk-cell *cdkCellDef="let row">{{utils.getCurrency()}} {{row.finalAmount | number:'.2'}}</td>
                   </ng-container>
+
+                  <ng-container cdkColumnDef="amountPaid">
+                    <th cdk-header-cell *cdkHeaderCellDef>Amount Paid</th>
+                    <td cdk-cell *cdkCellDef="let row">{{utils.getCurrency()}} {{row.AmountCurrentlyPaid | number:'.2'}}</td>
+                </ng-container>
+            
+                <ng-container cdkColumnDef="amountOwe">
+                  <th cdk-header-cell *cdkHeaderCellDef>Remaining</th>
+                  <td cdk-cell *cdkCellDef="let row">{{utils.getCurrency()}} {{row.finalAmount - row.AmountCurrentlyPaid | number:'.2'}}</td>
+              </ng-container>
+                  
               
                   <ng-container cdkColumnDef="createdDate">
                       <th cdk-header-cell *cdkHeaderCellDef>Created Date</th>

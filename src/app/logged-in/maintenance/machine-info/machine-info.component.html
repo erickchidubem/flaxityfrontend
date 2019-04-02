@@ -11,38 +11,33 @@
 
                 <tr>
                     <td colspan="3"><h4>{{leadInfo.name | uppercase}} </h4></td>
-                    <td><a routerLink="/access/lead/edit-lead/{{leadInfo.id}}" class="btn btn-sm btn-round  waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
+                    <td><a routerLink="/access/maintenance/edit-machine/{{leadInfo.id}}" class="btn btn-sm btn-round  waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
                 </tr>
               <tr>
-                <td style=" width:30%"><b>SALES STAGE : </b></td>
-                <td><span class="text-white btn btn-rounded btn-sm {{leadInfo.stage_color}}">
-                    {{leadInfo.stage_name}} - {{leadInfo.currentSalesStage}} %
+                <td style=" width:30%"><b>MACHINE CODE : </b></td>
+                <td><span class="btn btn-rounded btn-sm btn-secondary">
+                    {{leadInfo.code}} 
                     </span>
                   </td>
-                  <td><b>ACCOUNT SECTOR : </b></td>
-                  <td>{{leadInfo.sector}}</td>
+                  <td><b>MACHINE TYPE : </b></td>
+                  <td>{{leadInfo.productName}}</td>
               </tr>
             
               <tr>
-                <td><b>PHONE : </b></td>
-                <td>{{leadInfo.phone}}</td>
+                <td><b>SERIAL NO : </b></td>
+                <td>{{leadInfo.serialNo}}</td>
                 <td><b>EMAIL : </b></td>
                 <td>{{leadInfo.email}}</td>                          
              </tr> 
 
              <tr>
-                <td><b>CREATED BY : </b></td>
-                <td>{{leadInfo.createdByUser}}</td>
-                <td><b>LEAD SOURCE : </b></td>
-                <td>{{leadInfo.leadSource}}</td>
+                <td><b>SALES ADMIN : </b></td>
+                <td>{{leadInfo.salesAdmin}}</td>
+                <td><b>PHONE : </b></td>
+                <td>{{leadInfo.phone}}</td>
              </tr> 
             
-             <tr>
-                <td><b>ASSIGNED (SALES) : </b></td>
-                <td>{{leadInfo.assignedSales}}</td>
-                <td><b>ASSIGNED (SERVICE) : </b></td>
-                <td>{{leadInfo.assignedService}}</td>
-             </tr> 
+            
              
              <tr>
                 <td><b>ADDRESS : </b></td>
@@ -53,9 +48,11 @@
 
            </table>
 
-           
-           <!-- <app-lead-contact [accountId]="id" [machineId]="0"></app-lead-contact>
-           <app-lead-sales [userId]="0" [accountId]="id"></app-lead-sales> -->
+           <ng-container *ngIf="myaccountId > 0">
+            <app-lead-contact [accountId]="myaccountId" [machineId]="id"></app-lead-contact>
+           </ng-container>
+          
+           <!--<app-lead-sales [userId]="0" [accountId]="id"></app-lead-sales> -->
     </div>
 
 
