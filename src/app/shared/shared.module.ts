@@ -8,6 +8,9 @@ import {CdkTableModule } from '@angular/cdk/table';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { ToastrModule } from 'ngx-toastr';
+//import { NgSelectModule } from '@ng-select/ng-select';
+
+import  {SelectModule} from 'ng-select';
 import { LeadContactComponent } from '../logged-in/leads/lead-info/lead-contact/lead-contact.component';
 
 @NgModule({
@@ -20,7 +23,9 @@ import { LeadContactComponent } from '../logged-in/leads/lead-info/lead-contact/
       CdkTableModule,
       OwlDateTimeModule, OwlNativeDateTimeModule,
       PasswordStrengthMeterModule,
-      ToastrModule.forRoot()
+      ToastrModule.forRoot(),
+      SelectModule
+     // HttpClientModule,HttpModule
     ],
     exports : [
         LeadContactComponent,
@@ -30,7 +35,8 @@ import { LeadContactComponent } from '../logged-in/leads/lead-info/lead-contact/
         NgbModule,
         CdkTableModule,
         OwlDateTimeModule, OwlNativeDateTimeModule,
-        PasswordStrengthMeterModule,
+        PasswordStrengthMeterModule,SelectModule
+       // HttpClientModule,HttpModule,
        
     ],
     declarations: [

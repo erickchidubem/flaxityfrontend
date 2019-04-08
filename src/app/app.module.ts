@@ -21,7 +21,6 @@ import {CdkTableService} from './shared/shared-service/cdk-table';
 import { GlobalErrorHandlerService } from './shared/shared-service/global-error-handler';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { HttpClientModule } from '@angular/common/http';
-//import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
 

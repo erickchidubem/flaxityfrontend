@@ -27,97 +27,98 @@
             </div>
   
             <hr>
-            <div class="row invoice-info">
-              <div class="col-sm-6 invoice-col">
-                From
-                <address>
-                 <strong>CIS BURO LTD.</strong><br>
-                 13 Palace Road Oniru Estate,<br/> Victoria Island Extension<br/> Lagos, Nigeria<br/>
-                  Phone: 08093450000, 08187124805, 08187124804<br>
-                  Email: info@cisburoltd.com
-                </address>
-              </div><!-- /.col -->
-              <div class="col-sm-6 invoice-col" style="text-align:right">
-                To
-                <address>
-                  <strong>{{salesInfo.name}}</strong><br>
-                  {{salesInfo.address}}<br>
-                  <!-- Boston, MA 94107<br> -->
-                  Phone: {{salesInfo.phone}}<br>
-                  Email: {{salesInfo.email}}<br/>
-                  <b>Invoice #{{salesInfo.salesid}}</b><br>
-                  <b>Order ID:</b> {{salesInfo.ticketNo}}<br>
-                </address>
-              </div><!-- /.col -->
-             
-            </div><!-- /.row -->
+            <div id="contentToConvert">
+                <div class="row invoice-info">
+                  <div class="col-sm-6 invoice-col">
+                    From
+                    <address>
+                    <strong>CIS BURO LTD.</strong><br>
+                    13 Palace Road Oniru Estate,<br/> Victoria Island Extension<br/> Lagos, Nigeria<br/>
+                      Phone: 08093450000, 08187124805, 08187124804<br>
+                      Email: info@cisburoltd.com
+                    </address>
+                  </div><!-- /.col -->
+                  <div class="col-sm-6 invoice-col" style="text-align:right">
+                    To
+                    <address>
+                      <strong>{{salesInfo.name}}</strong><br>
+                      {{salesInfo.address}}<br>
+                      <!-- Boston, MA 94107<br> -->
+                      Phone: {{salesInfo.phone}}<br>
+                      Email: {{salesInfo.email}}<br/>
+                      <b>Invoice #{{salesInfo.salesid}}</b><br>
+                      <b>Order ID:</b> {{salesInfo.ticketNo}}<br>
+                    </address>
+                  </div><!-- /.col -->
+                
+                </div><!-- /.row -->
 
-            <!-- Table row -->
-            <div class="row">
-              <div class="col-12 table-responsive">
-                <table class="table table-sm table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>#</th>                     
-                      <th>Product</th>
-                      <th>Code</th>
-                      <th>Unit Price</th>
-                      <th>Qty</th>
-                      <th>Subtotal</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let c of salesDetails,let i=index">
-                      <td>{{i+1}}.</td>                  
-                      <td>{{c.productName}}</td>
-                      <td>{{c.code}}</td>
-                      <td>{{utils.getCurrency()}}{{c.amount | number:'.2'}}</td>
-                      <td>{{c.qty}}</td>
-                      <td>{{utils.getCurrency()}}{{c.total | number:'.2'}}</td>
-                    
-                    </tr>
-                    <tr>
-                        <td colspan="5"><b><p style="text-align:right">Discount :</p></b> </td>
-                        <td> <p style="color:red"> - {{utils.getCurrency()}}{{salesInfo.discount  | number:'.2'}}</p></td>
-                    </tr>
-                    <tr>
-                      <td colspan="5"><b><p style="text-align:right">Sub Total :</p></b> </td>
-                      <td>{{utils.getCurrency()}}{{(salesInfo.TotalPrice - salesInfo.discount)  | number:'.2'}}</td>
-                    </tr>
-                    
-                      <tr>
-                          <td colspan="5"><b><p style="text-align:right">VAT :</p></b> </td>
-                          <td>{{utils.getCurrency()}}{{vat  | number:'.2'}}</td>
-                      </tr>
+                <!-- Table row -->
+                <div class="row">
+                  <div class="col-12 table-responsive">
+                    <table class="table table-sm table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>                     
+                          <th>Product</th>
+                          <th>Code</th>
+                          <th>Unit Price</th>
+                          <th>Qty</th>
+                          <th>Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let c of salesDetails,let i=index">
+                          <td>{{i+1}}.</td>                  
+                          <td>{{c.productName}}</td>
+                          <td>{{c.code}}</td>
+                          <td>{{utils.getCurrency()}}{{c.amount | number:'.2'}}</td>
+                          <td>{{c.qty}}</td>
+                          <td>{{utils.getCurrency()}}{{c.total | number:'.2'}}</td>
+                        
+                        </tr>
+                        <tr>
+                            <td colspan="5"><b><p style="text-align:right">Discount :</p></b> </td>
+                            <td> <p style="color:red"> - {{utils.getCurrency()}}{{salesInfo.discount  | number:'.2'}}</p></td>
+                        </tr>
+                        <tr>
+                          <td colspan="5"><b><p style="text-align:right">Sub Total :</p></b> </td>
+                          <td>{{utils.getCurrency()}}{{(salesInfo.TotalPrice - salesInfo.discount)  | number:'.2'}}</td>
+                        </tr>
+                        
+                          <tr>
+                              <td colspan="5"><b><p style="text-align:right">VAT :</p></b> </td>
+                              <td>{{utils.getCurrency()}}{{vat  | number:'.2'}}</td>
+                          </tr>
 
-                      <tr>
-                          <td colspan="5"><b><p style="text-align:right">Total Amount :</p></b> </td>
-                          <td>{{utils.getCurrency()}}{{finalTotal  | number:'.2'}}</td>
-                      </tr>
+                          <tr>
+                              <td colspan="5"><b><p style="text-align:right">Total Amount :</p></b> </td>
+                              <td>{{utils.getCurrency()}}{{finalTotal  | number:'.2'}}</td>
+                          </tr>
 
-                      <tr>
-                        <td colspan="6">
-                          <p style="text-align: center">
-                          {{utils.numberToWord(finalTotal)}} {{utils.CurrencyName()}} Only
-                          </p>
-                        </td>
-                      </tr>
+                          <tr>
+                            <td colspan="6">
+                              <p style="text-align: center">
+                              {{utils.numberToWord(finalTotal)}} {{utils.CurrencyName()}} Only
+                              </p>
+                            </td>
+                          </tr>
 
-                      <tr>
-                          <td colspan="5"><b><p style="text-align:right">Amount Paid :</p></b> </td>
-                          <td>{{utils.getCurrency()}}{{salesInfo.AmountCurrentlyPaid  | number:'.2'}}</td>
-                      </tr>
+                          <tr>
+                              <td colspan="5"><b><p style="text-align:right">Amount Paid :</p></b> </td>
+                              <td>{{utils.getCurrency()}}{{salesInfo.AmountCurrentlyPaid  | number:'.2'}}</td>
+                          </tr>
 
-                      <tr>
-                          <td colspan="5"><b><p style="text-align:right;color:red">Amount Owing :</p></b> </td>
-                          <td style="color: red">{{utils.getCurrency()}}{{finalTotal - salesInfo.AmountCurrentlyPaid  | number:'.2'}}</td>
-                      </tr>
-                   
-                  </tbody>
-                </table>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-
+                          <tr>
+                              <td colspan="5"><b><p style="text-align:right;color:red">Amount Owing :</p></b> </td>
+                              <td style="color: red">{{utils.getCurrency()}}{{finalTotal - salesInfo.AmountCurrentlyPaid  | number:'.2'}}</td>
+                          </tr>
+                      
+                      </tbody>
+                    </table>
+                  </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div>
             <div class="row">
               <!-- accepted payments column -->
               <div class="col-lg-6 payment-icons">
@@ -132,7 +133,9 @@
                 </p>
               </div><!-- /.col -->
               <div class="col-lg-6">
-                <p class="lead" *ngIf="salesInfo.order_collect > 0 ">Amount Due : {{amountDue | date:'EEEE, dd, MMMM, yyyy'}}</p>
+                <!-- <p class="lead" *ngIf="salesInfo.order_collect > 0 ">Amount Due : {{amountDue | date:'EEEE, dd, MMMM, yyyy'}}</p> -->
+              
+              
                 <div class="table-responsive">
                   <!-- <table class="table">
                     <tbody>
@@ -173,7 +176,8 @@
     <div class="col-lg-6">
     <div class="float-sm-right">
                  <button class="btn btn-success m-1" *ngIf="salesInfo.order_collect < 3"><i class="fa fa-credit-card"></i> Submit Payment</button>
-                 <button class="btn btn-primary m-1"><i class="fa fa-download"></i> Generate PDF</button>
+                 <button class="btn btn-primary m-1" (click)="captureScreen()"><i class="fa fa-download"></i> Generate PDF</button>
+                 
     </div>
               </div>
             </div>

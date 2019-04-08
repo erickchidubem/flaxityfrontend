@@ -1,0 +1,199 @@
+<div class="container-fluid">
+  <!-- Breadcrumb-->
+ <div class="row pt-2 pb-2">
+    <div class="col-sm-9">
+    <h4 class="page-title">{{editCreateHeader}}</h4>
+   
+ </div>
+  <div class="col-sm-3">
+   
+  </div>
+ </div>
+
+ <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header text-uppercase">{{editCreateHeader}}</div>
+            <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="Register()">
+            
+                <div class="row">
+                 
+
+                  <div class="form-group row col-md-6">
+                    <label for="input-21" class="col-sm-3 col-form-label">Account</label>
+                    <div class="col-sm-9 input-group">
+                      <select class="form-control" formControlName="account_id"
+                      (change)="getAccountMachine($event.target.value)"
+                      [ngClass]="{ 'is-invalid': submitted && f.account_id.errors }">
+                        <option></option>
+                        <option *ngFor="let c of account" value="{{c.id}}">{{c.name}}</option>
+                      </select>  
+                       
+                       <div *ngIf="submitted && f.account_id.errors" class="invalid-feedback">
+                          <div *ngIf="f.account_id.required">this field is required</div>        
+                      </div>
+                    </div>
+                </div>
+
+                
+                <div class="form-group row col-md-6">
+                  <label for="input-21" class="col-sm-3 col-form-label">Machine</label>
+                  <div class="col-sm-9 input-group">
+                    <select class="form-control" formControlName="machine_id"
+                    [ngClass]="{ 'is-invalid': submitted && f.machine_id.errors }">
+                      <option></option>
+                      <option *ngFor="let c of account_machine" value="{{c.id}}">{{c.productName}} - {{c.code}} - {{c.serialNo}} </option> 
+                    </select>  
+                     
+                     <div *ngIf="submitted && f.machine_id.errors" class="invalid-feedback">
+                        <div *ngIf="f.machine_id.errors.required">this field is required</div>        
+                    </div>
+                  </div>
+              </div>
+                 
+
+                    <div class="form-group row col-md-6">
+                        <label for="input-21" class="col-sm-3 col-form-label">Reported By</label>
+                        <div class="col-sm-9">
+                             <input type="text" formControlName="reportedBy"  [ngClass]="{ 'is-invalid': submitted && f.reportedBy.errors }"
+                              class="form-control" placeholder="Reported By">
+                              <div *ngIf="submitted && f.reportedBy.errors" class="invalid-feedback">
+                                  <div *ngIf="f.reportedBy.errors.required">this field is required</div>        
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-6">
+                        <label for="input-21" class="col-sm-3 col-form-label">Service Cost</label>
+                        <div class="col-sm-9">
+                             <input type="text" formControlName="cost" (keypress)="utils.numberOnly($event)"
+                              [ngClass]="{ 'is-invalid': submitted && f.cost.errors }"
+                             class="form-control" placeholder="Enter Service Cost">
+
+                             <div *ngIf="submitted && f.cost.errors" class="invalid-feedback">
+                                <div *ngIf="f.cost.errors.required">this field is required</div> 
+                                   
+                            </div>
+                        </div>
+                    </div>
+
+
+             
+
+                    <div class="form-group row col-md-6">
+                      <label for="input-21" class="col-sm-3 col-form-label">Case Status</label>
+                      <div class="col-sm-9 input-group">
+                        <select class="form-control" formControlName="case_status_id"
+                        [ngClass]="{ 'is-invalid': submitted && f.case_status_id.errors }">
+                          <option></option>
+                          <ng-container *ngFor="let c of machinecase">
+                            <option *ngIf="c.type == 0" value="{{c.id}}">{{c.caseInfo}}</option>
+                          </ng-container>
+                            
+                        </select>  
+                         
+                         <div *ngIf="submitted && f.case_status_id.errors" class="invalid-feedback">
+                            <div *ngIf="f.case_status_id.errors.required">this field is required</div>        
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group row col-md-6">
+                    <label for="input-21" class="col-sm-3 col-form-label">Payment Status</label>
+                    <div class="col-sm-9 input-group">
+                      <select class="form-control" formControlName="paymentstatus_id"
+                      [ngClass]="{ 'is-invalid': submitted && f.paymentstatus_id.errors }">
+                        <option></option>
+                        <ng-container *ngFor="let c of machinecase">
+                          <option *ngIf="c.type == 1" value="{{c.id}}">{{c.caseInfo}}</option>
+                        </ng-container>
+                         
+                      </select> 
+                          <div *ngIf="submitted && f.paymentstatus_id.errors" class="invalid-feedback">
+                              <div *ngIf="f.paymentstatus_id.errors.required">this field is required</div>        
+                          </div>
+                        </div>
+                </div>
+
+
+
+                 
+
+
+                
+                <div class="form-group row col-md-12">
+                  <label for="input-21" class="col-sm-2 col-form-label">Report Note</label>
+                  <div class="col-lg-9 input-group">
+                    <textarea class="form-control" formControlName="reportNote"  [ngClass]="{ 'is-invalid': submitted && f.reportNote.errors }"></textarea>  
+                     
+                     <div *ngIf="submitted && f.reportNote.errors" class="invalid-feedback">
+                        <div *ngIf="f.reportNote.errors.required">this field is required</div>        
+                    </div>
+                  </div>
+              </div>
+                
+                <!-- <div class="form-group row col-md-6">
+                  <label for="input-21" class="col-sm-3 col-form-label">Issues</label>
+                  <div class="col-sm-9 input-group">
+                      <ng-select formControlName="issues" [multiple]="true"
+                      [options]="myOptions">
+                  </ng-select>
+                   
+                  </div>
+              </div> -->
+
+              <div class="form-group row col-md-6">
+                <label for="input-21" class="col-sm-3 col-form-label">Engineer</label>
+                <div class="col-sm-9 input-group">
+                  <select class="form-control" formControlName="engineer_id"
+                  [ngClass]="{ 'is-invalid': submitted && f.engineer_id.errors }">
+                    <option></option>
+                     <option *ngFor="let c of engineers" value="{{c.id}}">{{c.firstName}} {{c.lastName}}</option> 
+                  </select>  
+                   
+                   <div *ngIf="submitted && f.engineer_id.errors" class="invalid-feedback">
+                      <div *ngIf="f.engineer_id.errors.required">this field is required</div>        
+                  </div>
+                </div>
+            </div>
+              <div class="form-group row col-md-6">
+                  <label for="input-21" class="col-sm-3 col-form-label">Scheduled Date</label>
+                  <div class="col-sm-9 input-group">
+                  <input [owlDateTime]="dt1" formControlName ="scheduledDate"
+                      [ngClass]="{ 'is-invalid': submitted && f.scheduledDate.errors }"
+                       class="form-control" [min]="2/24/2019"
+                      [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+                        <owl-date-time #dt1 ></owl-date-time>
+                        <div *ngIf="submitted && f.scheduledDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.scheduledDate.errors.required">this field is required</div>        
+                        </div>
+                      </div>
+              </div>
+
+
+
+                  
+
+                    
+                    <hr/>
+
+                </div>
+                <div class="row">
+                    <div class="row col-md-10">      
+                      <div class="col-md-6">
+                          <button type="button" (click)="utils.goBack()" class="btn btn-danger"><i class="fa fa-times"></i> CANCEL</button>
+                                            
+                      </div>       
+                      <div class="col-md-6">
+                          <button class="btn btn-success col-md-6"><i class="fa fa-check-square-o"></i> SAVE</button>                   
+                        </div> 
+                     </div>
+                  </div>
+            
+            </form>
+
+            </div>
+          </div>
+        </div>
+ </div>
