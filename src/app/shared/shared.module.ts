@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
@@ -9,12 +10,17 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { ToastrModule } from 'ngx-toastr';
 //import { NgSelectModule } from '@ng-select/ng-select';
-
+ 
 import  {SelectModule} from 'ng-select';
-import { LeadContactComponent } from '../logged-in/leads/lead-info/lead-contact/lead-contact.component';
+import { LeadContactComponent } from './../shared/shared-components/lead-contact/lead-contact.component';
+import { LeadSalesComponent } from './../shared/shared-components/lead-sales/lead-sales.component';
+import { LeadSalesComponentComponent } from './../shared/shared-components/lead-sales/lead-sales-component/lead-sales-component.component';
+
+
 
 @NgModule({
     imports: [
+      RouterModule,
       CommonModule,
       NgxUiLoaderModule,
       ReactiveFormsModule,FormsModule,
@@ -29,6 +35,8 @@ import { LeadContactComponent } from '../logged-in/leads/lead-info/lead-contact/
     ],
     exports : [
         LeadContactComponent,
+        LeadSalesComponent, 
+        LeadSalesComponentComponent, 
         CommonModule,
         NgxUiLoaderModule,
         ReactiveFormsModule,FormsModule,
@@ -41,6 +49,8 @@ import { LeadContactComponent } from '../logged-in/leads/lead-info/lead-contact/
     ],
     declarations: [
        LeadContactComponent, 
+       LeadSalesComponent, 
+       LeadSalesComponentComponent, 
   ],
   
   })

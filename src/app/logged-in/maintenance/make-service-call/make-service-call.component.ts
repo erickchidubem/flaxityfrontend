@@ -132,17 +132,6 @@ export class MakeServiceCallComponent implements OnInit {
         }
         console.log(data);
       },
-      // err => {
-      //   this.utils.StopSpinner();
-       
-      //   if(err.status == 422){
-      //     this.toaster.Error(err.error.message);
-      //   }
-      //   console.log('Error Message : '+err.message);
-      //   console.log('Error : '+err.status);
-      //   console.log( err.error);   
-
-      //   }
     );
 
   }

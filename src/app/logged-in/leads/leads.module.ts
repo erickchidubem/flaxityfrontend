@@ -9,8 +9,6 @@ import { ViewMyLeadsComponent } from './view-my-leads/view-my-leads.component';
 import { ViewAllAccountsComponent } from './view-all-accounts/view-all-accounts.component';
 import { LeadStoryComponent } from './lead-info/lead-story/lead-story.component';
 import { AccountMachineComponent } from './lead-info/account-machine/account-machine.component';
-import { LeadSalesComponent } from './lead-info/lead-sales/lead-sales.component';
-import { LeadSalesComponentComponent } from './lead-info/lead-sales/lead-sales-component/lead-sales-component.component';
 
 const routes: Routes = [
   
@@ -37,8 +35,7 @@ const routes: Routes = [
      AddLeadsComponent,ViewAllLeadsComponent,
      LeadInfoComponent, ViewMyLeadsComponent, 
      ViewAllAccountsComponent, LeadStoryComponent, 
-     AccountMachineComponent, LeadSalesComponent, 
-     LeadSalesComponentComponent,   
+     AccountMachineComponent,  
    ],
 
 })
