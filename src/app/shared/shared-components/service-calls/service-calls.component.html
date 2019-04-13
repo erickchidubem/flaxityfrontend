@@ -1,0 +1,119 @@
+<div class="table-responsive">
+               
+  <!--Table start here -->
+<div class="row">
+   <div class="col-6">
+     <div class="form-inline">
+       <div class="form-group">
+         <div class="input-group mr-3">
+             <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
+             <div class="input-group-append">
+               <button class="btn btn-outline-secondary" (click)="searchFormControl.setValue('')">
+                 x
+               </button>
+             </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <div class="col-6">
+     <div class="float-right">
+       
+         <ngb-pagination 
+         [collectionSize]="tableDataSource$.value.length" 
+         [pageSize]="pageSize$.value"
+         [page]="currentPage$.value"
+         (pageChange)="currentPage$.next($event)"
+         >
+       </ngb-pagination>
+
+     </div>
+   </div>
+ </div>
+<table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
+
+ <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
+ <tr cdk-row *cdkRowDef="let row; columns : columns"></tr>
+ 
+<ng-container cdkColumnDef="ticketNo">
+  <th cdk-header-cell *cdkHeaderCellDef>TicketNo</th>
+  <td cdk-cell *cdkCellDef="let row">
+    <a class="btn btn-round btn-xs btn-outline-success" 
+    routerLink="/access/maintenance/view-service-call/{{row.id}}">{{row.ticketNo}}</a></td>
+</ng-container>
+ 
+ <ng-container cdkColumnDef="accountName">
+         <th cdk-header-cell *cdkHeaderCellDef>Account</th>
+         <td cdk-cell *cdkCellDef="let row">
+           <a routerLink="/access/lead/view-lead/{{row.account_id}}">
+            {{row.name}}
+          </a>
+          </td>
+     </ng-container>
+ 
+     <ng-container cdkColumnDef="productName">
+       <th cdk-header-cell *cdkHeaderCellDef>Machine</th>
+       <td cdk-cell *cdkCellDef="let row">
+         <a  class="btn btn-rounded btn-outline-success" 
+         routerLink="/access/products/product-info/{{row.product_id}}">
+          {{row.productName}}
+        </a>
+       </td>
+   </ng-container>
+
+     <ng-container cdkColumnDef="machineCode">
+         <th cdk-header-cell *cdkHeaderCellDef>Machine Serial/Code</th>
+         <td cdk-cell *cdkCellDef="let row">  
+           <a routerLink="/access/maintenance/machine-info/{{row.machine_id}}" class="btn-outline-secondary btn btn-round">
+           {{row.code}} - {{row.serialNo}}
+           </a></td>
+     </ng-container> 
+
+     
+     <ng-container cdkColumnDef="caseStatus">
+         <th cdk-header-cell *cdkHeaderCellDef>Case Status</th>
+         <td cdk-cell *cdkCellDef="let row">
+           {{row.casestatus}}
+         </td>
+     </ng-container>
+
+     <ng-container cdkColumnDef="engineer">
+      <th cdk-header-cell *cdkHeaderCellDef>Assigned Engineer</th>
+      <td cdk-cell *cdkCellDef="let row">
+        {{row.engineer}}
+      </td>
+  </ng-container>
+
+  <ng-container cdkColumnDef="closedStatus">
+    <th cdk-header-cell *cdkHeaderCellDef>Close Status</th>
+    <td cdk-cell *cdkCellDef="let row">
+      <p class="btn btn-danger btn-xs" *ngIf ="row.closeStatus == 0">OPEN</p>
+      <P class="btn btn-success btn-xs" *ngIf ="row.closeStatus == 1">CLOSED</P>
+    </td>
+</ng-container>
+     
+     <ng-container cdkColumnDef="createddate">
+         <th cdk-header-cell *cdkHeaderCellDef>Created Date</th>
+         <td cdk-cell *cdkCellDef="let row">{{row.createdDate | date:'dd-MMM-yyyy'}}</td>
+     </ng-container>
+     
+  
+
+     <ng-container cdkColumnDef="action">
+        <th cdk-header-cell *cdkHeaderCellDef></th>
+        <td cdk-cell *cdkCellDef="let row">
+       
+        </td>
+     </ng-container>
+
+     
+
+      
+
+     
+ 
+ </table> 
+
+<!--table ends here -->
+
+</div>

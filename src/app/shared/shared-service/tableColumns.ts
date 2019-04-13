@@ -17,3 +17,8 @@ export const productsLogColumn =
 export const salesColumn = 
 ["accountName","salesid","ordercollectstage","totalAmount","amountPaid","amountOwe","createdDate","ordercollectdate","adminCreated","action"]
 
+//["account","machineName","machineCode","casestatus","engineer","paymentstatus","opendate","scheduledate","closeddate","action"]
+
+export const serviceCallColumn = 
+["ticketNo","accountName","productName","machineCode","caseStatus","engineer","createddate","closedStatus","action"]
+

@@ -88,7 +88,7 @@
                         [ngClass]="{ 'is-invalid': submitted && f.case_status_id.errors }">
                           <option></option>
                           <ng-container *ngFor="let c of machinecase">
-                            <option *ngIf="c.type == 0" value="{{c.id}}">{{c.caseInfo}}</option>
+                            <option *ngIf="c.type == 0 && c.closestatus == 0" value="{{c.id}}">{{c.caseInfo}}</option>
                           </ng-container>
                             
                         </select>  

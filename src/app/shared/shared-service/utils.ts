@@ -9,8 +9,7 @@ declare var $:any;
 export class Utils {
 
     constructor(private Spinner : NgxUiLoaderService,private router:Router,
-        public location : Location,
-        private toaster : ToasterService){
+        public location : Location, private toaster : ToasterService){
 
     }
 
@@ -30,7 +29,7 @@ export class Utils {
         return arr.filter(function(ele){
           return ele != value;
         })
-      }
+    }
 
     getDateTimePicker(control){
         $('#'+control).datepicker({

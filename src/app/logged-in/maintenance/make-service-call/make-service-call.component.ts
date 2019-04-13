@@ -128,7 +128,7 @@ export class MakeServiceCallComponent implements OnInit {
         if(d.error == false){
           this.toaster.Success(d.message);
           //access/maintenance/machine-info/2
-          this.router.navigate(['/access/maintenance/machine-info/'+d.id]);                
+          this.router.navigate(['/access/maintenance/view-service-call/'+d.id]);                
         }
         console.log(data);
       },

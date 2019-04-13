@@ -15,6 +15,7 @@ import  {SelectModule} from 'ng-select';
 import { LeadContactComponent } from './../shared/shared-components/lead-contact/lead-contact.component';
 import { LeadSalesComponent } from './../shared/shared-components/lead-sales/lead-sales.component';
 import { LeadSalesComponentComponent } from './../shared/shared-components/lead-sales/lead-sales-component/lead-sales-component.component';
+import { ServiceCallsComponent } from './shared-components/service-calls/service-calls.component';
 
 
 
@@ -37,6 +38,7 @@ import { LeadSalesComponentComponent } from './../shared/shared-components/lead-
         LeadContactComponent,
         LeadSalesComponent, 
         LeadSalesComponentComponent, 
+        ServiceCallsComponent,
         CommonModule,
         NgxUiLoaderModule,
         ReactiveFormsModule,FormsModule,
@@ -50,7 +52,7 @@ import { LeadSalesComponentComponent } from './../shared/shared-components/lead-
     declarations: [
        LeadContactComponent, 
        LeadSalesComponent, 
-       LeadSalesComponentComponent, 
+       LeadSalesComponentComponent, ServiceCallsComponent, 
   ],
   
   })
