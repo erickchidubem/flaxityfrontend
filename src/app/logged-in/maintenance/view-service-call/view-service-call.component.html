@@ -1,3 +1,275 @@
-<p>
-  view-service-call works!
-</p>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">SERVICE CALL, {{serviceInfo?.ticketNo}} FOR {{serviceInfo?.name | uppercase}}  </h5>
+        <div class="table-responsive">
+               <table class="table table-bordered  table-striped">
+                 
+                <tr *ngIf="serviceInfo?.closeStatus == 0">
+                  <td colspan="3"></td>
+                  <td>
+                      <a routerLink="/access/maintenance/edit-service-call/{{serviceInfo?.id}}"
+                      class="btn btn-rounded btn-sm btn-warning">Edit  Service Call</a>
+                  </td>
+                </tr>
+                  <tr>
+                      <th scope="row">TICKET NUMBER</th>
+                      <td scope="col">{{serviceInfo?.ticketNo}}</td>
+                      <th scope="row">CREATED DATE</th>
+                      <td scope="col"> {{serviceInfo?.createdDate | date:'EEEE, dd, MMMM, yyyy hh:mm a'}}</td>
+                    </tr>
+                  <tr>
+                      <th scope="row">PRODUCT NAME</th>
+                      <td scope="col">{{serviceInfo?.productName}} --- {{serviceInfo?.productCode}}</td>
+                      <th scope="row">CASE STATUS</th>
+                      <td scope="col">
+                        <p class="btn btn-outline-success btn-round btn-xs" *ngIf="serviceInfo.closeStatus == 1"> {{serviceInfo?.casestatus}}</p>
+                        <p class="btn btn-outline-warning btn-round btn-xs" *ngIf="serviceInfo.closeStatus == 0"> {{serviceInfo?.casestatus}}</p> 
+                       
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">MACHINE CODE</th>
+                      <td scope="col">{{serviceInfo?.code}}</td>
+                      <th scope="row">MACHINE SERIAL NO</th>
+                      <td scope="col"> {{serviceInfo?.serialNo}}</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">LAST SCHEDULED ENGINEER</th>
+                        <td scope="col">{{serviceInfo?.engineer}}</td>
+                        <th scope="row">LAST SCHEDULED DATE</th>
+                        <td scope="col">
+                         {{serviceInfo?.scheduledDate | date:'EEEE, dd, MMMM, yyyy hh:mm a'}}
+                        </td>
+                      </tr>
+
+                      <tr>
+                          <th scope="row">REPORTS</th>
+                          <td scope="col" colspan="3">
+                            {{serviceInfo?.reportNote}}
+                          </td>
+                        
+                      </tr>
+                   
+                   
+                    <tr>
+                        <th scope="row">CONTACT NAME</th>
+                        <td scope="col"> </td>
+                        <th scope="row">PHONE NUMBER & EMAIL</th>
+                        <td scope="col"> </td>
+                    </tr>
+
+
+                     
+                    
+
+                    <tr *ngIf="serviceInfo?.closeStatus == 0">
+                        <th scope="row">
+                             <button data-toggle="modal" data-target="#reschedule" class="btn btn-xs btn-outline-info">
+                             <i class="fa fa-microchip"></i> RESCHEDULE </button>
+                        </th>
+                        <td scope="col">
+                            <button data-toggle="modal"  data-target="#closed" class="btn btn-xs btn-outline-primary">
+            <i class="zmdi zmdi-run"></i> FOLLOW-UP </button>
+                        </td>
+                        <th scope="row">
+                            <button data-toggle="modal"  data-target="#closed"  class="btn btn-xs btn-outline-dark">
+                              <i class="fa fa-window-close"></i> CLOSE </button>
+                        </th>        
+                      <td> 
+                      </td>
+                  </tr>
+                
+                   
+                </table>
+            </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header text-uppercase">Follow Up Notes</div>
+                 <div class="card-body">
+                    <div class="list-group">
+                             <ng-container *ngFor="let c of followUp">
+                                <a href="javaScript:void();" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                  <h5 class="mb-1">{{c?.engineer}}</h5>
+                                  <small class="text-muted">{{c?.createdDate | date:'EEEE, dd, MMMM, yyyy hh:mm a'}}</small>
+                                </div>
+                                <br/>
+                                <h6>Observations</h6>
+                                <p style="white-space:pre-line;">{{c.observations}}</p>
+                                
+                                <br/>
+                                <h6>Work Done</h6>
+                                <p style="white-space:pre-line;">{{c.workdone}}</p>
+                                
+                                <br/>
+                                <h6>Recommendations</h6>
+                                <p style="white-space:pre-line;">{{c.recommendation}}</p>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <small class="text-muted">
+                                          Scheduled Date : {{c.scheduledTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
+                                        </small>
+                                    </div>
+    
+                                    <div class="col-md-4">
+                                        <small class="text-muted">
+                                            Start Date : {{c.StartTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
+                                        </small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <small class="text-muted">
+                                            Finished Date : {{c.FinishedTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                
+                              </a>
+                             </ng-container>
+                             
+                              
+                            </div>
+                 </div>
+                </div>
+              </div>
+             </div>
+        
+   </div>
+  
+  
+  
+  
+  
+  
+   
+   <div class="modal fade" id="closed">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content border-success">
+        <div class="modal-header bg-success">
+          <h5 class="modal-title text-white">Close Service Call</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+ 
+        <form [formGroup]="closed" (ngSubmit)="submitClosed()">
+                  <div class="modal-body">
+                    <h2 class="mb-0 py3 text-primary">Close Service Call</h2>
+                    
+                    <div class="form-group input-group-lg mb-3">
+                      <label for="input-1">Close Case Status</label>
+                      <select class="form-control" formControlName="closeStatus"
+                      [ngClass]="{ 'is-invalid': f3submit && f3.closeStatus.errors }">
+                        <option></option>
+                        
+                        <ng-container *ngFor="let c of machinecase">
+                          <option *ngIf="c.type == 0 && c.closestatus == 1" value="{{c.id}}">{{c.caseInfo}}</option>
+                        </ng-container>
+                      </select>  
+                       
+                      <div *ngIf="f3submit && f3.closeStatus.errors" class="invalid-feedback">
+                          <div *ngIf="f3.closeStatus.errors.required">this field is required</div>        
+                      </div>
+                    </div>
+
+                    <div class="form-group input-group-lg mb-3">
+                      <label for="input-1">Payment Status</label>
+                      <select class="form-control" formControlName="paymentstatus_id"
+                      [ngClass]="{ 'is-invalid': f3submit && f3.paymentstatus_id.errors }">
+                        <option></option>
+                        
+                        <ng-container *ngFor="let c of machinecase">
+                          <option *ngIf="c.type == 1" value="{{c.id}}">{{c.caseInfo}}</option>
+                        </ng-container>
+                      </select>  
+                       
+                      <div *ngIf="f3submit && f3.paymentstatus_id.errors" class="invalid-feedback">
+                          <div *ngIf="f3.paymentstatus_id.errors.required">this field is required</div>        
+                      </div>
+                    </div>
+
+                 <div class="form-group input-group-lg mb-3">
+                    <label for="input-1">Closing Note</label>
+                   
+                      <textarea class="form-control" formControlName="closeNote"
+                      style="height:200%"
+                      [ngClass]="{ 'is-invalid': f3submit && f3.closeNote.errors }"></textarea>  
+                       
+                       <div *ngIf="f3submit && f3.closeNote.errors" class="invalid-feedback">
+                          <div *ngIf="f3.closeNote.errors.required">this field is required</div>        
+                      </div>
+                   
+                  </div>
+                 
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-inverse-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    <button class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+                  </div>
+      </form>
+      </div>
+    </div>
+  </div> 
+  
+  
+  
+
+   <div class="modal fade" id="reschedule">
+      <div class="modal-dialog">
+        <div class="modal-content border-info">
+          <div class="modal-header bg-info">
+            <h5 class="modal-title text-white">Reschedule Service To Another Engineer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+   
+          <form [formGroup]="reschedule" (ngSubmit)="submitReschedule()">
+                    <div class="modal-body">
+                      <h2 class="mb-0 py3 text-primary">Reschedule Service To Another Engineer</h2>
+                        
+                      <div class="form-group input-group-lg mb-3">
+                        <label for="input-1">Engineer</label>
+                        <select class="form-control" formControlName="engineer_id"
+                        [ngClass]="{ 'is-invalid': f1submit && f1.engineer_id.errors }">
+                          <option></option>
+                           <option *ngFor="let c of engineers" value="{{c.id}}">{{c.firstName}} {{c.lastName}}</option> 
+                        </select>  
+                         
+                        <div *ngIf="f1submit && f1.engineer_id.errors" class="invalid-feedback">
+                            <div *ngIf="f1.engineer_id.errors.required">this field is required</div>        
+                        </div>
+                      </div>
+  
+                   <div class="form-group input-group-lg mb-3">
+                      <label for="input-1">Scheduled Date</label>
+                      <input [owlDateTime]="dt1" formControlName ="scheduledDate"
+                      [ngClass]="{ 'is-invalid': f1submit && f1.scheduledDate.errors }"
+                       class="form-control" [min]="2/24/2019"
+                      [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+                        <owl-date-time #dt1 ></owl-date-time>
+                        <div *ngIf="f1submit && f1.scheduledDate.errors" class="invalid-feedback">
+                            <div *ngIf="f1.scheduledDate.errors.required">this field is required</div>        
+                        </div>
+                    </div>
+                   
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-inverse-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                      <button class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+                    </div>
+        </form>
+        </div>
+      </div>
+    </div> 
+  

@@ -32,12 +32,9 @@ export class MakeServiceCallComponent implements OnInit {
     this.editCreateHeader = "Create New Service Call";
     this.submitted = false;
     this.id = this.route.params['value'].id;
-    //this.getEditInformation(this.id);
+   
     this.generateForm();
-  
-    this.getAllAccount();
-  //  this.getAllMachine();
-    
+    this.getAllAccount(this.id);  
   }
   
   account :any;
@@ -48,16 +45,17 @@ export class MakeServiceCallComponent implements OnInit {
   id : any;
 
   upDateFormInformation(d : any){
+    this.getAccountMachine(d.account_id);
     this.form.patchValue({
       id : d.id,
       account_id : d.account_id,
       machine_id : d.machine_id,
-      reportedBy : d.reportBy,
+      reportedBy : d.reportedBy,
       cost : d.cost,
       paymentstatus_id : d.paymentstatus_id,
       case_status_id : d.case_status_id,
       engineer_id : d.engineer_id,
-      scheduledDate : d.scheduledDate,
+      scheduledDate : this.utils.convertToDateModel(d.scheduledDate),
       reportNote : d.reportNote
     });
   }
@@ -71,12 +69,12 @@ export class MakeServiceCallComponent implements OnInit {
   getEditInformation(id){   
     if(id > 0){
       this.utils.StartSpinner();
-      this.context.getWithToken(id,'machine/getmachine/').
+      this.context.getWithToken(id,'maintenance/getsingleservicecall/').
       subscribe( data => {
         let d = <any>data;
-        this.editCreateHeader= "Edit Service Call  for "+d.data.name+" with serialNo : "+d.data.serialNo+" and product : "+d.data.productName;
-        this.upDateFormInformation(d.data);
-        console.log(d.data)
+        this.editCreateHeader= "Edit Service Call  for "+d.data1.name+" with serialNo : "+d.data1.serialNo+" and product : "+d.data1.productName;
+        this.upDateFormInformation(d.data1);
+        console.log(d)
         this.utils.StopSpinner();
       });    
     }else{
@@ -145,7 +143,7 @@ export class MakeServiceCallComponent implements OnInit {
   machinecase : any[];
   engineers : any[];
 
-  getAllAccount(){
+  getAllAccount(id){
     this.utils.StartSpinner();
      
     this.context.getWithToken('','account/viewallaccounts').
@@ -172,6 +170,8 @@ export class MakeServiceCallComponent implements OnInit {
         this.utils.StopSpinner();
       }); 
 
+
+    this.getEditInformation(this.id);
     this.utils.StopSpinner();
   }
 
@@ -189,7 +189,10 @@ export class MakeServiceCallComponent implements OnInit {
 
 
   getAccountMachine(accountid){
-    this.account_machine =this.machine.filter(x=>x.accountid == accountid);
+    if(this.machine != null){
+      this.account_machine =this.machine.filter(x=>x.accountid == accountid);
+    }
+    
   }
 
 

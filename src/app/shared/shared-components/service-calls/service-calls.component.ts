@@ -38,6 +38,7 @@ export class ServiceCallsComponent implements OnInit {
   @Input() startdate : any;
   @Input() enddate : any;
   @Input() closed : any;
+  @Input() followup : any;
 
   constructor(private context : ContextService,public utils : Utils, private route : ActivatedRoute,
     private cdktable : CdkTableService) { }
@@ -57,7 +58,7 @@ export class ServiceCallsComponent implements OnInit {
 
     ///maintenance/allservicecalls/{accountid}/{machineid}/{startdate}/{enddate}/{closed}/{engineerid}
     this.utils.StartSpinner();
-      this.context.getWithToken('/'+this.accountId+'/'+this.machineId+'/'+this.startdate+'/'+this.enddate+'/'+this.closed+'/'+this.engineerId,
+      this.context.getWithToken('/'+this.accountId+'/'+this.machineId+'/'+this.startdate+'/'+this.enddate+'/'+this.closed+'/'+this.engineerId+'/'+this.followup,
       'maintenance/allservicecalls').
       subscribe( data => {
         let d = <any>data;
