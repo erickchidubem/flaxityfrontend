@@ -21,8 +21,15 @@ export class ViewServiceCallComponent implements OnInit {
   id : any = this.route.params['value'].id;
   engineers : any[];
   machinecase : any[];
+
+  departmentId : any;
+
+  allowFollowUp : any[] = [3,4];
+
  
   ngOnInit() {
+    let tokenvalue = <any>this.context.decodeToken();
+    this.departmentId = tokenvalue.context.user[0].departmentId;
     this.getLeadInformation(this.id);
     this.generateForms(this.id);
   }
@@ -57,6 +64,23 @@ export class ViewServiceCallComponent implements OnInit {
   f1submit:boolean=false;reschedule : FormGroup;//f1;
   f2submit:boolean=false;followup : FormGroup;//f2;
   f3submit:boolean=false ; closed : FormGroup;//f3;
+
+
+  startFollowUp(id,scheduledTime,StartTime="",FinishedTime="",observations="",
+  workdone="",recommendation=""){
+
+    this.followup.patchValue({
+      id : id,
+      scheduledTime : [scheduledTime],
+      StartTime : [StartTime],
+      FinishedTime : [FinishedTime],
+      observations : [observations],
+      workdone : [workdone],
+      recommendation : [recommendation]
+    });
+
+  }
+
 
   generateForms(id){
     
@@ -143,5 +167,8 @@ export class ViewServiceCallComponent implements OnInit {
       );
   }
 
+  submitFollowUp(){
+
+  }
   
 }

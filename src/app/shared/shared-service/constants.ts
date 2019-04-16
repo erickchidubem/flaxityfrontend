@@ -9,8 +9,8 @@ export class Constants{
    }
 
    GetHttpHeadersToken() : HttpHeaders{
-       const headers = new HttpHeaders().set('content-type', 'application/json')
-                                        .set('Authorization', 'Bearer ' + this.GetToken());      
+       const headers = this.GetHttpHeadersAnonymous()
+                           .set('Authorization', 'Bearer ' + this.GetToken());      
        return headers;
    }
 

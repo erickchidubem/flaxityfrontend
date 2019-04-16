@@ -67,15 +67,21 @@
 
                     <tr *ngIf="serviceInfo?.closeStatus == 0">
                         <th scope="row">
-                             <button data-toggle="modal" data-target="#reschedule" class="btn btn-xs btn-outline-info">
+                             <button 
+                             
+                             data-toggle="modal" data-target="#reschedule" class="btn btn-xs btn-outline-info">
                              <i class="fa fa-microchip"></i> RESCHEDULE </button>
                         </th>
                         <td scope="col">
-                            <button data-toggle="modal"  data-target="#closed" class="btn btn-xs btn-outline-primary">
+                            <button data-toggle="modal"  
+                            (click)="startFollowUp(0,serviceInfo?.scheduledDate)"
+                            data-target="#followup" class="btn btn-xs btn-outline-primary">
             <i class="zmdi zmdi-run"></i> FOLLOW-UP </button>
                         </td>
                         <th scope="row">
-                            <button data-toggle="modal"  data-target="#closed"  class="btn btn-xs btn-outline-dark">
+                            <button
+                            
+                            data-toggle="modal"  data-target="#closed"  class="btn btn-xs btn-outline-dark">
                               <i class="fa fa-window-close"></i> CLOSE </button>
                         </th>        
                       <td> 
@@ -273,3 +279,91 @@
       </div>
     </div> 
   
+
+
+    
+   <div class="modal fade" id="followup">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content border-warning">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title text-white">Follow Up Call</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+ 
+        <form [formGroup]="followup" (ngSubmit)="submitFollowUp()">
+                  <div class="modal-body"> 
+                   
+
+                    <div class="form-group input-group-lg mb-3">
+                      <label for="input-1">Start Date & Time</label>
+                      <input [owlDateTime]="dt2" formControlName ="StartTime"
+                      [ngClass]="{ 'is-invalid': f2submit && f2.StartTime.errors }"
+                       class="form-control" [min]="2/24/2019"
+                      [owlDateTimeTrigger]="dt2" placeholder="Date Time">
+                        <owl-date-time #dt2 ></owl-date-time>
+                        <div *ngIf="f2submit && f2.StartTime.errors" class="invalid-feedback">
+                            <div *ngIf="f2.StartTime.errors.required">this field is required</div>        
+                        </div>
+                    </div>
+
+                    <div class="form-group input-group-lg mb-3">
+                      <label for="input-1">End Date & Time</label>
+                      <input [owlDateTime]="dt3" formControlName ="FinishedTime"
+                      [ngClass]="{ 'is-invalid': f2submit && f2.FinishedTime.errors }"
+                       class="form-control" [min]="2/24/2019"
+                      [owlDateTimeTrigger]="dt3" placeholder="Date Time">
+                        <owl-date-time #dt3 ></owl-date-time>
+                        <div *ngIf="f2submit && f2.FinishedTime.errors" class="invalid-feedback">
+                            <div *ngIf="f2.FinishedTime.errors.required">this field is required</div>        
+                        </div>
+                    </div>
+                 <div class="form-group input-group-lg mb-3">
+                    <label for="input-1">Observations</label>
+                   
+                      <textarea class="form-control" formControlName="observations"
+                      style="height:200%"
+                      [ngClass]="{ 'is-invalid': f2submit && f2.observations.errors }"></textarea>  
+                       
+                       <div *ngIf="f2submit && f2.observations.errors" class="invalid-feedback">
+                          <div *ngIf="f2.observations.errors.required">this field is required</div>        
+                      </div>
+                   
+                  </div>
+
+                  <div class="form-group input-group-lg mb-3">
+                    <label for="input-1">Work Done</label>
+                   
+                      <textarea class="form-control" formControlName="workdone"
+                      style="height:200%"
+                      [ngClass]="{ 'is-invalid': f2submit && f2.workdone.errors }"></textarea>  
+                       
+                       <div *ngIf="f2submit && f2.workdone.errors" class="invalid-feedback">
+                          <div *ngIf="f2.workdone.errors.required">this field is required</div>        
+                      </div>
+                   
+                  </div>
+
+                  <div class="form-group input-group-lg mb-3">
+                    <label for="input-1">Recommendation</label>
+                   
+                      <textarea class="form-control" formControlName="recommendation"
+                      style="height:200%"
+                      [ngClass]="{ 'is-invalid': f2submit && f2.recommendation.errors }"></textarea>  
+                       
+                       <div *ngIf="f2submit && f2.recommendation.errors" class="invalid-feedback">
+                          <div *ngIf="f2.recommendation.errors.required">this field is required</div>        
+                      </div>
+                   
+                  </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-inverse-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    <button class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+                  </div>
+      </form>
+      </div>
+    </div>
+  </div> 

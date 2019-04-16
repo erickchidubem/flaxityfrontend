@@ -14,8 +14,11 @@ export class PrimarySidebarComponent implements OnInit {
   grantAccess : boolean = false;
   constructor(public utils : Utils, private context : ContextService,private router : Router) { }
 
+  departmentId : any;
   ngOnInit() {
     this.getUserInformation();
+    let tokenvalue = <any>this.context.decodeToken();
+    this.departmentId = tokenvalue.context.user[0].departmentId;
   }
 
   getUserInformation(){

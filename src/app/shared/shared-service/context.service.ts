@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient}  from '@angular/common/http';
+import * as jwt_decode from 'jwt-decode';
 import { Constants } from './constants';
 
 @Injectable({
@@ -8,6 +9,12 @@ import { Constants } from './constants';
 export class ContextService {
 
   constructor(private http:HttpClient,private config: Constants) { }
+
+
+  decodeToken(){
+    var decoded = jwt_decode(this.config.GetToken()); 
+    return decoded;
+  }
 
   getWithToken(DataObject : string, SubAPIURL : string){
     return this.http.get(this.config.apiUrl + SubAPIURL+DataObject,{ headers:this.config.GetHttpHeadersToken()} );
