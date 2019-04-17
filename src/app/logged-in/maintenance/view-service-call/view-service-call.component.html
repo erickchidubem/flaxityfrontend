@@ -7,10 +7,16 @@
                <table class="table table-bordered  table-striped">
                  
                 <tr *ngIf="serviceInfo?.closeStatus == 0">
-                  <td colspan="3"></td>
+                    <td>
+                        <a 
+                         routerLink="/access/sales/service-call-sales/{{serviceInfo?.id}}/{{serviceInfo?.account_id}}/{{serviceInfo?.machine_id}}"
+                        class="btn btn-rounded btn-sm btn-success">Make Sales</a>
+                    </td>
+                  <td colspan="2"></td>
                   <td>
-                      <a routerLink="/access/maintenance/edit-service-call/{{serviceInfo?.id}}"
-                      class="btn btn-rounded btn-sm btn-warning">Edit  Service Call</a>
+                      <a *ngIf="departmentId == 4"
+                      routerLink="/access/maintenance/edit-service-call/{{serviceInfo?.id}}"
+                      class="btn btn-rounded btn-sm btn-warning">Edit Service Call</a>
                   </td>
                 </tr>
                   <tr>
@@ -37,6 +43,12 @@
                     </tr>
 
                     <tr>
+                      <th scope="row">ADDRESS</th>
+                      <td scope="col" colspan="3">
+                        {{serviceInfo?.address}}
+                      </td>
+                    </tr>
+                    <tr>
                         <th scope="row">LAST SCHEDULED ENGINEER</th>
                         <td scope="col">{{serviceInfo?.engineer}}</td>
                         <th scope="row">LAST SCHEDULED DATE</th>
@@ -55,11 +67,33 @@
                    
                    
                     <tr>
+                        <th scope="row">ACCOUNT PHONE</th>
+                        <td scope="col"> {{serviceInfo?.phone}}  </td>
+                        <th scope="row">ACCOUNT EMAIL</th>
+                        <td scope="col">
+                          {{serviceInfo?.email}}
+                        </td>
+                    </tr>
+
+
+                    <tr *ngIf="serviceInfo?.closeStatus == 1">
+                      <th scope="row">CLOSING NOTE</th>
+                      <td scope="col" colspan="3">
+                        {{serviceInfo?.closeNote}}
+                      </td>
+                    
+                  </tr>
+
+                
+
+                    <!-- <tr>
                         <th scope="row">CONTACT NAME</th>
                         <td scope="col"> </td>
                         <th scope="row">PHONE NUMBER & EMAIL</th>
-                        <td scope="col"> </td>
-                    </tr>
+                        <td scope="col">
+                          {{serviceInfo?.phone}} , {{serviceInfo?.email}}
+                        </td>
+                    </tr> -->
 
 
                      
@@ -68,19 +102,20 @@
                     <tr *ngIf="serviceInfo?.closeStatus == 0">
                         <th scope="row">
                              <button 
-                             
+                             *ngIf="departmentId == 4"
                              data-toggle="modal" data-target="#reschedule" class="btn btn-xs btn-outline-info">
                              <i class="fa fa-microchip"></i> RESCHEDULE </button>
                         </th>
                         <td scope="col">
                             <button data-toggle="modal"  
+                            *ngIf="departmentId == 4 || userid == serviceInfo.engineer_id"
                             (click)="startFollowUp(0,serviceInfo?.scheduledDate)"
                             data-target="#followup" class="btn btn-xs btn-outline-primary">
             <i class="zmdi zmdi-run"></i> FOLLOW-UP </button>
                         </td>
                         <th scope="row">
                             <button
-                            
+                            *ngIf="departmentId == 4" 
                             data-toggle="modal"  data-target="#closed"  class="btn btn-xs btn-outline-dark">
                               <i class="fa fa-window-close"></i> CLOSE </button>
                         </th>        
@@ -98,51 +133,71 @@
           <div class="row">
               <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-header text-uppercase">Follow Up Notes</div>
+                  <div class="card-header text-uppercase">Follow Up Notes and sales made</div>
                  <div class="card-body">
-                    <div class="list-group">
-                             <ng-container *ngFor="let c of followUp">
-                                <a href="javaScript:void();" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                  <h5 class="mb-1">{{c?.engineer}}</h5>
-                                  <small class="text-muted">{{c?.createdDate | date:'EEEE, dd, MMMM, yyyy hh:mm a'}}</small>
-                                </div>
-                                <br/>
-                                <h6>Observations</h6>
-                                <p style="white-space:pre-line;">{{c.observations}}</p>
-                                
-                                <br/>
-                                <h6>Work Done</h6>
-                                <p style="white-space:pre-line;">{{c.workdone}}</p>
-                                
-                                <br/>
-                                <h6>Recommendations</h6>
-                                <p style="white-space:pre-line;">{{c.recommendation}}</p>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <small class="text-muted">
-                                          Scheduled Date : {{c.scheduledTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
-                                        </small>
-                                    </div>
-    
-                                    <div class="col-md-4">
-                                        <small class="text-muted">
-                                            Start Date : {{c.StartTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
-                                        </small>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <small class="text-muted">
-                                            Finished Date : {{c.FinishedTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
-                                        </small>
-                                    </div>
-                                </div>
-                                
-                                
-                              </a>
-                             </ng-container>
-                             
-                              
-                            </div>
+                    <ul class="nav nav-pills nav-pills-info nav-justified" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" data-toggle="pill" href="#piil-13"> <span class="hidden-xs">FOLLOW UP NOTES</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-toggle="pill" href="#piil-14"> <span class="hidden-xs">SALES MADE</span></a>
+                        </li>
+                      
+                       
+                      </ul>
+
+                      <div class="tab-content">
+                          <div id="piil-13" class="container tab-pane active">
+                              <div class="list-group">
+                                  <ng-container *ngFor="let c of followUp">
+                                     <a href="javaScript:void();" class="list-group-item list-group-item-action flex-column align-items-start">
+                                     <div class="d-flex w-100 justify-content-between">
+                                       <h5 class="mb-1">{{c?.engineer}}</h5>
+                                       <small class="text-muted">{{c?.createdDate | date:'EEEE, dd, MMMM, yyyy hh:mm a'}}</small>
+                                     </div>
+                                     <br/>
+                                     <h6>Observations</h6>
+                                     <p style="white-space:pre-line;">{{c.observations}}</p>
+                                     
+                                     <br/>
+                                     <h6>Work Done</h6>
+                                     <p style="white-space:pre-line;">{{c.workdone}}</p>
+                                     
+                                     <br/>
+                                     <h6>Recommendations</h6>
+                                     <p style="white-space:pre-line;">{{c.recommendation}}</p>
+                                     <div class="row">
+                                         <div class="col-md-4">
+                                             <small class="text-muted">
+                                               Scheduled Date : {{c.scheduledTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
+                                             </small>
+                                         </div>
+         
+                                         <div class="col-md-4">
+                                             <small class="text-muted">
+                                                 Start Date : {{c.StartTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
+                                             </small>
+                                         </div>
+                                         <div class="col-md-4">
+                                             <small class="text-muted">
+                                                 Finished Date : {{c.FinishedTime | date:'EEEE, dd, MMMM,yyyy hh:mm a'}}
+                                             </small>
+                                         </div>
+                                     </div>
+                                     
+                                     
+                                   </a>
+                                  </ng-container>
+                                  
+                                   
+                         </div>
+                          </div>
+                          <div id="piil-14" class="container tab-pane fade">
+                               
+                          </div>
+
+
+                   
                  </div>
                 </div>
               </div>

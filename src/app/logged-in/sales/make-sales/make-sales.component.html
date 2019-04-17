@@ -14,7 +14,10 @@
           <div class="row">
               <div class="col-sm-6">
                   <label>ACCOUNT NAME</label>
-                  <select class="form-control" [(ngModel)]="accountId" name="accountId" >
+                  <select class="form-control" [(ngModel)]="accountId"
+                  (change)="getMachines($event.target.value)"
+                  [disabled]="!enableMachinesCategory"
+                  name="accountId" >
                       <option value="0"></option>
                       <ng-container *ngFor="let c of alllead">
                         <option value="{{c.id}}">{{c.name}}</option>
@@ -25,9 +28,13 @@
               </div>
               <div class="col-sm-6">
                 <label>MACHINE NAME</label>
-                <select class="form-control" [(ngModel)]="machineId" name="machineId" required >
+                <select class="form-control" 
+                [disabled]="!enableMachinesCategory"
+                
+                 [(ngModel)]="machineId" name="machineId" required >
                    
                     <option value="0">NO MACHINE</option>
+                    <option *ngFor="let c of leadMachine" [ngValue]="c.id">{{c.code}} - {{c.productName}} - {{c.serialNo}}</option>
           </select>
               </div>
           </div>
@@ -48,7 +55,14 @@
                           >
                               <option value =""></option>
                               <ng-container *ngFor="let c of productType">
-                                <option value="{{c.id}}|{{c.type}}" >{{c.type}}</option>
+                                
+                                <ng-container *ngIf="!enableMachinesCategory">
+                                    <option *ngIf="c.id>1"  value="{{c.id}}|{{c.type}}" >{{c.type}}</option>
+                                </ng-container>
+                                <ng-container *ngIf="enableMachinesCategory">
+                                    <option value="{{c.id}}|{{c.type}}" >{{c.type}}</option>
+                                </ng-container>
+                               
                               </ng-container>
                              
                           </select>

@@ -37,6 +37,9 @@ export class MakeSalesComponent implements OnInit {
 
     countOnline : number = 0;
  
+
+    
+
     submitted2 : boolean = false;
     ngOnInit() {
         this.submitted = false;
@@ -49,6 +52,7 @@ export class MakeSalesComponent implements OnInit {
         if(id>0){
           this.getSalesInfo(id);
         }
+       
         
   }
 
@@ -132,7 +136,28 @@ console.log(formData);
 
   get f(){return this.form.controls;}
 
+  enableMachinesCategory : boolean = true;
  
+  ServiceCallSubscribe(){
+
+    let serviceid = this.route.params['value'].serviceid;
+    let accountid = this.route.params['value'].accountid;
+    let machineid = this.route.params['value'].machineid;
+    if(serviceid > 0){
+      this.servicecall_id = serviceid;
+          if(accountid > 0){
+            this.enableMachinesCategory = false;
+            this.accountId = accountid;
+            this.getMachines(this.accountId);
+            if(machineid > 0){
+              this.machineId = machineid;
+              console.log('machineid = '+machineid)
+              console.log('machine maine ' + this.machineId)
+            }
+          }
+    }
+    this.machineId = machineid;
+  }
 
 
   deleteFromArray(id){
@@ -160,7 +185,17 @@ console.log(formData);
     this.form.patchValue({unitPrice:'',qty : ''});
   }
 
+
+  getMachines(thisvalue){ 
+    this.machineId = 0;
+    if(thisvalue){
+      this.leadMachine =this.allMachines.filter(x=>x.account_id == thisvalue);
+    }
+  }
+
   alllead : any=[];
+  allMachines : any[];
+  leadMachine : any[];
   productType : any=[];
   allProduct : any=[];
   allProductSelect : any=[];
@@ -173,6 +208,14 @@ console.log(formData);
         let d = <any>data;
         this.alllead = d.data;
         console.log(d)
+      });
+
+      this.context.getWithToken('','machine/getallmachine').
+      subscribe( data => {
+        let d = <any>data;
+        this.allMachines = d.data;
+        console.log(d)
+        this.ServiceCallSubscribe();
       });
 
       this.context.getWithToken("0",'product/getproductsbytype/').

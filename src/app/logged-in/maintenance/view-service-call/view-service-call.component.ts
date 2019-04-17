@@ -23,13 +23,18 @@ export class ViewServiceCallComponent implements OnInit {
   machinecase : any[];
 
   departmentId : any;
+  userid : any;
 
   allowFollowUp : any[] = [3,4];
 
  
   ngOnInit() {
-    let tokenvalue = <any>this.context.decodeToken();
-    this.departmentId = tokenvalue.context.user[0].departmentId;
+    this.f1submit = false;
+    this.f2submit = false;
+    this.f3submit = false;
+    let tokenvalue = <any>this.context.decodeToken().context.user[0];   
+    this.departmentId = tokenvalue.departmentId;
+    this.userid = tokenvalue.id;
     this.getLeadInformation(this.id);
     this.generateForms(this.id);
   }
@@ -71,16 +76,16 @@ export class ViewServiceCallComponent implements OnInit {
 
     this.followup.patchValue({
       id : id,
-      scheduledTime : [scheduledTime],
-      StartTime : [StartTime],
-      FinishedTime : [FinishedTime],
-      observations : [observations],
-      workdone : [workdone],
-      recommendation : [recommendation]
+      scheduledTime : scheduledTime,
+      StartTime : StartTime,
+      FinishedTime : FinishedTime,
+      observations : observations,
+      workdone : workdone,
+      recommendation : recommendation
     });
 
   }
-
+ 
 
   generateForms(id){
     
@@ -147,7 +152,7 @@ export class ViewServiceCallComponent implements OnInit {
       return;
     }
 
-      // this.utils.StartSpinner();
+      this.utils.StartSpinner();
        let formData = JSON.stringify(this.closed.value);
        console.log(formData);
       this.context.postWithToken(formData, '/maintenance/closecall').subscribe(
@@ -168,7 +173,31 @@ export class ViewServiceCallComponent implements OnInit {
   }
 
   submitFollowUp(){
+    this.f2submit = true;
+    console.log(JSON.stringify(this.followup.value));
+    if(this.followup.invalid){
+      this.utils.invalidFormMessage();
+      return;
+    }
 
+      // this.utils.StartSpinner();
+       let formData = JSON.stringify(this.followup.value);
+       console.log(formData);
+      this.context.postWithToken(formData, '/maintenance/followup').subscribe(
+        data=>{
+          this.utils.StopSpinner();
+          let d = <any>data;
+          if(d.error == false){
+            this.toaster.Success(d.message);
+            $('#followup').modal("hide");
+              this.ngOnInit();    
+                     
+          }else{
+            this.toaster.Error(d.message);
+          }
+          console.log(d);
+        },
+      );
   }
   
 }

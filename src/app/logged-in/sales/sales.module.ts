@@ -18,6 +18,7 @@ const routes: Routes = [
    
     {path: 'make-sales', component : MakeSalesComponent},
     {path: 'edit-sales/:id', component : MakeSalesComponent},
+    {path: 'service-call-sales/:serviceid/:accountid/:machineid', component:MakeSalesComponent},
     {path: 'invoice/:id', component: InvoiceComponent},
     {path : 'view-uncollected/:id', component : ViewOrdersComponent},
     {path : 'view-collected/:id/:name', component : ViewOrdersComponent},
