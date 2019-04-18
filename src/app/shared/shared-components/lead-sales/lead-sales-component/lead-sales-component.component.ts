@@ -36,6 +36,8 @@ export class LeadSalesComponentComponent implements OnInit {
   @Input() userId : any;
   @Input() salesType : any;
 
+  @Input() serviceId : any;
+
 
   constructor(private context : ContextService,public utils : Utils, private route : ActivatedRoute,
     private cdktable : CdkTableService) { }
