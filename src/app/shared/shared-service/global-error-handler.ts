@@ -42,6 +42,9 @@ export class GlobalErrorHandlerService implements ErrorHandler {
           theErrorMessage = "Please check your input values, some fields where not supplied properly";
       }else if (errorcode == 401){
           router.navigate(['error/401']);
+     }else{
+      theErrorMessage = "Unknown Error, please contact the system administrator";
+      router.navigate(['error/500']);
      }
     toaster.Error(theErrorMessage);
   }

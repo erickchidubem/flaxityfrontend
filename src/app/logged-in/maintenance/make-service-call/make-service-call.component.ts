@@ -165,7 +165,7 @@ export class MakeServiceCallComponent implements OnInit {
         let d = <any>data;
         this.engineers = d.data3;
         this.machineIssue = d.data2;
-        this.optionalizeIssues(d.data2);
+     //   this.optionalizeIssues(d.data2);
         this.machinecase = d.data1;
         this.utils.StopSpinner();
       }); 

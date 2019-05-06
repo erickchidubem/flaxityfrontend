@@ -11,7 +11,7 @@ export class AllServiceCallComponent implements OnInit {
 
   constructor(private context : ContextService,public utils : Utils) { }
 
-  info : any[];
+  info : any=[];
 
   accountId : any=0;
   machineId : any=0;
