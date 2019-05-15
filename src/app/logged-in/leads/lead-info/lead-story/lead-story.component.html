@@ -74,7 +74,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div [innerHTML] = "storyInformation" style="text-align:center"></div>
+        <div [innerHTML] = "storyInformation" style="text-align:center;word-wrap: break-word;white-space: initial;white-space:pre-line;"></div>
 
         <form [formGroup]="form" (ngSubmit)="submit()">
             <div *ngIf="formShow" class="modal-body">

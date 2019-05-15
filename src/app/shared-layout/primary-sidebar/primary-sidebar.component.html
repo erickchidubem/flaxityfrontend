@@ -136,7 +136,7 @@
      </div>
      <div id="sales-dropdown" class="collapse">
          <ul class="user-setting-menu">
-             <li><a routerLink="/access/sales/make-sales"><i class="zmdi zmdi-long-arrow-right"></i>Make Sales</a></li>              
+             <li><a routerLink="/access/sales/make-sales"><i class="zmdi zmdi-long-arrow-right"></i> Make Sales</a></li>              
              <li><a routerLink="/access/sales/view-collected/4/ALL-COLLECTED"><i class="zmdi zmdi-long-arrow-right"></i>Collected Orders</a></li>              
              <li><a routerLink="/access/sales/view-uncollected/0"><i class="zmdi zmdi-long-arrow-right"></i>Uncollected Orders</a></li> 
              <li><a routerLink="/access/products/view-all-products"><i class="zmdi zmdi-long-arrow-right"></i>Payment Reconciliation</a></li>              
@@ -148,7 +148,24 @@
 
 <!---- END MENU DROP DOWN ---->
 
+<!---- MENU DROP DOWN ---->
+<div class="user-details">
+    <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#billing-dropdown">
+             <div class="media-body">
+             <h6 class="side-user-name"><i class="fa fa-handshake-o"></i><span> Contract Billing</span></h6>
+             </div>
+     </div>
+     <div id="billing-dropdown" class="collapse">
+         <ul class="user-setting-menu">
+             <li><a routerLink="/access/billing/create-contract"><i class="zmdi zmdi-long-arrow-right"></i>Create Contract</a></li>              
+             <li><a routerLink="/access/billing/product-category"><i class="zmdi zmdi-long-arrow-right"></i>View Contract</a></li>              
+             <li><a routerLink="/access/billing/product-category"><i class="zmdi zmdi-long-arrow-right"></i>View Billings</a></li>              
+            
+         </ul>
+     </div>
+</div>
 
+<!---- END MENU DROP DOWN ---->
 
   <!---- MENU DROP DOWN ---->
   <div class="user-details">

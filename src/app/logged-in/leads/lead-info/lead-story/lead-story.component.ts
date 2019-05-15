@@ -95,7 +95,7 @@ export class LeadStoryComponent implements OnInit {
     this.storyInformation += "<p><b> Email : </b>"+d.email+"  <b>Phone : </b>"+d.phone+"</p>";
     this.storyInformation += "<b> Prepared By : </b>"+d.admin_name+"";
     this.storyInformation += "<p><b> Initial Sales Stage : </b>"+d.initial_salesstage+" - "+d.initialSalesStage+"% <b>Created Date : </b>"+d.createdDate+"</p>";
-    this.storyInformation += "<p><b> Description : </b>"+d.firstDescription+"</p>";
+    this.storyInformation += "<p><b> Description : </b><br/>"+d.firstDescription+"</p>";
     this.storyInformation += "<p><b> Proposed Revisit Date : </b> "+d.proposedRevisitDate+"</p>";
   
     if(d.revisit == 1){

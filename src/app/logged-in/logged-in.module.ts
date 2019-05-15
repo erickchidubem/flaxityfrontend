@@ -20,6 +20,7 @@ const routes: Routes = [
     { path: 'sales', loadChildren : './sales/sales.module#SalesModule'},
     { path: 'settings', loadChildren : './settings/settings.module#SettingsModule'},
     { path: 'maintenance', loadChildren : './maintenance/maintenance.module#MaintenanceModule'},
+    { path: 'billing', loadChildren : './billing/billing.module#BillingModule'},
 ]; 
 @NgModule({
   imports: [
