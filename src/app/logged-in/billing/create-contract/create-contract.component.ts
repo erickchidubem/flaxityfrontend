@@ -16,7 +16,10 @@ export class CreateContractComponent implements OnInit {
     private toaster : ToasterService,private router : Router,
      private context : ContextService) { }
 
+     editCreateHeader : string;
   ngOnInit() {
+    this.editCreateHeader = "Create New Billing Contract";
+    this.generateForm();
   }
 
   form : FormGroup;

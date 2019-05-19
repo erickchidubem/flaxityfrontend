@@ -18,9 +18,7 @@
                             <option></option>
                             <!-- <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option> -->
                           </select>  
-                           <div class="input-group-append">
-                                <span class="input-group-text"><i class="fa fa-plus-square"></i></span>
-                           </div>
+                           
                            <div *ngIf="submitted && f.contract_type.errors" class="invalid-feedback">
                               <div *ngIf="f.contract_type.errors.required">this field is required</div>        
                           </div>
@@ -35,9 +33,7 @@
                           <option></option>
                           <!-- <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option> -->
                         </select>  
-                         <div class="input-group-append">
-                              <span class="input-group-text"><i class="fa fa-plus-square"></i></span>
-                         </div>
+                         
                          <div *ngIf="submitted && f.accountId.errors" class="invalid-feedback">
                             <div *ngIf="f.accountId.errors.required">this field is required</div>        
                         </div>
@@ -52,9 +48,7 @@
                         <option></option>
                         <!-- <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option> -->
                       </select>  
-                       <div class="input-group-append">
-                            <span class="input-group-text"><i class="fa fa-plus-square"></i></span>
-                       </div>
+                       
                        <div *ngIf="submitted && f.contractDuration.errors" class="invalid-feedback">
                           <div *ngIf="f.contractDuration.errors.required">this field is required</div>        
                       </div>
@@ -70,9 +64,7 @@
                       <option></option>
                       <!-- <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option> -->
                     </select>  
-                     <div class="input-group-append">
-                          <span class="input-group-text"><i class="fa fa-plus-square"></i></span>
-                     </div>
+                    
                      <div *ngIf="submitted && f.billingType.errors" class="invalid-feedback">
                         <div *ngIf="f.billingType.errors.required">this field is required</div>        
                     </div>
@@ -88,9 +80,7 @@
                    class="form-control" [min]="2/24/2019"
                   [owlDateTimeTrigger]="dt1" placeholder="Date Time">
                     <owl-date-time #dt1 ></owl-date-time>
-                   <div class="input-group-append">
-                        <span class="input-group-text"><i class="fa fa-plus-square"></i></span>
-                   </div>
+                   
                    <div *ngIf="submitted && f.contractStartDate.errors" class="invalid-feedback">
                       <div *ngIf="f.contractStartDate.errors.required">this field is required</div>        
                   </div>
@@ -107,11 +97,9 @@
                 </div>
                 <div class="row">
                     <div class="row col-md-10">      
-                      <div class="col-md-6">
-                          <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i> CANCEL</button>
-                                            
+                      <div class="col-md-9">                  
                       </div>       
-                      <div class="col-md-6">
+                      <div class="col-md-3">
                           <button class="btn btn-success col-md-6"><i class="fa fa-check-square-o"></i> SAVE</button>                   
                         </div> 
                      </div>
