@@ -7,109 +7,14 @@
              <div class="card-body">
            
               <div class="table-responsive">
-                <!-- <table style="font-size: 11px" class="table table-sm table-striped table-bordered">
-                 <thead>
-                 
-                   <tr>
-                      <td colspan="2">
-                          <button data-toggle="modal" (click)="generate()"
-                           data-target="#leadcontact" class="btn btn-sm  btn-primary m-1">
-                             Create 
-                          </button>
-                       </td>
-                     <td colspan="5"></td>
-                   
-                   </tr>
-
-                  
-                   <tr>
-                     <th scope="col">#</th>
-                     <th scope="col" colspan="2">Machine</th>
-                     <th scope="col">Rental Charge</th>
-                    
-                     <th scope="col" width="10%">Min Volume X Cost (Mono)</th>
-                     <th scope="col" width="10%">Min Volume X Cost (Color)</th>
-                     <th></th>                                         
-                   </tr>
-                   
-                   <ng-container *ngFor="let c of contractDetails;let i = index">
-
-                  
-                   <tr>
-                      <td scope="col" rowspan="2">{{i+1}}. </td>
-                      <td scope="col" colspan="2" rowspan="2">
-                        {{c.productName}} - {{c.code}} - {{c.serialNo}}
-                      </td>
-                      <td scope="col" rowspan="2"><b>{{utils.getCurrency()}} {{c.rentalCharge | number:'.2'}}</b></td>
-                     
-                      <td scope="col" widtd="10%">
-                      
-                            {{c.min_vol_mono | number:'.2'}} X {{c.cost_mono | number:'.2'}} = 
-                            <b>
-                                {{utils.getCurrency()}}
-                            {{c.min_vol_mono * c.cost_mono | number:'.2'}}
-                      </b> 
-                    </td>
-                      <td scope="col" widtd="10%">
-                          {{c.min_vol_color | number:'.2'}} X {{c.cost_color | number:'.2'}} = 
-                          <b>
-                              {{utils.getCurrency()}}
-                          {{c.min_vol_color * c.cost_color | number:'.2'}}
-                    </b> 
-                      </td>
-                      <td></td>                                        
-                    </tr>
-
-                   <tr>
-                       <td scope="col">#</td>
-                      <td scope="col">Machine</td>
-                      <td scope="col">Rental Charge</td>
-                      
-                      <td scope="col">Email</td>
-                      <td scope="col">EXCESS MONO: {{c.excess_mono | number:'.2'}}</td>
-                      <td scope="col">EXCESS COLOR: {{c.excess_color | number:'.2'}}</td>
-                      <td></td>                                             
-                </tr>
-              </ng-container>
-                             
-id
-contract_id
-machine_id
-rentalCharge
-min_vol_mono
-cost_mono
-excess_mono
-excess_cost_mono
-min_vol_color
-cost_color
-excess_color
-excess_cost_color
-initial_mono
-initial_color
-current_mono
-current_color
-createdBy
-createdDate
-product_id
-serialNo
-code
-productName
-productCode
-ExpectedPrice 
-
-                  
-                 </thead>
-                 <tbody>
-               
-                 </tbody>
-               </table> -->
+           
                <table style="font-size: 11px" class="table table-sm table-striped table-bordered display nowrap table  responsive nowrap table-bordered">
                   
                   <tr>
                       <td colspan="3">
                           <button data-toggle="modal" (click)="generate()"
                            data-target="#leadcontact" class="btn btn-sm  btn-primary m-1">
-                             Create 
+                             Add Machine To Contract 
                           </button>
                        </td>
                      <td colspan="14"></td>
@@ -157,31 +62,35 @@ ExpectedPrice
                             <td>{{c.type * c.contractDuration}} TIMEs</td>
                             <td>  {{utils.getCurrency()}} {{c.minimumExpected * c.type * c.contractDuration | number:'.2'}} </td>
 
-                            <td><button class="btn btn-warning btn-sm">Edit</button></td>
+                            <td><button class="btn btn-warning btn-sm"
+                              data-toggle="modal" 
+                           data-target="#leadcontact"
+                              (click)="editForm(c)">Edit</button></td>
                             <td><button class="btn btn-danger btn-sm">Delete</button></td>
                   </tr>
                   </ng-container>
                   
                </table>
-
-               <!-- <table class="display nowrap table  responsive nowrap table-bordered">
-
-                              <tr>
-                                 <td colspan="4">&nbsp;</td>
-                             </tr>
-                             <tr>
-                                 <td colspan="4">
-                                 <h3 style="text-align: center;">
-                                 <b>TOTAL VALUE: ₦19,226,880.00</b></h3>
-                                 <h4 style="text-align: center;">
-                                 NINETEEN MILLION, TWO HUNDRED AND TWENTY-SIX THOUSAND, EIGHT HUNDRED AND EIGHTY NAIRA ONLY
-                                  </h4>
-                                 </td>
-                             </tr>
-
-
-                  </table> -->
          </div>
+
+         <br/>
+         <hr/>
+            <h6 style="text-align: center;">
+                <b>TOTAL MONTHLY VALUE : {{utils.getCurrency()}} {{contractData?.totalMonthlyValue | number:'.2'}}</b>
+        </h6>
+                <h6 style="text-align: center;">
+                {{utils.numberToWord(contractData?.totalMonthlyValue)}} {{utils.CurrencyName()}}
+                </h6>
+        <br/>
+        <hr/>
+              
+         <h6 style="text-align: center;">
+               <b>TOTAL WORTH : {{utils.getCurrency()}} {{contractData?.totalWorth | number:'.2'}}</b>
+       </h6>
+               <h6 style="text-align: center;">
+                  {{utils.numberToWord(contractData?.totalWorth)}} {{utils.CurrencyName()}}
+               </h6>
+           
              </div>
            </div>
          </div>

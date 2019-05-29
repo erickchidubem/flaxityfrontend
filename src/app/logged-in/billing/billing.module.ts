@@ -7,12 +7,14 @@ import { CreateContractComponent } from './create-contract/create-contract.compo
 import { AddMachineContractComponent } from './add-machine-contract/add-machine-contract.component';
 import {GenerateBillingComponent} from './generate-billing/generate-billing.component';
 import { CreateContractDetailsComponent } from './create-contract-details/create-contract-details.component';
+import { AllContractsComponent } from './all-contracts/all-contracts.component';
 const routes: Routes = [ 
     {path : 'create-contract', component : CreateContractComponent },
     {path : 'edit-contract/:id', component : CreateContractComponent },
     {path : 'view-contract-info/:id/:id2', component : CreateContractComponent },
     {path : 'add-machine', component : AddMachineContractComponent},
-    {path : 'generate-billing/:id', component : GenerateBillingComponent}
+    {path : 'generate-billing/:id', component : GenerateBillingComponent},
+    {path : 'all-contracts', component : AllContractsComponent}
    
  ]; 
 
@@ -28,7 +30,8 @@ const routes: Routes = [
       CreateContractComponent,
       AddMachineContractComponent,
       GenerateBillingComponent,
-      CreateContractDetailsComponent
+      CreateContractDetailsComponent,
+      AllContractsComponent
 ],
 
 })

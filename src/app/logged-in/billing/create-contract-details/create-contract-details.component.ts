@@ -30,6 +30,7 @@ export class CreateContractDetailsComponent implements OnInit {
 
   machine : any= [];
   contractDetails : any = [];
+  contractData :any =[];
   setUp(){
     this.context.getWithToken(this.accountId,'/machine/getaccountmachine/').
     subscribe( data => {
@@ -43,6 +44,7 @@ export class CreateContractDetailsComponent implements OnInit {
     subscribe( data => {
       let d = <any>data; 
       console.log(d)
+      this.contractData = d;
       this.contractDetails = d.data;
      // this.utils.StopSpinner();
     });
@@ -81,7 +83,36 @@ export class CreateContractDetailsComponent implements OnInit {
   }
 
   generate(){
+    this.form.reset();
+    this.form.patchValue({
+      id : 0,
+      accountId : this.accountId,
+      contract_id : this.contractId,
+      
+    })
+  }
 
+  editForm(d : any){
+    console.log(d);
+    this.form.reset();
+    this.form.patchValue({
+      id : d.id,
+      accountId : this.accountId,
+      contract_id : this.contractId,
+      machine_id : d.machine_id ,
+      rentalCharge : d.rentalCharge ,
+      min_vol_mono : d.min_vol_mono ,
+      cost_mono : d.cost_mono ,
+      excess_mono : d.excess_mono ,
+      excess_cost_mono  : d.excess_cost_color ,
+      min_vol_color : d.min_vol_color ,
+      cost_color : d.cost_color ,
+      excess_color : d.excess_color ,
+      excess_cost_color : d.excess_cost_color ,
+      initial_mono : d.initial_mono ,
+      initial_color : d.initial_color ,
+    });
+    console.log(this.form.value)
   }
 
   resetForm(){

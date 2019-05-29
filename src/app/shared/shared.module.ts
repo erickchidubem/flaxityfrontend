@@ -16,6 +16,7 @@ import { LeadContactComponent } from './../shared/shared-components/lead-contact
 import { LeadSalesComponent } from './../shared/shared-components/lead-sales/lead-sales.component';
 import { LeadSalesComponentComponent } from './../shared/shared-components/lead-sales/lead-sales-component/lead-sales-component.component';
 import { ServiceCallsComponent } from './shared-components/service-calls/service-calls.component';
+import { AllContractInfoComponent } from './shared-components/all-contract-info/all-contract-info.component';
 
 
 
@@ -39,6 +40,7 @@ import { ServiceCallsComponent } from './shared-components/service-calls/service
         LeadSalesComponent, 
         LeadSalesComponentComponent, 
         ServiceCallsComponent,
+        AllContractInfoComponent,
         CommonModule,
         NgxUiLoaderModule,
         ReactiveFormsModule,FormsModule,
@@ -52,7 +54,7 @@ import { ServiceCallsComponent } from './shared-components/service-calls/service
     declarations: [
        LeadContactComponent, 
        LeadSalesComponent, 
-       LeadSalesComponentComponent, ServiceCallsComponent, 
+       LeadSalesComponentComponent, ServiceCallsComponent, AllContractInfoComponent, 
   ],
   
   })
