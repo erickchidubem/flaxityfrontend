@@ -1,0 +1,378 @@
+<div class="container-fluid">
+ 
+  <div class="row">
+         <div class="col-lg-12">
+           <div class="card">
+             <div class="card-header text-uppercase">Contract Details</div>
+             <div class="card-body">
+           
+              <div class="table-responsive">
+                <!-- <table style="font-size: 11px" class="table table-sm table-striped table-bordered">
+                 <thead>
+                 
+                   <tr>
+                      <td colspan="2">
+                          <button data-toggle="modal" (click)="generate()"
+                           data-target="#leadcontact" class="btn btn-sm  btn-primary m-1">
+                             Create 
+                          </button>
+                       </td>
+                     <td colspan="5"></td>
+                   
+                   </tr>
+
+                  
+                   <tr>
+                     <th scope="col">#</th>
+                     <th scope="col" colspan="2">Machine</th>
+                     <th scope="col">Rental Charge</th>
+                    
+                     <th scope="col" width="10%">Min Volume X Cost (Mono)</th>
+                     <th scope="col" width="10%">Min Volume X Cost (Color)</th>
+                     <th></th>                                         
+                   </tr>
+                   
+                   <ng-container *ngFor="let c of contractDetails;let i = index">
+
+                  
+                   <tr>
+                      <td scope="col" rowspan="2">{{i+1}}. </td>
+                      <td scope="col" colspan="2" rowspan="2">
+                        {{c.productName}} - {{c.code}} - {{c.serialNo}}
+                      </td>
+                      <td scope="col" rowspan="2"><b>{{utils.getCurrency()}} {{c.rentalCharge | number:'.2'}}</b></td>
+                     
+                      <td scope="col" widtd="10%">
+                      
+                            {{c.min_vol_mono | number:'.2'}} X {{c.cost_mono | number:'.2'}} = 
+                            <b>
+                                {{utils.getCurrency()}}
+                            {{c.min_vol_mono * c.cost_mono | number:'.2'}}
+                      </b> 
+                    </td>
+                      <td scope="col" widtd="10%">
+                          {{c.min_vol_color | number:'.2'}} X {{c.cost_color | number:'.2'}} = 
+                          <b>
+                              {{utils.getCurrency()}}
+                          {{c.min_vol_color * c.cost_color | number:'.2'}}
+                    </b> 
+                      </td>
+                      <td></td>                                        
+                    </tr>
+
+                   <tr>
+                       <td scope="col">#</td>
+                      <td scope="col">Machine</td>
+                      <td scope="col">Rental Charge</td>
+                      
+                      <td scope="col">Email</td>
+                      <td scope="col">EXCESS MONO: {{c.excess_mono | number:'.2'}}</td>
+                      <td scope="col">EXCESS COLOR: {{c.excess_color | number:'.2'}}</td>
+                      <td></td>                                             
+                </tr>
+              </ng-container>
+                             
+id
+contract_id
+machine_id
+rentalCharge
+min_vol_mono
+cost_mono
+excess_mono
+excess_cost_mono
+min_vol_color
+cost_color
+excess_color
+excess_cost_color
+initial_mono
+initial_color
+current_mono
+current_color
+createdBy
+createdDate
+product_id
+serialNo
+code
+productName
+productCode
+ExpectedPrice 
+
+                  
+                 </thead>
+                 <tbody>
+               
+                 </tbody>
+               </table> -->
+               <table style="font-size: 11px" class="table table-sm table-striped table-bordered display nowrap table  responsive nowrap table-bordered">
+                  
+                  <tr>
+                      <td colspan="3">
+                          <button data-toggle="modal" (click)="generate()"
+                           data-target="#leadcontact" class="btn btn-sm  btn-primary m-1">
+                             Create 
+                          </button>
+                       </td>
+                     <td colspan="14"></td>
+                   
+                   </tr>
+                
+                <tr>
+                    <td>#</td>
+                    <th>MACHINE</th>
+                    <th>SERIAL-NO</th>
+                    <th>C-MONO</th>
+                    <th>V-MONO</th>
+                    <th>C-COLOR</th>
+                    <th>V-COLOR</th>
+                    <th>RENTAL</th>
+                    <th>MONO-PAY</th>
+                    <th>C-PAY</th>
+
+                    <th>BILLING</th>
+                    <th>PAY</th>
+                    <th>DURATION</th>
+                    <th>OCCURENCE</th>
+                     <th>TOTal COLLECTION</th>
+                     <th></th>
+                     <th></th>
+                  </tr>
+                  <ng-container *ngFor="let c of contractDetails;let i = index">
+                  <tr>
+                    <td>{{i+1}}.</td>
+                            <td>{{c.productName}} - {{c.code}}</td>
+                            <td>{{c.serialNo}}</td>
+                            <td>{{utils.getCurrency()}}{{c.cost_mono | number:'.2'}}</td>
+                            <td>{{c.min_vol_mono | number:'.2'}}</td>
+                            <td>{{utils.getCurrency()}}{{c.cost_color | number:'.2'}}</td>
+                            <td>{{c.min_vol_color | number:'.2'}}</td>
+                            <td>{{utils.getCurrency()}} {{c.rentalCharge | number:'.2'}} </td>
+                            <td> {{utils.getCurrency()}}
+                                {{c.min_vol_mono * c.cost_mono | number:'.2'}} </td>
+                            <td> {{utils.getCurrency()}}
+                                {{c.min_vol_color * c.cost_color | number:'.2'}} </td>
+
+                            <td> {{c.billingName}}  </td>
+                            <td> {{utils.getCurrency()}}{{c.minimumExpected | number:'.2'}}</td>
+                            <td>{{c.contractDuration}} YEAR(S)</td>
+                            <td>{{c.type * c.contractDuration}} TIMEs</td>
+                            <td>  {{utils.getCurrency()}} {{c.minimumExpected * c.type * c.contractDuration | number:'.2'}} </td>
+
+                            <td><button class="btn btn-warning btn-sm">Edit</button></td>
+                            <td><button class="btn btn-danger btn-sm">Delete</button></td>
+                  </tr>
+                  </ng-container>
+                  
+               </table>
+
+               <!-- <table class="display nowrap table  responsive nowrap table-bordered">
+
+                              <tr>
+                                 <td colspan="4">&nbsp;</td>
+                             </tr>
+                             <tr>
+                                 <td colspan="4">
+                                 <h3 style="text-align: center;">
+                                 <b>TOTAL VALUE: ₦19,226,880.00</b></h3>
+                                 <h4 style="text-align: center;">
+                                 NINETEEN MILLION, TWO HUNDRED AND TWENTY-SIX THOUSAND, EIGHT HUNDRED AND EIGHTY NAIRA ONLY
+                                  </h4>
+                                 </td>
+                             </tr>
+
+
+                  </table> -->
+         </div>
+             </div>
+           </div>
+         </div>
+  </div>
+
+<!-- 
+  contract_id, machine_id, rentalCharge,min_vol_mono, cost_mono, excess_mono, excess_cost_mono,
+   min_vol_color, cost_color, excess_color, excess_cost_color, initial_mono, initial_color, 
+   current_mono, current_color, createdBy -->
+  <div class="modal fade" id="leadcontact">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Edit Contract Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+       
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="modal-body">
+          
+              <div class="row">
+
+                  <div class="form-group col-lg-6">
+                      <label for="input-2">MACHINE</label>
+                      <select  formControlName ="machine_id"
+                      [ngClass]="{ 'is-invalid': submitted && f.machine_id.errors }"
+                       class="form-control" placeholder="MACHINE">
+                       <option *ngFor="let c of machine" value="{{c.id}}">{{c.productName}} - {{c.code}} - {{c.serialNo}} </option> 
+                       </select>
+                       
+                        <div *ngIf="submitted && f.machine_id.errors" class="invalid-feedback">
+                            <div *ngIf="f.machine_id.errors.required">this field is required</div>        
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                      <label for="input-1">RENTAL CHARGE</label>
+                      <input class="form-control" formControlName="rentalCharge" 
+                      (keypress)="utils.decimalsOnly($event,f.rentalCharge)"
+                      [ngClass]="{ 'is-invalid': submitted && f.rentalCharge.errors }"
+                       placeholder="Rental Charge" />
+
+                      <div *ngIf="submitted && f.rentalCharge.errors" class="invalid-feedback">
+                          <div *ngIf="f.rentalCharge.errors.required">this field is required</div>        
+                      </div>
+                    </div>
+                   
+              </div>
+ 
+              <div class="row">
+                  <div class="form-group col-lg-6">
+                    <label for="input-1">MINIMUM VOLUME MONO</label>
+                    <input class="form-control" formControlName="min_vol_mono" 
+                    [ngClass]="{ 'is-invalid': submitted && f.min_vol_mono.errors }"
+                    (keypress)="utils.numberOnly($event)"
+                     placeholder="Minimum Volume mono" />
+
+                    <div *ngIf="submitted && f.min_vol_mono.errors" class="invalid-feedback">
+                        <div *ngIf="f.min_vol_mono.errors.required">this field is required</div>        
+                    </div>
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <label for="input-2">COST PER MONO CLICK</label>
+                    <input  formControlName ="cost_mono"  (keypress)="utils.decimalsOnly($event,f.cost_mono)"
+                    [ngClass]="{ 'is-invalid': submitted && f.cost_mono.errors }"
+                     class="form-control" placeholder="Cost per mono click">
+                     
+                      <div *ngIf="submitted && f.cost_mono.errors" class="invalid-feedback">
+                          <div *ngIf="f.cost_mono.errors.required">this field is required</div>        
+                      </div>
+                  </div>
+              </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                  <label for="input-1">EXCESS MONO </label>
+                  <input class="form-control" formControlName="excess_mono" 
+                  (keypress)="utils.numberOnly($event)"
+                  [ngClass]="{ 'is-invalid': submitted && f.excess_mono.errors }"
+                   placeholder="Excess Mono" />
+
+                  <div *ngIf="submitted && f.excess_mono.errors" class="invalid-feedback">
+                      <div *ngIf="f.excess_mono.errors.required">this field is required</div>        
+                  </div>
+                </div>
+                <div class="form-group col-lg-6">
+                  <label for="input-2">EXCESS COST OF MONO</label>
+                  <input  formControlName ="excess_cost_mono"
+                  (keypress)="utils.decimalsOnly($event,f.excess_cost_mono)"
+                  [ngClass]="{ 'is-invalid': submitted && f.excess_cost_mono.errors }"
+                   class="form-control" placeholder="Cost per excess mono click">
+                   
+                    <div *ngIf="submitted && f.excess_cost_mono.errors" class="invalid-feedback">
+                        <div *ngIf="f.excess_cost_mono.errors.required">this field is required</div>        
+                    </div>
+                </div>
+          </div>
+
+
+
+
+
+          <div class="row">
+              <div class="form-group col-lg-6">
+                <label for="input-1">MINIMUM VOLUME COLOR</label>
+                <input class="form-control" formControlName="min_vol_color" 
+                (keypress)="utils.numberOnly($event)"
+                [ngClass]="{ 'is-invalid': submitted && f.min_vol_color.errors }"
+                 placeholder="Minimum volume color" />
+
+                <div *ngIf="submitted && f.min_vol_color.errors" class="invalid-feedback">
+                    <div *ngIf="f.min_vol_color.errors.required">this field is required</div>        
+                </div>
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="input-2">COST PER COLOR CLICK</label>
+                <input  formControlName ="cost_color" 
+                (keypress)="utils.decimalsOnly($event,f.cost_color)"
+                [ngClass]="{ 'is-invalid': submitted && f.cost_color.errors }"
+                 class="form-control" placeholder="Cost per color click">
+                 
+                  <div *ngIf="submitted && f.cost_color.errors" class="invalid-feedback">
+                      <div *ngIf="f.cost_color.errors.required">this field is required</div>        
+                  </div>
+              </div>
+          </div>
+
+        <div class="row">
+            <div class="form-group col-lg-6">
+              <label for="input-1">EXCESS COLOR </label>
+              <input class="form-control" formControlName="excess_color" 
+              (keypress)="utils.numberOnly($event)"
+              [ngClass]="{ 'is-invalid': submitted && f.excess_color.errors }"
+               placeholder="Excess color" />
+
+              <div *ngIf="submitted && f.excess_color.errors" class="invalid-feedback">
+                  <div *ngIf="f.excess_color.errors.required">this field is required</div>        
+              </div>
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="input-2">EXCESS COST OF COLOR</label>
+              <input  formControlName ="excess_cost_color" 
+              (keypress)="utils.decimalsOnly($event,f.excess_cost_color)"
+              [ngClass]="{ 'is-invalid': submitted && f.excess_cost_color.errors }"
+               class="form-control" placeholder="Cost per excess color click">
+               
+                <div *ngIf="submitted && f.excess_cost_color.errors" class="invalid-feedback">
+                    <div *ngIf="f.excess_cost_color.errors.required">this field is required</div>        
+                </div>
+            </div>
+      </div>
+
+
+      <div class="row">
+          <div class="form-group col-lg-6">
+            <label for="input-1">INSTALLATION MONO COUNT</label>
+            <input class="form-control" formControlName="initial_mono" 
+            (keypress)="utils.numberOnly($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.initial_mono.errors }"
+             placeholder="Installation mono count" />
+
+            <div *ngIf="submitted && f.initial_mono.errors" class="invalid-feedback">
+                <div *ngIf="f.initial_mono.errors.required">this field is required</div>        
+            </div>
+          </div>
+
+          <div class="form-group col-lg-6">
+              <label for="input-1">INSTALLATION COLOR COUNT</label>
+              <input class="form-control" formControlName="initial_color" 
+              (keypress)="utils.numberOnly($event)"
+              [ngClass]="{ 'is-invalid': submitted && f.initial_color.errors }"
+               placeholder="Installation color count" />
+  
+              <div *ngIf="submitted && f.initial_color.errors" class="invalid-feedback">
+                  <div *ngIf="f.initial_color.errors.required">this field is required</div>        
+              </div>
+            </div>
+         
+    </div>
+               
+              
+              
+          
+            </div>
+            <div class="modal-footer">
+              <button type="button" (click)="resetForm()" class="btn btn-inverse-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+              <button class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+            </div>
+      </form>
+      </div>
+    </div>
+  </div>

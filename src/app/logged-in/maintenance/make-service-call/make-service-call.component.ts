@@ -78,7 +78,7 @@ export class MakeServiceCallComponent implements OnInit {
         this.utils.StopSpinner();
       });    
     }else{
-      this.editCreateHeader = "Create New Machine";
+      this.editCreateHeader = "Create New Service Cal";
     }
 
   }

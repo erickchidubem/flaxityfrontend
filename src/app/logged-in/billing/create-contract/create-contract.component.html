@@ -5,6 +5,8 @@
           <div class="card">
             <div class="card-header text-uppercase">{{editCreateHeader}}</div>
             <div class="card-body">
+
+          <ng-container *ngIf="!firstLand">
             <form [formGroup]="form" (ngSubmit)="Register()">
             
                 <div class="row">
@@ -16,7 +18,7 @@
                           <select class="form-control" formControlName="contract_type"
                           [ngClass]="{ 'is-invalid': submitted && f.contract_type.errors }">
                             <option></option>
-                            <!-- <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option> -->
+                            <option *ngFor="let c of billing" value="{{c.id}}">{{c.contractName}}</option>
                           </select>  
                            
                            <div *ngIf="submitted && f.contract_type.errors" class="invalid-feedback">
@@ -31,7 +33,7 @@
                         <select class="form-control" formControlName="accountId"
                         [ngClass]="{ 'is-invalid': submitted && f.accountId.errors }">
                           <option></option>
-                          <!-- <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option> -->
+                           <option *ngFor="let c of account" value="{{c.id}}">{{c.name}}</option> 
                         </select>  
                          
                          <div *ngIf="submitted && f.accountId.errors" class="invalid-feedback">
@@ -46,6 +48,11 @@
                       <select class="form-control" formControlName="contractDuration"
                       [ngClass]="{ 'is-invalid': submitted && f.contractDuration.errors }">
                         <option></option>
+                        <option value="1">1 YEAR</option>
+                        <option value="2">2 YEARS</option>
+                        <option value="3">3 YEARS</option>
+                        <option value="4">4 YEARS</option>
+                        <option value="5">5 YEARS</option>
                         <!-- <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option> -->
                       </select>  
                        
@@ -62,7 +69,7 @@
                     <select class="form-control" formControlName="billingType"
                     [ngClass]="{ 'is-invalid': submitted && f.billingType.errors }">
                       <option></option>
-                      <!-- <option *ngFor="let c of LeadSource" value="{{c.source}}">{{c.source}}</option> -->
+                    <option *ngFor="let c of billingType" value="{{c.id}}">{{c.billingName}}</option>
                     </select>  
                     
                      <div *ngIf="submitted && f.billingType.errors" class="invalid-feedback">
@@ -79,7 +86,7 @@
                   [ngClass]="{ 'is-invalid': submitted && f.contractStartDate.errors }"
                    class="form-control" [min]="2/24/2019"
                   [owlDateTimeTrigger]="dt1" placeholder="Date Time">
-                    <owl-date-time #dt1 ></owl-date-time>
+                    <owl-date-time #dt1 [pickerType]="'calendar'" ></owl-date-time>
                    
                    <div *ngIf="submitted && f.contractStartDate.errors" class="invalid-feedback">
                       <div *ngIf="f.contractStartDate.errors.required">this field is required</div>        
@@ -107,7 +114,88 @@
             
             </form>
 
+          </ng-container>
+            <ng-container *ngIf="firstLand">
+
+           
+                <div>
+                    <div class="row">
+                      
+                    
+                        <div class="form-group row col-md-6">
+                            <label for="input-21" class="col-sm-6 col-form-label">CONTRACT TYPE</label>
+                            <div class="col-sm-6 input-group">
+                             {{serviceInfo?.contractName}}
+                            </div>
+                        </div>
+
+                      <div class="form-group row col-md-6">
+                          <label for="input-21" class="col-sm-6 col-form-label">ACCOUNT</label>
+                          <div class="col-sm-6 input-group">
+                           {{serviceInfo?.accountName | uppercase}}
+                          </div>
+                      </div>
+
+                      <div class="form-group row col-md-6">
+                        <label for="input-21" class="col-sm-6 col-form-label">DURATION</label>
+                        <div class="col-sm-6 input-group">
+                           {{serviceInfo?.contractDuration}} YEAR(S)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row col-md-6">
+                      <label for="input-21" class="col-sm-6 col-form-label">BILLING TYPE</label>
+                      <div class="col-sm-6 input-group">
+                          {{serviceInfo?.billingName}}
+                      </div>
+                  </div>
+
+
+                  <div class="form-group row col-md-6">
+                    <label for="input-21" class="col-sm-6 col-form-label">CONTRACT START DATE</label>
+                    <div class="col-sm-6 input-group">
+                        {{serviceInfo?.contractStartDate | date:'dd-MMM-yyyy'}}
+                    </div>
+                </div>
+
+                <div class="form-group row col-md-6">
+                    <label for="input-21" class="col-sm-6 col-form-label">CONTRACT END DATE</label>
+                    <div class="col-sm-6 input-group">
+                        {{serviceInfo?.contactEndDate | date:'dd-MMM-yyyy'}}
+                        
+                    </div>
+                </div>
+
+                    
+                      
+                    
+
+                      
+                        <hr/>
+
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-10">      
+                          <div class="col-md-9">                  
+                          </div>       
+                          <div class="col-md-3">
+                              <button class="btn btn-info col-md-6"><i class="fa fa-check-square-o"></i> EDIT</button>                   
+                            </div> 
+                        </div>
+                      </div>
+
+                </div>
+        
+        
+            </ng-container>
             </div>
           </div>
         </div>
  </div>
+
+
+ <ng-container *ngIf="displayContractDetails">
+   <app-create-contract-details [accountId]="accountId" [contractId]="id"></app-create-contract-details>
+ </ng-container>
+</div>
