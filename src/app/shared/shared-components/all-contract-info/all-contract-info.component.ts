@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { leadsColumn, DataPerPage } from '../../shared-service/tableColumns';
+import { contractSummary, DataPerPage } from '../../shared-service/tableColumns';
 import { FormControl } from '@angular/forms';
 import { ContextService } from '../../shared-service/context.service';
 import { Utils } from '../../shared-service/utils';
@@ -17,7 +17,7 @@ export class AllContractInfoComponent implements OnInit {
   private heros$;
   superlatives$ = new BehaviorSubject<{[superlativeName: string]: string}>({});
   tableDataSource$ = new BehaviorSubject<any[]>([]);
-  columns = leadsColumn;
+  columns = contractSummary;
   currentPage$ = new BehaviorSubject<number>(1);
   pageSize$ = new BehaviorSubject<number>(DataPerPage);
   dataOnPage$ = new BehaviorSubject<any[]>([]);
@@ -41,9 +41,10 @@ export class AllContractInfoComponent implements OnInit {
   getAllLeads(){
 
     this.utils.StartSpinner();
-      this.context.getWithToken('','account/viewallaccounts').
+      this.context.getWithToken('0/'+this.accountId,'billing/getcontractinfo/').
       subscribe( data => {
         let d = <any>data;
+        console.log(d)
         this.alllead = d.data;
         if(d.data == null){
           this.alllead = {};

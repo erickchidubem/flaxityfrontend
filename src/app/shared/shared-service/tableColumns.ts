@@ -5,6 +5,10 @@ export const leadsColumn =
 ["name","industry","email","phone","address","leadSource","leadStage","createdDate","createdBy","assignToSales","assignToService"]
 
 
+export const contractSummary =
+
+["contractId","accountName","cName","billingName","contractStart","duration","minimumAmount","worth","createdBy","action"];
+
 export const machineColumn =
 ["accountname","machinetype","code","serialno","salesadmin","address","action"]
 

@@ -52,7 +52,20 @@ export class CreateContractComponent implements OnInit {
 
   get f() {return this.form.controls;}
 
+  editData(){
+        this.firstLand = true;
+        console.log("come come come")
+        this.firstLand = false;
+        this.displayContractDetails = false;
+  }
  
+  cancelForm(){
+    this.firstLand = true;
+    console.log("come come come")
+    this.firstLand = true;
+    this.displayContractDetails = true;
+}
+
 
   submitted : boolean = false;
   displayContractDetails : boolean = false;
@@ -133,7 +146,7 @@ export class CreateContractComponent implements OnInit {
   }
 
 
-  editData
+  
 
   serviceInfo : any;
 
@@ -157,7 +170,7 @@ export class CreateContractComponent implements OnInit {
     this.id = this.route.params['value'].id;
     if(this.id > 0){
      
-      this.context.getWithToken(this.id,'billing/getcontractinfo/').
+      this.context.getWithToken(this.id+'/0','billing/getcontractinfo/').
       subscribe( data => {
         let d = <any>data;
         console.log(d)

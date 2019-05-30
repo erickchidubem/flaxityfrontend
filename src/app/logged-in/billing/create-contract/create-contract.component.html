@@ -104,10 +104,12 @@
                 </div>
                 <div class="row">
                     <div class="row col-md-10">      
-                      <div class="col-md-9">                  
+                      <div class="col-md-9">   
+                          <button class="btn btn-danger col-md-6" type="button" (click)="cancelForm()"
+                          ><i class="fa fa-check-square-o"></i> CANCEL</button>                
                       </div>       
                       <div class="col-md-3">
-                          <button class="btn btn-success col-md-6"><i class="fa fa-check-square-o"></i> SAVE</button>                   
+                          <button class="btn btn-success col-md-12"><i class="fa fa-check-square-o"></i> SAVE</button>                   
                         </div> 
                      </div>
                   </div>
@@ -180,7 +182,8 @@
                           <div class="col-md-9">                  
                           </div>       
                           <div class="col-md-3">
-                              <button class="btn btn-info col-md-6"><i class="fa fa-check-square-o"></i> EDIT</button>                   
+                              <button class="btn btn-info col-md-6" (click)="editData()"
+                              ><i class="fa fa-check-square-o"></i> EDIT</button>                   
                             </div> 
                         </div>
                       </div>

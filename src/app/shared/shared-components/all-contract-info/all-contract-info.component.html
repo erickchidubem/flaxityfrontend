@@ -31,70 +31,93 @@
                   </div>
                 </div>
               </div>
-             <table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
+              <!-- AdminCreated: "Ekekwe Eric"
+Phone: "08161809475"
+: "6"
+: "My Palace Hotel"
+address: "Ezekwe Street, Oshodi"
+billingName: "MONTHLY (EVERY MONTH)"
+billingType: "1"
+cName: "MPS"
+contactEndDate: "2023-05-29 23:00:00"
+contractDuration: "4"
+contractName: "MANAGED PRINT SERVICE"
+contractStartDate: "2019-05-29 23:00:00"
+contract_type: "1"
+contractid: "000006"
+createdBy: "1"
+createdDate: "2019-05-28 11:21:16"
+email: "erickchidubem@gmail.com"
+id: "6"
+machineCount: "2"
+minimumAmount: "138720.00"
+nextBillingDate: null
+nextBillingMonth: "1"
+numberOfbillingOccurence: "12" -->
+<!-- ["","","cName","billingName","contractStart","contractEndDate","minimumAmount","worth","action"]; -->
+
+           <table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
    
               <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
               <tr cdk-row *cdkRowDef="let row; columns : columns"></tr>
               
-                  <ng-container cdkColumnDef="name">
-                      <th cdk-header-cell *cdkHeaderCellDef>Name</th>
-                      <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/lead/view-lead/{{row?.id}}">{{row?.name}}</a></td>
+                  <ng-container cdkColumnDef="contractId">
+                      <th cdk-header-cell *cdkHeaderCellDef>Contract ID</th>
+                      <td cdk-cell *cdkCellDef="let row">
+                        <a routerLink="/access/billing/view-contract-info/{{row?.id}}/view">{{row?.contractid}}</a></td>
                   </ng-container>
               
-                  <ng-container cdkColumnDef="createdDate">
-                      <th cdk-header-cell *cdkHeaderCellDef>Date Created</th>
-                      <td cdk-cell *cdkCellDef="let row">{{row?.createdDate | date:'dd-MMMM-yyyy'}}</td>
-                  </ng-container> 
+                  <ng-container cdkColumnDef="accountName">
+                      <th cdk-header-cell *cdkHeaderCellDef>Account Name</th>
+                      <td cdk-cell *cdkCellDef="let row">
+                        <a routerLink="/access/lead/view-lead/{{row?.accountId}}">{{row?.accountName}}</a></td>
+                  </ng-container>
              
                   
-                  <ng-container cdkColumnDef="industry">
-                      <th cdk-header-cell *cdkHeaderCellDef>Industry</th>
-                      <td cdk-cell *cdkCellDef="let row">{{row?.sector}}</td>
+                  <ng-container cdkColumnDef="cName">
+                      <th cdk-header-cell *cdkHeaderCellDef>Contract</th>
+                      <td cdk-cell *cdkCellDef="let row">{{row?.cName}}</td>
                   </ng-container>
               
-                  <ng-container cdkColumnDef="email">
-                      <th cdk-header-cell *cdkHeaderCellDef>Email</th>
-                      <td cdk-cell *cdkCellDef="let row">{{row?.email}}</td>
+                  <ng-container cdkColumnDef="billingName">
+                      <th cdk-header-cell *cdkHeaderCellDef>Billing Type</th>
+                      <td cdk-cell *cdkCellDef="let row">{{row?.billingName}}</td>
                   </ng-container> 
    
-                  <ng-container cdkColumnDef="phone">
-                  <th cdk-header-cell *cdkHeaderCellDef>Phone</th>
-                  <td cdk-cell *cdkCellDef="let row">{{row?.phone}}</td>
+                  <ng-container cdkColumnDef="contractStart">
+                  <th cdk-header-cell *cdkHeaderCellDef>contractStart</th>
+                  <td cdk-cell *cdkCellDef="let row">{{row?.contractStartDate | date:'dd-MMM-yyyy'}}</td>
                   </ng-container>
+
+                  <ng-container cdkColumnDef="duration">
+                      <th cdk-header-cell *cdkHeaderCellDef>Duration</th>
+                      <td cdk-cell *cdkCellDef="let row">{{row?.contractDuration}} year(s)</td>
+                      </ng-container>
    
-                  <ng-container cdkColumnDef="address">
-                     <th cdk-header-cell *cdkHeaderCellDef>Address</th>
-                     <td cdk-cell *cdkCellDef="let row">{{row?.address}}</td>
+                  <ng-container cdkColumnDef="minimumAmount">
+                     <th cdk-header-cell *cdkHeaderCellDef>Monthly Minimum Amount</th>
+                     <td cdk-cell *cdkCellDef="let row">{{row?.minimumAmount | number:'.2'}}</td>
                   </ng-container>
   
-                  <ng-container cdkColumnDef="leadSource">
-                      <th cdk-header-cell *cdkHeaderCellDef>Lead Source</th>
-                      <td cdk-cell *cdkCellDef="let row">{{row?.leadSource}}</td>
+                  <ng-container cdkColumnDef="worth">
+                      <th cdk-header-cell *cdkHeaderCellDef>Total Worth</th>
+                      <td cdk-cell *cdkCellDef="let row">{{row?.minimumAmount * row?.numberOfbillingOccurence * row?.contractDuration | number:'.2'}}</td>
                    </ng-container>
    
-                   <ng-container cdkColumnDef="leadStage">
-                      <th cdk-header-cell *cdkHeaderCellDef>Lead Stage</th>
-                      <td cdk-cell *cdkCellDef="let row">
-                        <span class="text-white btn btn-rounded {{row?.stage_color}}">
-                        {{row?.stage_name}} - {{row?.currentSalesStage}} %
-                        </span>
-                      </td>
-                   </ng-container>
+                  
   
                    <ng-container cdkColumnDef="createdBy">
                       <th cdk-header-cell *cdkHeaderCellDef>Created By</th>
-                      <td cdk-cell *cdkCellDef="let row">{{row?.createdByUser}}</td>
+                      <td cdk-cell *cdkCellDef="let row">{{row?.AdminCreated}}</td>
+                   </ng-container>
+
+                   <ng-container cdkColumnDef="action">
+                      <th cdk-header-cell *cdkHeaderCellDef></th>
+                      <td cdk-cell *cdkCellDef="let row">
+
+                      </td>
                    </ng-container>
   
-                   <ng-container cdkColumnDef="assignToSales">
-                      <th cdk-header-cell *cdkHeaderCellDef>Assign To (Sales)</th>
-                      <td cdk-cell *cdkCellDef="let row">{{row?.assignedSales}}</td>
-                   </ng-container>
-                  
-                   <ng-container cdkColumnDef="assignToService">
-                      <th cdk-header-cell *cdkHeaderCellDef>Assign To (Service)</th>
-                      <td cdk-cell *cdkCellDef="let row">{{row?.assignedService}}</td>
-                   </ng-container>
               
               </table>
              
