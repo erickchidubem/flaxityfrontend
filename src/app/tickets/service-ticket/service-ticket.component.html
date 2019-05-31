@@ -1,0 +1,261 @@
+<div class="card">
+    <div class="card-body">
+            <!-- Content Header (Page header) 
+            <section class="content-header">
+              <h3>
+                Invoice
+                <small>#{{salesInfo.salesid}}</small>
+              </h3>
+            </section>
+  -->
+            <!-- Main content -->
+            <section class="invoice">
+             
+              <div class="row mt-3">
+                <!-- title row -->
+                   <div class="col-lg-6">
+                 <img src="../../../assets/logo.png" width="150px">
+                </div>
+              
+      <div class="col-lg-6">
+        <h5 class="float-sm-right">Date Generated: {{serviceInfo.createdDate | date:'EEEE, MMM, dd, yyyy'}}<br/></h5>
+      
+      </div>
+              </div>
+    
+              <hr>
+           
+                  <div class="row invoice-info">
+                    <div class="col-sm-6 invoice-col">
+                      From
+                      <address>
+                      <strong>CIS BURO LTD.</strong><br>
+                      13 Palace Road Oniru Estate,<br/> Victoria Island Extension<br/> Lagos, Nigeria<br/>
+                        Phone: 08093450000, 08187124805, 08187124804<br>
+                        Email: info@cisburoltd.com
+                      </address>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6 invoice-col" style="text-align:right">
+                      To
+                      <address>
+                        <strong>{{serviceInfo.name}}</strong><br>
+                        {{serviceInfo.address}}<br>
+                        <!-- Boston, MA 94107<br> -->
+                        Phone: {{serviceInfo.phone}}<br>
+                        Email: {{serviceInfo.email}}<br/>
+                      
+                        <b>Order ID:</b> {{serviceInfo.ticketNo}}<br>
+                      </address>
+                    </div><!-- /.col -->
+                  
+                  </div><!-- /.row -->
+  
+                  <!-- Table row -->
+                  <div class="row">
+                    <div class="col-12 table-responsive">
+
+                        <h5 class="card-title" style="text-align: center">SERVICE CALL, {{serviceInfo?.ticketNo}} FOR {{serviceInfo?.name | uppercase}}  </h5>
+        <div class="table-responsive">
+               <table class="table table-bordered table-sm table-striped">
+                 
+               
+                  <tr>
+                      <th scope="row">PRODUCT NAME</th>
+                      <td scope="col">{{serviceInfo?.productName}} --- {{serviceInfo?.productCode}}</td>
+                      <th scope="row">CASE STATUS</th>
+                      <td scope="col">
+                        <p class="btn btn-outline-success btn-round btn-sm" *ngIf="serviceInfo.closeStatus == 1"> {{serviceInfo?.casestatus}}</p>
+                        <p class="btn btn-outline-warning btn-round btn-sm" *ngIf="serviceInfo.closeStatus == 0"> {{serviceInfo?.casestatus}}</p> 
+                       
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">MACHINE CODE</th>
+                      <td scope="col">{{serviceInfo?.code}}</td>
+                      <th scope="row">MACHINE SERIAL NO</th>
+                      <td scope="col"> {{serviceInfo?.serialNo}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">ADDRESS</th>
+                      <td scope="col" colspan="3">
+                        {{serviceInfo?.address}}
+                      </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">SCHEDULED ENGINEER</th>
+                        <td scope="col">{{serviceInfo?.engineer}}</td>
+                        <th scope="row">SCHEDULED DATE</th>
+                        <td scope="col">
+                         {{serviceInfo?.scheduledDate | date:'EEEE, dd, MMMM, yyyy hh:mm a'}}
+                        </td>
+                      </tr>
+
+                      <tr>
+                          <th scope="row">START TIME</th>
+                          <td scope="col"></td>
+                          <th scope="row">END TIME</th>
+                          <td scope="col"> </td>
+                        </tr>
+
+                      <tr style="height: 80px">
+                          <td scope="col" colspan="4">
+                              <b>CUSTOMER REPORT : </b>
+                            {{serviceInfo?.reportNote}}
+                          </td>
+                        
+                      </tr>
+                   
+                   
+                    <tr>
+                        <th scope="row">ACCOUNT PHONE</th>
+                        <td scope="col"> {{serviceInfo?.phone}}  </td>
+                        <th scope="row">ACCOUNT EMAIL</th>
+                        <td scope="col">
+                          {{serviceInfo?.email}}
+                        </td>
+                    </tr>
+
+
+                    <tr *ngIf="serviceInfo?.closeStatus == 1">
+                      <th scope="row">CLOSING NOTE</th>
+                      <td scope="col" colspan="3">
+                        {{serviceInfo?.closeNote}}
+                      </td>
+                    
+                  </tr>
+
+                  <tr>
+                      <td colspan="4" style="height: 100px">
+                        <b>OBSERVATION</b>
+                        
+
+                      </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="height: 100px">
+                          <b>WORK DONE</b>
+                          
+  
+                        </td>
+                      </tr>
+ 
+                      <tr>
+                          <td colspan="4" style="height: 100px">
+                            <b>RECOMMENDATIONS</b>
+                            
+    
+                          </td>
+                        </tr>
+     
+                </table>
+
+
+                      <table class="table table-sm table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th colspan="6" style="background: black; color: blanchedalmond; text-align: center"><b>RECOMMENDED PARTS TO REPLACE</b></th>
+                          </tr>
+                          <tr>
+                            <th>#</th>                     
+                            <th style="width: 50%">Product</th>
+                            <th style="width: 30%">Code</th>
+                            <th style ="width: 15%">Qty</th>
+                           
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1.</td>                  
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            
+                          
+                          </tr>
+                          <tr>
+                              <td>2.</td>                  
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                             
+                            
+                            </tr>
+                            <tr>
+                                <td>3.</td>                  
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                               
+                              
+                              </tr>
+                              <tr>
+                                  <td>4.</td>                  
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                 
+                                
+                                </tr>
+                                <tr>
+                                    <td>5.</td>                  
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                
+                                  
+                                  </tr>
+                                
+  
+                        </tbody>
+                      </table>
+
+                      <table class="table table-sm table-bordered table-striped">
+
+                          <tr>
+                
+                               <td><p style="text-align: left"><BR/>CUSTOMER NAME:</p></td>
+                                <td rowspan="2"><p style="text-align: left"><b><u>CUSTOMER SIGNATURE & DATE:</u></b></p><p style="text-align: center">&nbsp;</p></td>
+                
+                          </tr>
+                          <tr>
+                
+                              <td><p style="text-align: left; color: red; font-style: bold"><BR/>CUSTOMER SHOULD RATE THE ENGINEER'S SERVICE</p></td>
+                
+                          </tr>
+                      </table>
+                          <table class="table table-sm table-bordered table-striped">
+                              <tr>
+                                  <td><p style="color: black">EXCELLENT - 5</p></td>
+                                  <td><p style="color: black">VERY GOOD - 4</p></td>
+                                  <td><p style="color: black">GOOD - 3</p></td>
+                                  <td><p style="color: orange">FAIR - 2</p></td>
+                                  <td><p style="color: red">POOR - 1</p></td>
+                                  <td><p style="color: red">VERY POOR - 0</p></td>
+                              </tr>
+                          </table>
+                
+                    </div><!-- /.col -->
+                  </div><!-- /.row -->
+              </div>
+             
+   
+              <!-- this row will not appear when printing -->
+              <hr>
+             
+                <div class="col-lg-6">
+                 
+               </div>
+      <div class="col-lg-6">
+      <div class="float-sm-right">
+                 
+                   <button class="btn btn-primary m-1" onclick="window.print()" ><i class="fa fa-download"></i> Print</button>
+                   
+      </div>
+                </div>
+              </section>
+          
+    </div>
+  </div>
+  
+  

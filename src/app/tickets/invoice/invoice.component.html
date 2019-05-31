@@ -1,28 +1,25 @@
 <div class="card">
   <div class="card-body">
-          <!-- Content Header (Page header) -->
+          <!-- Content Header (Page header) 
           <section class="content-header">
             <h3>
               Invoice
               <small>#{{salesInfo.salesid}}</small>
             </h3>
           </section>
-
+-->
           <!-- Main content -->
           <section class="invoice">
-            <!-- title row -->
+           
             <div class="row mt-3">
-              <div class="col-lg-6">
-                <h4><i class="fa fa-globe"></i> {{salesInfo.name}}</h4>
-                <p><span class="text-white btn btn-round {{salesInfo.order_color}}">
-                  {{salesInfo.ordercollectstage}}
-                </span></p>
+              <!-- title row -->
+                 <div class="col-lg-6">
+               <img src="../../../assets/logo.png" width="150px">
               </div>
+            
     <div class="col-lg-6">
-      <a routerLink="/access/sales/edit-sales/{{salesInfo.id}}"  *ngIf="salesInfo.order_collect == 0 && salesInfo.createdBy == userid" class="float-sm-right btn btn-round btn-info">EDIT INVOICE</a>
-     <h5 class="float-sm-right">Date Generated: {{salesInfo.createdDate | date:'EEEE, MMM, dd, yyyy'}}<br/>
+      <h5 class="float-sm-right">Date Generated: {{salesInfo.createdDate | date:'EEEE, MMM, dd, yyyy'}}<br/>
      <span *ngIf="salesInfo.order_collect > 0">Date Closed: {{salesInfo.order_collect_date | date:'EEEE, MMM, dd, yyyy'}}</span></h5>
-   
     </div>
             </div>
   
@@ -58,6 +55,9 @@
                   <div class="col-12 table-responsive">
                     <table class="table table-sm table-bordered table-striped">
                       <thead>
+                        <tr>
+                          <th colspan="6" style="background: black; color: blanchedalmond; text-align: center"><b>ITEMS PURCHASED</b></th>
+                        </tr>
                         <tr>
                           <th>#</th>                     
                           <th>Product</th>
@@ -122,20 +122,14 @@
             <div class="row">
               <!-- accepted payments column -->
               <div class="col-lg-6 payment-icons">
-                <p class="lead">Payment Methods:</p>
-                <!-- <img src="assets/images/payment-icons/visa-dark.png" alt="Visa">
-                <img src="assets/images/payment-icons/mastro-dark.png" alt="Mastercard">
-                <img src="assets/images/payment-icons/american-dark.png" alt="American Express">
-                <img src="assets/images/payment-icons/paypal-dark.png" alt="Paypal"> -->
+                <p class="lead"></p>
+               
                 <p class="bg-light p-2 mt-3 rounded">
-                  <!-- Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                 -->
+                
                 </p>
               </div><!-- /.col -->
               <div class="col-lg-6">
-                <!-- <p class="lead" *ngIf="salesInfo.order_collect > 0 ">Amount Due : {{amountDue | date:'EEEE, dd, MMMM, yyyy'}}</p> -->
-              
-              
+               
                 <div class="table-responsive">
                   <!-- <table class="table">
                     <tbody>
@@ -165,22 +159,13 @@
             <hr>
             <div class="row no-print">
               <div class="col-lg-6">
-                 <a target="_blank"
-                 data-toggle="modal"  data-target="#closeorder" 
-                 class="text-white btn btn-dark m-1" 
-                 *ngIf="salesInfo.order_collect == 0 && salesInfo.createdBy == userid">
-                 <i class="fa fa-print"></i> Close Order</a> 
-                <a routerLink="/access/delivery/"  target="_blank" *ngIf="salesInfo.order_collect > 0" class="btn btn-secondary m-1">
-                  <i class="fa fa-truck"></i> Generate Delivery Note</a>
+               
              </div>
     <div class="col-lg-6">
     <div class="float-sm-right">
-                 <button class="btn btn-success m-1" *ngIf="salesInfo.order_collect < 3"><i class="fa fa-credit-card"></i> Submit Payment</button>
-                 <!-- <button class="btn btn-primary m-1" (click)="captureScreen()"><i class="fa fa-download"></i> Generate PDF</button> -->
-                 <a class="btn btn-primary m-1" 
-                 routerLink="/ticket/invoice/{{salesInfo?.id}}"
-                 target="_blank"
-                 ><i class="fa fa-download"></i> Printable</a>
+               
+                 <button class="btn btn-primary m-1" onclick="window.print()" ><i class="fa fa-download"></i> Print</button>
+                 
     </div>
               </div>
             </div>
@@ -188,47 +173,3 @@
   </div>
 </div>
 
-
-
-
-<div class="modal fade" id="closeorder">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Collect Order</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-       <!-- <div [innerHTML] = "storyInformation" style="text-align:center"></div> -->
-      <div class="modal-body">
-        <form [formGroup]="formcloseorder" (ngSubmit)="submitcloseorder()">
-          <div class="form-group row">
-                  <label for="input-21" class="col-sm-2 col-form-label">Date Closed</label>
-                  <div class="input-group mb-3">
-                    <input [owlDateTime]="dt1" formControlName ="date" readonly
-                        [ngClass]="{ 'is-invalid': submitted && f.date.errors }"
-                          class="form-control" [min]="2/24/2019"
-                        [owlDateTimeTrigger]="dt1" placeholder="Date Time">
-                      <div class="input-group-append">
-                      <span class="input-group-text"><i class="fa fa-times-rectangle"></i></span>
-                    </div>
-                  </div>
-                  <owl-date-time #dt1 ></owl-date-time>
-                  <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
-                    <div *ngIf="f.date.errors.required">this field is required</div>        
-                </div>
-         </div>
-
-         <div class="form-group">
-           <button class="btn btn-success">Collect Order</button>
-         </div>
-          </form>
-          
-      </div>
-    
-   
-
-    </div>
-  </div>
-</div>

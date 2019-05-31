@@ -35,7 +35,6 @@ export class LeadSalesComponentComponent implements OnInit {
   @Input() accountId : any;
   @Input() userId : any;
   @Input() salesType : any;
-
   @Input() serviceId : any;
 
 
@@ -56,7 +55,7 @@ export class LeadSalesComponentComponent implements OnInit {
   getAllSales(){
 
     this.utils.StartSpinner();
-      this.context.getWithToken('/'+this.accountId+'/'+this.userId+'/'+this.salesType,'sales/getaccountuserssales').
+      this.context.getWithToken('/'+this.accountId+'/'+this.userId+'/'+this.salesType+'/'+this.serviceId,'sales/getaccountuserssales').
       subscribe( data => {
         let d = <any>data;
         this.allSales = d.data;

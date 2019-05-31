@@ -2,9 +2,14 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-              <h5 class="card-title">SERVICE CALL, {{serviceInfo?.ticketNo}} FOR {{serviceInfo?.name | uppercase}}  </h5>
+              <h5 class="card-title">SERVICE CALL, {{serviceInfo?.ticketNo}} FOR {{serviceInfo?.name | uppercase}}   | <a 
+                routerLink="/ticket/service-call/{{serviceInfo?.id}}"
+               class="btn btn-rounded btn-sm btn-info" target="_blank">Printable</a></h5>
+              <p style="text-align: center">
+                  
+              </p>
         <div class="table-responsive">
-               <table class="table table-bordered  table-striped">
+               <table class="table table-bordered table-sm  table-striped">
                  
                 <tr *ngIf="serviceInfo?.closeStatus == 0">
                     <td>
@@ -142,8 +147,6 @@
                         <li class="nav-item">
                           <a class="nav-link" data-toggle="pill" href="#piil-14"> <span class="hidden-xs">SALES MADE</span></a>
                         </li>
-                      
-                       
                       </ul>
 
                       <div class="tab-content">
@@ -193,7 +196,7 @@
                          </div>
                           </div>
                           <div id="piil-14" class="container tab-pane fade">
-                               
+                              <app-lead-sales-component [accountId]="0" [userId]="0" [salesType]="5" [serviceId]="id"></app-lead-sales-component>
                           </div>
 
 

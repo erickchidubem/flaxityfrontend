@@ -27,7 +27,7 @@ const routes: Routes = [
     {path : 'password-reset/:id/:date/:date2/:datediff', component : PasswordResetComponent},
     {path : 'access', component:BodyContentComponent, canActivate:[InternalAuthGuard], loadChildren : './logged-in/logged-in.module#LoggedInModule'},
     { path: 'error', loadChildren: './error-pages/error.module#ErrorModule' },
- 
+    {path : 'ticket', loadChildren : './tickets/tickets.module#TicketsModule'},
     {path : '**', redirectTo : '/error/400'},
     
   ];
