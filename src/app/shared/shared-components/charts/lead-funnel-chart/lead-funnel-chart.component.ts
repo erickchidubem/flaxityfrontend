@@ -36,26 +36,32 @@ export class LeadFunnelChartComponent implements OnInit {
   
   RunFunnel(d :any){
     let chart = am4core.create("chartdiv", am4charts.SlicedChart);
-chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+            chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
 
-chart.data = d;
+            chart.data = d;
 
-let series = chart.series.push(new am4charts.FunnelSeries());
-series.colors.step = 2;
-series.dataFields.value = "value";
-series.dataFields.category = "name";
-series.alignLabels = true;
+            let series = chart.series.push(new am4charts.FunnelSeries());
+            series.colors.step = 2;
+            series.dataFields.value = "value";
+            series.dataFields.category = "name";
+            series.alignLabels = true;
 
-series.labelsContainer.paddingLeft = 15;
-series.labelsContainer.width = 200;
+            let fillModifier = new am4core.LinearGradientModifier();
+            fillModifier.brightnesses =[-0.5,1,-0.5];
+            fillModifier.offsets = [0,0.5,1];
+            series.slices.template.fillModifier = fillModifier;
+            series.alignLabels = true;
 
-//series.orientation = "horizontal";
-//series.bottomRatio = 1;
+            series.labelsContainer.paddingLeft = 15;
+            series.labelsContainer.width = 200;
 
-chart.legend = new am4charts.Legend();
-chart.legend.position = "left";
-chart.legend.valign = "bottom";
-chart.legend.margin(5,5,20,5)
+            //series.orientation = "horizontal";
+            //series.bottomRatio = 1;
+
+            chart.legend = new am4charts.Legend();
+            chart.legend.position = "left";
+            chart.legend.valign = "bottom";
+            chart.legend.margin(5,5,20,5)
   }
 
   ngAfterViewInit() {
@@ -74,15 +80,12 @@ chart.legend.margin(5,5,20,5)
 
   salesInfo : any=[];
   getLeadStages(){
-    this.context.getWithToken(this.userId+'/'+this.viewType,'account/leadstagecount/').
-    subscribe( data => {
-      let d = <any>data;
-      this.RunFunnel(d.data);
-      console.log(d.data)
-     
-    }); 
-
-  
-}
+        this.context.getWithToken(this.userId+'/'+this.viewType,'account/leadstagecount/').
+        subscribe( data => {
+          let d = <any>data;
+          this.RunFunnel(d.data);
+          console.log(d.data)
+        }); 
+    }
 
 }

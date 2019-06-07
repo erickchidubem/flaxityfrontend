@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-sales-dashboard',
@@ -9,9 +11,14 @@ export class SalesDashboardComponent implements OnInit {
 
   @Input() userId : any;
   @Input() viewType : any;
-  constructor() { }
+  theDate = new Date();
+  DateString : any;
+  constructor(public datepipe : DatePipe) { 
+    this.DateString =this.datepipe.transform(this.theDate,'yyyy-MM-dd');
+  }
 
   ngOnInit() {
+    
   }
 
 }

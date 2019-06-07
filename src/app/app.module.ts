@@ -22,6 +22,7 @@ import { GlobalErrorHandlerService } from './shared/shared-service/global-error-
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { HttpClientModule } from '@angular/common/http';
 import { AmChartsModule } from "@amcharts/amcharts3-angular";
+import { DatePipe } from '@angular/common';
 
 @NgModule({
 
@@ -51,7 +52,7 @@ import { AmChartsModule } from "@amcharts/amcharts3-angular";
     ContextService,
     GlobalErrorHandlerService,
     CdkTableService,
-    
+    DatePipe,
     { 
       provide:  ErrorHandler, 
       useClass: GlobalErrorHandlerService 

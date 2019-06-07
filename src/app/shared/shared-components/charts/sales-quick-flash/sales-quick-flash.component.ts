@@ -13,6 +13,7 @@ export class SalesQuickFlashComponent implements OnInit {
   constructor(public utils : Utils, private context : ContextService) { }
 
   ngOnInit() {
+    this.getData();
   }
 
   salesInfo : any =[];
@@ -20,10 +21,10 @@ export class SalesQuickFlashComponent implements OnInit {
     this.context.getWithToken('/'+this.userId+'/'+this.theDate,'sales/getallsalesinformation').
     subscribe( data => {
       let d = <any>data;
-      this.salesInfo = d.data;
-      console.log(d)
+      this.salesInfo = d.data[0];
+      console.log(d.data[0])
     
     });
   }
-
+ 
 }
