@@ -175,7 +175,10 @@
              </div>
     <div class="col-lg-6">
     <div class="float-sm-right">
-                 <button class="btn btn-success m-1" *ngIf="salesInfo.order_collect < 3"><i class="fa fa-credit-card"></i> Submit Payment</button>
+                 <button class="btn btn-success m-1" data-target="#closeorder"
+                 *ngIf="salesInfo.order_collect < 3 && salesInfo.order_collect > 0">
+                 <i class="fa fa-credit-card"></i> Submit Payment
+                </button>
                  <!-- <button class="btn btn-primary m-1" (click)="captureScreen()"><i class="fa fa-download"></i> Generate PDF</button> -->
                  <a class="btn btn-primary m-1" 
                  routerLink="/ticket/invoice/{{salesInfo?.id}}"
@@ -232,3 +235,48 @@
     </div>
   </div>
 </div>
+
+
+
+
+<div class="modal fade" id="collectpayment">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Collect Payment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+         <!-- <div [innerHTML] = "storyInformation" style="text-align:center"></div> -->
+        <div class="modal-body">
+          <form [formGroup]="formcloseorder" (ngSubmit)="submitcloseorder()">
+            <div class="form-group row">
+                    <label for="input-21" class="col-sm-2 col-form-label">Date Closed</label>
+                    <div class="input-group mb-3">
+                      <!-- <input [owlDateTime]="dt2" formControlName ="date" readonly
+                          [ngClass]="{ 'is-invalid': submitted && f.date.errors }"
+                            class="form-control" [min]="2/24/2019"
+                          [owlDateTimeTrigger]="dt2" placeholder="Date Time"> -->
+                        <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-times-rectangle"></i></span>
+                      </div>
+                    </div>
+                    <owl-date-time #dt1 ></owl-date-time>
+                    <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+                      <div *ngIf="f.date.errors.required">this field is required</div>        
+                  </div>
+           </div>
+  
+           <div class="form-group">
+             <button class="btn btn-success">Collect Order</button>
+           </div>
+            </form>
+            
+        </div>
+      
+     
+  
+      </div>
+    </div>
+  </div>

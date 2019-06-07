@@ -7,8 +7,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import {CdkTableModule } from '@angular/cdk/table';
 import {CdkTableService} from '../shared/shared-service/cdk-table';
+import {SharedModule} from '../shared/shared.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SalesDashboardComponent } from './sales-dashboard/sales-dashboard.component';
+import { ServiceDashboardComponent } from './service-dashboard/service-dashboard.component';
+import { CommingSoonComponent } from './comming-soon/comming-soon.component';
 
 const routes: Routes = [
         
@@ -21,11 +25,13 @@ const routes: Routes = [
     { path: 'settings', loadChildren : './settings/settings.module#SettingsModule'},
     { path: 'maintenance', loadChildren : './maintenance/maintenance.module#MaintenanceModule'},
     { path: 'billing', loadChildren : './billing/billing.module#BillingModule'},
+    {path: 'coming-soon', component : CommingSoonComponent}
 ]; 
 @NgModule({
   imports: [
     
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes),
     NgxUiLoaderModule,
     ReactiveFormsModule,FormsModule,
@@ -35,6 +41,9 @@ const routes: Routes = [
   exports : [RouterModule],
   declarations: [
       DashboardComponent,
+      SalesDashboardComponent,
+      ServiceDashboardComponent,
+      CommingSoonComponent,
     ],
 
 })

@@ -17,6 +17,9 @@ import { LeadSalesComponent } from './../shared/shared-components/lead-sales/lea
 import { LeadSalesComponentComponent } from './../shared/shared-components/lead-sales/lead-sales-component/lead-sales-component.component';
 import { ServiceCallsComponent } from './shared-components/service-calls/service-calls.component';
 import { AllContractInfoComponent } from './shared-components/all-contract-info/all-contract-info.component';
+import { LeadFunnelChartComponent } from './shared-components/charts/lead-funnel-chart/lead-funnel-chart.component';
+import { SalesTrendLineChartComponent } from './shared-components/charts/sales-trend-line-chart/sales-trend-line-chart.component';
+import { SalesQuickFlashComponent } from './shared-components/charts/sales-quick-flash/sales-quick-flash.component';
 
 
 
@@ -41,6 +44,9 @@ import { AllContractInfoComponent } from './shared-components/all-contract-info/
         LeadSalesComponentComponent, 
         ServiceCallsComponent,
         AllContractInfoComponent,
+        LeadFunnelChartComponent,
+        SalesTrendLineChartComponent,
+        SalesQuickFlashComponent,
         CommonModule,
         NgxUiLoaderModule,
         ReactiveFormsModule,FormsModule,
@@ -52,9 +58,10 @@ import { AllContractInfoComponent } from './shared-components/all-contract-info/
        
     ],
     declarations: [
-       LeadContactComponent, 
-       LeadSalesComponent, 
-       LeadSalesComponentComponent, ServiceCallsComponent, AllContractInfoComponent, 
+       LeadContactComponent,  LeadSalesComponent, 
+       LeadSalesComponentComponent, ServiceCallsComponent,
+        AllContractInfoComponent, LeadFunnelChartComponent, 
+        SalesTrendLineChartComponent, SalesQuickFlashComponent, 
   ],
   
   })

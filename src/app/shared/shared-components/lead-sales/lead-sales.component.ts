@@ -16,14 +16,16 @@ export class LeadSalesComponent implements OnInit {
 
   @Input() accountId : any;
   @Input() userId : any;
+  @Input() serviceId : any;
   allSales : any;
+
   ngOnInit() {
     this.getAllSalesInformation();
   }
   getAllSalesInformation(){
 
     this.utils.StartSpinner();
-      this.context.getWithToken('/'+this.accountId+'/'+this.userId+'/5','sales/getsalessuminfo').
+      this.context.getWithToken('/'+this.accountId+'/'+this.userId+'/5/'+this.serviceId,'sales/getsalessuminfo').
       subscribe( data => {
         let d = <any>data;
         this.allSales = d.data;

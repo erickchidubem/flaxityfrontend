@@ -1,0 +1,93 @@
+
+        <div class="container-fluid">
+    
+            <!--Start Dashboard Content-->
+      
+        
+               <app-sales-quick-flash></app-sales-quick-flash>
+        
+               <!--End Row-->
+      
+          
+        <div class="row">
+            <div class="col-12 col-lg-12 col-xl-12">
+               <app-lead-funnel-chart [userId]="userId" [viewType]="viewType"></app-lead-funnel-chart>
+           </div>
+  
+           <div class="col-12 col-lg-12 col-xs-12">
+              <app-sales-trend-line-chart></app-sales-trend-line-chart>
+           </div>
+        </div><!--End Row-->
+        
+      
+      
+      
+          <div class="row">
+            <div class="col-12 col-lg-6 col-xl-4">
+              <div class="card">
+                 <div class="card-body">
+                   <p>Top Earning Since Joining</p>
+                   <h4 class="mb-0">N 287,493</h4>
+                   <small>1.4% <i class="zmdi zmdi-long-arrow-up"></i>January 2019</small>
+                   <hr>
+                   <p>Least Earning Since Joining</p>
+                   <h4 class="mb-0">N 87,493</h4>
+                   <small>5.43% <i class="zmdi zmdi-long-arrow-up"></i>February 2018</small>
+                    <hr>
+
+                    <p>Total Earning Since Joining</p>
+                   <h4 class="mb-0">N 87,493</h4>
+                   <small>5.43% <i class="zmdi zmdi-long-arrow-up"></i>February 2018</small>
+                    <hr>
+                    <p>Percentage Target Met</p>
+                    <h4 class="mb-0">23.5 %</h4>
+                      
+                 </div>
+              </div>
+      
+            </div>
+      
+            <div class="col-12 col-lg-6 col-xl-8">
+               <div class="card">
+                 <div class="card-header">Top Earners
+                   <div class="card-action">
+                   <div class="dropdown">
+                   <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                    <i class="icon-options"></i>
+                   </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="javascript:void();">This Month</a>
+                    <a class="dropdown-item" href="javascript:void();">This Year</a>
+                    <a class="dropdown-item" href="javascript:void();">Since Joining</a>
+                    </div>
+                   </div>
+                 </div>
+                 <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="media align-items-center">
+                        <img src="../../../external-assets/images/avatars/avatar-15.png" alt="user avatar" class="customer-img rounded-circle">
+                      <div class="media-body ml-3">
+                        <h6 class="mb-0">Ekekwe Eric <small class="ml-4">Joined : 12-March-2018</small></h6>
+                        <p class="mb-0 small-font">N 22,340 </p>
+                      </div>
+                     
+                    </div>
+                    </li>
+                   
+                  </ul>
+               </div>
+            </div>
+          </div><!--End Row-->
+        
+          <div class="table-responsive">
+              <app-lead-sales [userId]="0" [accountId]="0" [serviceId]="0"></app-lead-sales>
+           </div>
+        
+        <!--End Row-->
+      
+            <!--End Dashboard Content-->
+      
+          </div>
+          <!-- End container-fluid-->
+          
+     
