@@ -16,6 +16,11 @@ export class ContextService {
     return decoded;
   }
 
+  UserProfile(){
+    let value = <any>this.decodeToken();
+    return value.context.user[0];
+  }
+
   getWithToken(DataObject : string, SubAPIURL : string){
     return this.http.get(this.config.apiUrl + SubAPIURL+DataObject,{ headers:this.config.GetHttpHeadersToken()} );
   }

@@ -1,34 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Utils } from 'src/app/shared/shared-service/utils';
 import { ContextService } from 'src/app/shared/shared-service/context.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToasterService } from 'src/app/shared/shared-service/toaster.service';
+import { BehaviorSubject } from 'rxjs';
+import { DataPerPage } from 'src/app/shared/shared-service/tableColumns';
+import { CdkTableService } from 'src/app/shared/shared-service/cdk-table';
 declare var $:any;
-@Component({
+@Component({ 
   selector: 'app-lead-story',
   templateUrl: './lead-story.component.html',
   styleUrls: ['./lead-story.component.css']
 })
 export class LeadStoryComponent implements OnInit {
+@Input() accountId : any;
+@Input() userId : any;
+@Input() viewType : any;
+@Input() departmentId : any;
+
+
+private heros$;
+superlatives$ = new BehaviorSubject<{[superlativeName: string]: string}>({});
+tableDataSource$ = new BehaviorSubject<any[]>([]);
+columns = ["revisit","name","createdDate","proposedDate","admin_name","email","phone","address","leadStage"];
+currentPage$ = new BehaviorSubject<number>(1);
+pageSize$ = new BehaviorSubject<number>(DataPerPage);
+dataOnPage$ = new BehaviorSubject<any[]>([]);
+searchFormControl = new FormControl();
+sortKey$ = new BehaviorSubject<string>('');
+sortDirection$ = new BehaviorSubject<string>('asc');
 
   constructor(public utils : Utils,private context : ContextService, private fb : FormBuilder,
+    private cdktable : CdkTableService,
     private route: ActivatedRoute, private toaster : ToasterService) { }
 
-  id : any;
+  
   leadStoryInfo : any;
   SalesStage : any;
   submitted : boolean = false;
   my_userId : any;
 
+  createButton : boolean = true;
 
   ngOnInit() {
     this.submitted = false;
-    this.id = this.route.params['value'].id;
-    this.generateForm(this.id);
+   
+    this.generateForm(this.accountId);
     this.getUserInformation();
     this.getSalesStages();
-    this.getLeadStoryInformation(this.id);
+    this.getLeadStoryInformation(this.accountId,this.userId,this.viewType, this.departmentId);
+    if(this.accountId == 0 || this.accountId == null){
+      this.createButton = false;
+    }
   }
 
   getUserInformation(){
@@ -43,17 +67,21 @@ export class LeadStoryComponent implements OnInit {
       }); 
   }
 
-  getLeadStoryInformation(id){
+  getLeadStoryInformation(accountId,userId,viewType,dptId){
     this.utils.StartSpinner();
-      this.context.getWithToken(id,'account/viewleadsstories/').
+      this.context.getWithToken(accountId+"/"+userId+"/"+viewType+"/"+dptId,'account/viewleadsstories/').
       subscribe( data => {
         let d = <any>data;
         this.leadStoryInfo = d.data;
-        console.log(d.data)
+
+        this.heros$ = new BehaviorSubject<{[name: string]: any}>(d.data);
+        this.cdktable.GenerateCDKTable(this.tableDataSource$,this.currentPage$, this.pageSize$,this.heros$,
+        this.searchFormControl,this.sortKey$,this.sortDirection$,this.dataOnPage$)
+        console.log(d)
         this.utils.StopSpinner();
       }); 
   }
-
+ 
   getSalesStages(){
    
       this.context.getWithToken('','account/salesstage').
@@ -86,11 +114,13 @@ export class LeadStoryComponent implements OnInit {
   generate(){
     this.formShow = true;
     this.storyInformation = "";
+    this.form.patchValue({id : 0,account_id : this.accountId});
   }
 
   generateStoryInfo(d : any){
 
-    
+    console.log(d);
+    this.formShow = true;
     this.storyInformation = "<b>"+d.name+"</b>";
     this.storyInformation += "<p><b> Email : </b>"+d.email+"  <b>Phone : </b>"+d.phone+"</p>";
     this.storyInformation += "<b> Prepared By : </b>"+d.admin_name+"";
@@ -109,16 +139,17 @@ export class LeadStoryComponent implements OnInit {
 
     this.form.patchValue({id : d.id});
   
-    if(d.revisit == 1){
-      this.formShow == false;
-    } else if(d.revisit == 0 && d.requiredTimeToUpdate > 72){
-      this.formShow == false;
-    }else if(this.my_userId  != d.createdBy)
+    
+    
+    if(d.revisit == 0 && d.requiredTimeToUpdate > 72){
+      this.formShow = false;
+    
+    }
+    
+    if(this.my_userId  != d.createdBy)
     { 
       this.formShow = false; 
-    } else {
-      this.formShow = true;
-    }
+    } 
 
   }
 
@@ -135,7 +166,6 @@ export class LeadStoryComponent implements OnInit {
       this.utils.invalidFormMessage();
       return;
     }
-
     this.utils.StartSpinner();
     let formData = JSON.stringify(this.form.value);
     console.log(formData);
@@ -146,9 +176,8 @@ export class LeadStoryComponent implements OnInit {
         if(d.error == false){
           this.toaster.Success(d.message);
           $('#leadstory').modal("hide");
-          this.getLeadStoryInformation(this.id);
+          this.getLeadStoryInformation(this.accountId,this.userId,this.viewType,this.departmentId);
           this.ngOnInit();
-      
         }
         console.log(data);
       },

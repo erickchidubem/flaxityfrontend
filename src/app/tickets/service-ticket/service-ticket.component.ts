@@ -26,9 +26,8 @@ export class ServiceTicketComponent implements OnInit {
 
  
   ngOnInit() {
-    let tokenvalue = <any>this.context.decodeToken().context.user[0];   
-    this.departmentId = tokenvalue.departmentId;
-    this.userid = tokenvalue.id;
+    this.departmentId = this.context.UserProfile().departmentId;
+    this.userid = this.context.UserProfile().id;
     this.getLeadInformation(this.id);
   
   }

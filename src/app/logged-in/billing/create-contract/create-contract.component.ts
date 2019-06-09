@@ -86,15 +86,17 @@ export class CreateContractComponent implements OnInit {
         let d = <any>data;
         if(d.error == false){
            this.toaster.Success(d.message);
-        console.log(d);
+           console.log(d);
            this.id = d.id;
            this.accountId = this.form.get('accountId').value;
            if(this.id > 0){
              
           //    window.history.replaceState({},'',`/person/${1}/${3}`)
               window.history.replaceState({},"Contract Modification","access/billing/edit-contract/"+this.id)
-               this.displayContractDetails = true;
+               
+              this.displayContractDetails = true;
                this.firstLand = true;
+              // this.pullFromDB(this.id);
              
                
             }else{
@@ -164,26 +166,31 @@ export class CreateContractComponent implements OnInit {
    });
  }
 
+
+ pullFromDB(id : any){
+  this.context.getWithToken(id+'/0','billing/getcontractinfo/').
+  subscribe( data => {
+    let d = <any>data;
+    console.log(d)
+    this.editCreateHeader = "Edit CONTRACT INFO "+d.data.contractid+ " FOR "+d.data.accountName;
+    this.serviceInfo = d.data;
+    this.populateForm(d.data);
+
+    this.utils.StopSpinner();
+    this.firstLand = true;
+    this.displayContractDetails = true;
+    this.accountId = d.data.accountId;
+    console.log(d)
+  }); 
+ }
+
   getEdit(){
     
     this.submitted = false;
     this.id = this.route.params['value'].id;
     if(this.id > 0){
+     this.pullFromDB(this.id);
      
-      this.context.getWithToken(this.id+'/0','billing/getcontractinfo/').
-      subscribe( data => {
-        let d = <any>data;
-        console.log(d)
-        this.editCreateHeader = "Edit CONTRACT INFO "+d.data.contractid+ " FOR "+d.data.accountName;
-        this.serviceInfo = d.data;
-        this.populateForm(d.data);
-   
-        this.utils.StopSpinner();
-        this.firstLand = true;
-        this.displayContractDetails = true;
-        this.accountId = d.data.accountId;
-        console.log(d)
-      }); 
     }
     
   }

@@ -9,7 +9,7 @@
     <div id="collapse-1" class="collapse show" data-parent="#accordion1">
       <div class="card-body">-->
       
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="viewType == 0">
             <table class="table table-sm table-striped table-bordered">
              <thead>
                 <tr>
@@ -21,6 +21,7 @@
                  <td colspan="4"> <h5>Lead Story Updates</h5></td>
                  <td>
                     <button data-toggle="modal" (click)="generate()"
+                    *ngIf="createButton"
                      data-target="#leadstory" class="btn  btn-primary m-1">
                        Create 
                     </button>
@@ -34,7 +35,7 @@
                  <th scope="col">Proposed Revist</th>
                  <th scope="col">Initial Sales Stage</th>
                  
-                 
+                  
                </tr>
              </thead>
              <tbody>
@@ -50,7 +51,11 @@
                   </td>
                  <td>{{c.createdDate | date:'EEEE, d, MMMM, yyyy'}}</td>
                  <td>{{c.proposedRevisitDate | date:'EEEE, d, MMMM, yyyy'}}</td>
-                 <td>{{c.initial_salesstage}}</td>
+                 <td>
+                    <span class="text-white btn btn-rounded btn-sm {{c.initial_stagecolor}}">
+                        {{c.initial_salesstage}} 
+                      </span>
+                 </td>
                 
                  
 
@@ -58,7 +63,116 @@
              </ng-container>
              </tbody>
            </table>
-     </div>
+       </div>
+
+       <div class="row" *ngIf="viewType == 1">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header"><i class="fa fa-table"></i>View All Lead Story Updates</div>
+              <div class="card-body">
+                <div class="table-responsive">
+      
+                   <!--Table start here -->
+                <div class="row">
+                    <div class="col-6">
+                      <div class="form-inline">
+                        <div class="form-group">
+                          <div class="input-group mr-3">
+                              <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="searchFormControl.setValue('')">
+                                  x
+                                </button>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="float-right">
+                        
+                          <ngb-pagination 
+                          [collectionSize]="tableDataSource$.value.length" 
+                          [pageSize]="pageSize$.value"
+                          [page]="currentPage$.value"
+                          (pageChange)="currentPage$.next($event)"
+                          >
+                        </ngb-pagination>
+       
+                      </div>
+                    </div>
+                  </div>
+                 <table cdk-table [dataSource]="dataOnPage$" class="table table-sm table-striped table-bordered">
+       
+                  <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
+                  <tr cdk-row *cdkRowDef="let row; columns : columns"></tr>
+                  <ng-container cdkColumnDef="revisit">
+                      <th cdk-header-cell *cdkHeaderCellDef></th>
+                      <td cdk-cell *cdkCellDef="let row">
+
+                            <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-primary m-1" *ngIf="row.revisit == 0 && row.requiredTimeToUpdate < 72">
+                              Pending Revisit in {{row.whenToRevisit}} hr(s)
+                            </a>
+                            <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-danger m-1" *ngIf="row.revisit == 0 && row.requiredTimeToUpdate > 72">Did not Revisit </a>
+                            <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-success m-1" *ngIf="row.revisit == 1">Visited</a>
+                </td>
+              </ng-container>
+                      <ng-container cdkColumnDef="name">
+                          <th cdk-header-cell *cdkHeaderCellDef>Account Name</th>
+                          <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/lead/view-lead/{{row?.id}}">{{row?.name}}</a></td>
+                      </ng-container>
+                  
+                      <ng-container cdkColumnDef="createdDate">
+                          <th cdk-header-cell *cdkHeaderCellDef>Date Created</th>
+                          <td cdk-cell *cdkCellDef="let row">{{row?.createdDate | date:'dd-MMMM-yyyy'}}</td>
+                      </ng-container> 
+
+                      <ng-container cdkColumnDef="proposedDate">
+                          <th cdk-header-cell *cdkHeaderCellDef>Date Propose</th>
+                          <td cdk-cell *cdkCellDef="let row">{{row?.createdDate | date:'dd-MMMM-yyyy hh:mm a'}}</td>
+                      </ng-container> 
+                 
+                      
+                      <ng-container cdkColumnDef="admin_name">
+                          <th cdk-header-cell *cdkHeaderCellDef>Created By</th>
+                          <td cdk-cell *cdkCellDef="let row">{{row?.admin_name}}</td>
+                      </ng-container>
+                  
+                      <ng-container cdkColumnDef="email">
+                          <th cdk-header-cell *cdkHeaderCellDef>Email</th>
+                          <td cdk-cell *cdkCellDef="let row">{{row?.email}}</td>
+                      </ng-container> 
+       
+                      <ng-container cdkColumnDef="phone">
+                      <th cdk-header-cell *cdkHeaderCellDef>Phone</th>
+                      <td cdk-cell *cdkCellDef="let row">{{row?.phone}}</td>
+                      </ng-container>
+       
+                      <ng-container cdkColumnDef="address">
+                         <th cdk-header-cell *cdkHeaderCellDef>Address</th>
+                         <td cdk-cell *cdkCellDef="let row">{{row?.address}}</td>
+                      </ng-container>
+
+                       <ng-container cdkColumnDef="leadStage">
+                          <th cdk-header-cell *cdkHeaderCellDef>Initial Stage</th>
+                          <td cdk-cell *cdkCellDef="let row">
+                            <span class="text-white btn btn-rounded btn-sm {{row?.initial_stagecolor}}">
+                                {{row?.initial_salesstage}} 
+                              </span>
+                          </td>
+                       </ng-container>
+      
+                       
+                  
+                  </table>
+                 
+                 <!--table ends here -->
+      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Row-->
      <!-- </div>
     </div>
   </div>

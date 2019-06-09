@@ -15,10 +15,15 @@ export class LeadInfoComponent implements OnInit {
 
   leadInfo : any=[];
   id : any = this.route.params['value'].id;
+  userId : any;
+  departmentId : any;
 
   tbPercentage ="30%";
   ngOnInit() {
+    
+    this.departmentId = this.context.UserProfile().departmentId;
     this.getLeadInformation(this.id);
+    this.userId = this.context.UserProfile().id;
   }
 
   getLeadInformation(id){

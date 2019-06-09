@@ -17,8 +17,7 @@ export class PrimarySidebarComponent implements OnInit {
   departmentId : any;
   ngOnInit() {
     this.getUserInformation();
-    let tokenvalue = <any>this.context.decodeToken();
-    this.departmentId = tokenvalue.context.user[0].departmentId;
+    this.departmentId = this.context.UserProfile().departmentId;
   }
 
   getUserInformation(){

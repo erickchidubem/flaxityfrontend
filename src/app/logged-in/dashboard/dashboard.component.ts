@@ -12,9 +12,8 @@ export class DashboardComponent implements OnInit {
   viewType : any;
   ngOnInit() {
    
-    let tokenvalue = <any>this.context.decodeToken();
-    let dptId  = tokenvalue.context.user[0].departmentId;
-    this.userId = tokenvalue.context.user[0].id;
+    let dptId  = this.context.UserProfile().departmentId;
+    this.userId = this.context.UserProfile().id;
 
     if(dptId == 1){
       this.viewType == 1;
