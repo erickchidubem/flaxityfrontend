@@ -21,7 +21,7 @@ import {CdkTableService} from './shared/shared-service/cdk-table';
 import { GlobalErrorHandlerService } from './shared/shared-service/global-error-handler';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { HttpClientModule } from '@angular/common/http';
-import { AmChartsModule } from "@amcharts/amcharts3-angular";
+//import { AmChartsModule } from "@amcharts/amcharts3-angular";
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -31,7 +31,7 @@ import { DatePipe } from '@angular/common';
   ],
 
   imports: [
-    AmChartsModule,
+  //  AmChartsModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

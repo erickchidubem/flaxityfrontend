@@ -6,8 +6,8 @@ import { ToasterService } from 'src/app/shared/shared-service/toaster.service';
 import { Router, ActivatedRoute } from '@angular/router';
 declare var $:any;
 
-import * as jspdf from 'jspdf';  
-import html2canvas from 'html2canvas';  
+//import * as jspdf from 'jspdf';  
+//import html2canvas from 'html2canvas';  
 
 @Component({
   selector: 'app-invoice',
@@ -40,20 +40,20 @@ export class InvoiceComponent implements OnInit {
 
   public captureScreen()  
   {  
-    var data = document.getElementById('contentToConvert');  
-    html2canvas(data).then(canvas => {  
-      // Few necessary setting options  
-      var imgWidth = 190;   
-      var pageHeight = 295;    
-      var imgHeight = canvas.height * imgWidth / canvas.width;  
-      var heightLeft = imgHeight;  
+    // var data = document.getElementById('contentToConvert');  
+    // html2canvas(data).then(canvas => {  
+    //   // Few necessary setting options  
+    //   var imgWidth = 190;   
+    //   var pageHeight = 295;    
+    //   var imgHeight = canvas.height * imgWidth / canvas.width;  
+    //   var heightLeft = imgHeight;  
   
-      const contentDataURL = canvas.toDataURL('image/png')  
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
-      var position = 5;  
-      pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)  
-      pdf.save('CISBURO-Invoice.pdf'); // Generated PDF   
-    });  
+    //   const contentDataURL = canvas.toDataURL('image/png')  
+    //   let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+    //   var position = 5;  
+    //   pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)  
+    //   pdf.save('CISBURO-Invoice.pdf'); // Generated PDF   
+    // });  
   } 
  
   generateForm(){

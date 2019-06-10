@@ -5,8 +5,8 @@ import { Utils } from 'src/app/shared/shared-service/utils';
 import { ToasterService } from 'src/app/shared/shared-service/toaster.service';
 import { Router, ActivatedRoute } from '@angular/router';
 declare var $:any;
-import * as jspdf from 'jspdf';  
-import html2canvas from 'html2canvas';  
+//import * as jspdf from 'jspdf';  
+//import html2canvas from 'html2canvas';  
 
 @Component({
   selector: 'app-invoice',

@@ -118,10 +118,12 @@ export class Utils {
 
     getCurrency(){
         return "₦ ";
+      //  return "$ ";
     }
 
     CurrencyName (){
         return "Naira ";
+     //   return "Dollars ";
     }
 
     numberToWord(n){
