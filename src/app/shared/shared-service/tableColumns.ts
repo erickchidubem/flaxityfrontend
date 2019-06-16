@@ -4,6 +4,8 @@ export const DataPerPageI = 10;
 export const leadsColumn =
 ["name","industry","email","phone","address","leadSource","leadStage","createdDate","createdBy","assignToSales","assignToService"]
 
+export const userTargetsColumn =
+["name", "amount","phone","email", "month", "year","action"]
 
 export const contractSummary =
 

@@ -12,12 +12,14 @@ import {InternalUsersComponent} from '../user-management/internal-users/internal
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { UserTargetsComponent } from './user-targets/user-targets.component';
 
 const routes: Routes = [
     {path: '', component : InternalUsersComponent } ,
     {path: 'create-user', component : CreateUserComponent} ,
     {path: 'edit-user/:id', component : CreateUserComponent},
-    {path: 'change-password', component : ChangePasswordComponent}
+    {path: 'change-password', component : ChangePasswordComponent},
+    {path : 'user-tagert', component : UserTargetsComponent}
 ]; 
 @NgModule({
   imports: [
@@ -34,7 +36,8 @@ const routes: Routes = [
   declarations: [
     InternalUsersComponent,
     CreateUserComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    UserTargetsComponent
     ],
 
 })

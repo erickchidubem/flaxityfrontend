@@ -1,11 +1,11 @@
 import { HttpHeaders } from "@angular/common/http";
 export class Constants{
    //public static API_URL = "http://flaxity.com/cisburoltd/public/"; // NIGERIAN ENVIROMENT
-  // public static API_URL ="http://localhost:81/flaxity/public/"; //DEV ENVIROMENT
-   public static API_URL = "http://flaxity.com/cisburoltd/public/";   // LEBANON ENVIROMENT
+   public static API_URL ="http://localhost:81/flaxity/public/"; //DEV ENVIROMENT
+  // public static API_URL = "https://flaxity.com/cisburosal/public/";   // LEBANON ENVIROMENT
    public readonly apiUrl = Constants.API_URL; 
  
-    GetToken(){
+   GetToken(){
        return localStorage.getItem('token');
    }
 
@@ -15,11 +15,11 @@ export class Constants{
        return headers;
    }
 
-     GetHttpHeadersAnonymous() : HttpHeaders{
-       const headers = new HttpHeaders().set('content-type', 'application/json');                             
-       return headers;
-     }
- 
+  GetHttpHeadersAnonymous() : HttpHeaders{
+    const headers = new HttpHeaders().set('content-type', 'application/json');                             
+    return headers;
+  }
+
     
  
 }
