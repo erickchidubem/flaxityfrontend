@@ -3,12 +3,15 @@ import { ToasterService } from "./toaster.service";
 import { Injectable } from "@angular/core";
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {Location} from '@angular/common';
+import { ContextService } from "./context.service";
+import { Constants } from "./constants";
 declare var $:any;
 
 @Injectable()
 export class Utils {
 
     constructor(private Spinner : NgxUiLoaderService,private router:Router,
+        private context : ContextService,private constant : Constants,
         public location : Location, private toaster : ToasterService){
 
     }
@@ -117,13 +120,19 @@ export class Utils {
 
 
     getCurrency(){
-        return "₦ ";
-      //  return "$ ";
+        if(this.constant.DM == 2){
+            return "$ ";
+        }else{
+            return "₦ "
+        }
     }
 
     CurrencyName (){
-        return "Naira ";
-     //   return "Dollars ";
+        if(this.constant.DM == 2){
+            return "Dollars ";
+        }else{
+            return "Naira ";
+        }
     }
 
     numberToWord(n){

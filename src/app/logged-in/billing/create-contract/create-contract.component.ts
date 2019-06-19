@@ -96,7 +96,7 @@ export class CreateContractComponent implements OnInit {
                
               this.displayContractDetails = true;
                this.firstLand = true;
-              // this.pullFromDB(this.id);
+               this.pullFromDB(this.id);
              
                
             }else{
