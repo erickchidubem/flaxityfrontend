@@ -22,7 +22,6 @@ import { GlobalErrorHandlerService } from './shared/shared-service/global-error-
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-
 @NgModule({
 
   declarations: [
@@ -40,8 +39,7 @@ import { DatePipe } from '@angular/common';
     HttpModule, ToastrModule.forRoot(),
     CdkTableModule,
     NgbModule, SweetAlert2Module.forRoot(),
-    LSelect2Module,
-   
+    LSelect2Module, 
   ],
   providers: [
     Constants,

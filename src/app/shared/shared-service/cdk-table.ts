@@ -19,13 +19,22 @@ export class CdkTableService {
   });
 
     _heros$.pipe(take(1)).subscribe(data =>{
-      _tableDataSource$.next(Object.values(data));
+      if(data === null){
+
+      }else{
+        _tableDataSource$.next(Object.values(data));
+      }
+      
     })
 
     combineLatest(_heros$, _searchFormControl.valueChanges, _sortKey$, _sortDirection$)
     .subscribe(([changedHeroData, searchTerm, sortKey, sortDirection]) => {
-      const heroesArray = Object.values(changedHeroData);
-      let filteredHeroes: any[];
+
+      if(changedHeroData === null){
+
+      }else{
+        const heroesArray = Object.values(changedHeroData);
+        let filteredHeroes: any[];
 
       if (!searchTerm) {
         filteredHeroes = heroesArray;
@@ -47,6 +56,10 @@ export class CdkTableService {
       });
 
      _tableDataSource$.next(sortedHeroes);
+      }
+      
+     
+      
     });
 
    _searchFormControl.setValue('');

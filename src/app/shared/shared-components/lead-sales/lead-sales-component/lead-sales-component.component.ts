@@ -66,7 +66,7 @@ export class LeadSalesComponentComponent implements OnInit {
         this.cdktable.GenerateCDKTable(this.tableDataSource$,this.currentPage$, this.pageSize$,this.heros$,
         this.searchFormControl,this.sortKey$,this.sortDirection$,this.dataOnPage$)
         console.log(d)
-      this.utils.StopSpinner();
+      //this.utils.StopSpinner();
       });
 
   

@@ -38,13 +38,13 @@
 
                    <tr *ngFor="let c of leadContacts;let i = index">
                       <td scope="col">{{i+1}}.</td>
-                      <td scope="col">{{c.contactPerson}}</td>
-                      <td scope="col">{{c.phone}}</td>
+                      <td scope="col">{{c?.contactPerson}}</td>
+                      <td scope="col">{{c?.phone}}</td>
                      
-                      <td scope="col">{{c.email}}</td>
-                      <td scope="col">{{c.designation}}</td>
+                      <td scope="col">{{c?.email}}</td>
+                      <td scope="col">{{c?.designation}}</td>
                       <td><a class="btn btn-round btn-warning btn-sm" data-toggle="modal" 
-                        (click)="EditContact(c.id,c.contactPerson,c.phone,c.email,c.designation,c.machineId)"
+                        (click)="EditContact(c?.id,c.contactPerson,c.phone,c.email,c.designation,c.machineId)"
                         data-target="#leadcontact">Edit</a></td>                                         
                     </tr>
                  </thead>

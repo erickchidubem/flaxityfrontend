@@ -1,2 +1,9 @@
-
 @import "../node_modules/ng-pick-datetime/assets/style/picker.min.css";
+.zoom {
+    zoom: 90%;
+}
+
+
+.zooma {
+    zoom: 105%;
+}
