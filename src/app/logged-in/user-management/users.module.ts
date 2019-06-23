@@ -1,19 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
-import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
-import {CdkTableModule } from '@angular/cdk/table';
-import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
-import {CdkTableService} from '../../shared/shared-service/cdk-table';
+import {SharedModule} from '../../shared/shared.module';
 import {InternalUsersComponent} from '../user-management/internal-users/internal-users.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { UserTargetsComponent } from './user-targets/user-targets.component';
-
 const routes: Routes = [
     {path: '', component : InternalUsersComponent } ,
     {path: 'create-user', component : CreateUserComponent} ,
@@ -21,23 +13,28 @@ const routes: Routes = [
     {path: 'change-password', component : ChangePasswordComponent},
     {path : 'user-tagert', component : UserTargetsComponent}
 ]; 
+
+@Pipe({ name: 'myPipe'})
+export class MyPipe implements PipeTransform{
+  transform(val) {
+ 
+ return val.replace(/\D/g, "")
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //  return val.toUpperCase()
+  } 
+}
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     RouterModule.forChild(routes),
-    NgxUiLoaderModule,
-    ReactiveFormsModule,FormsModule,
-    NgbModule,// SweetAlert2Module.forRoot(),
-    CdkTableModule,DlDateTimePickerDateModule,
-    PasswordStrengthMeterModule
-    
   ],
   exports : [RouterModule],
   declarations: [
     InternalUsersComponent,
     CreateUserComponent,
     ChangePasswordComponent,
-    UserTargetsComponent
+    UserTargetsComponent, MyPipe
     ],
 
 })

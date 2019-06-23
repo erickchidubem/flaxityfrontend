@@ -8,24 +8,20 @@
         <li class="breadcrumb-item"><a href="javaScript:void();">Users</a></li>
         <li class="breadcrumb-item active" aria-current="page">Users Targets</li>
      </ol>
- </div>
+ </div> 
  <div class="col-sm-3">
-   <!-- <div class="btn-group float-sm-right">
+    <div class="btn-group float-sm-right">
     <button type="button" class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i> Menu</button>
     <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown">
     <span class="caret"></span>
     </button>
   <div class="dropdown-menu">
-      <a routerLink="/access/add-lead" class="dropdown-item">Add New Lead</a>
-      <a href="javaScript:void();" class="dropdown-item">View Accounts</a>
-      
-      <div class="dropdown-divider"></div>
-      <a href="javaScript:void();" class="dropdown-item">Separated link</a>
-    </div> 
-  </div> -->
+      <a routerlink="access/users/user-tagert" data-toggle="modal" (click)="clearForm()" data-target="#leadstory" class="dropdown-item">Create new Target</a>
+   
+  </div> 
  </div>
  </div>
-
+ 
 
   <div class="row">
     <div class="col-lg-12">
@@ -106,7 +102,7 @@
                 <ng-container cdkColumnDef="action">
                   <th cdk-header-cell *cdkHeaderCellDef></th>
                   <td cdk-cell *cdkCellDef="let row">
-                      <a href="" class="btn btn-sm btn-success ">Edit</a>
+                      <a routerlink="access/users/user-tagert" data-toggle="modal" (click)="EditUserTarget(row)" data-target="#leadstory" class="btn btn-sm btn-success ">Edit</a>
                   </td>
                </ng-container>
 
@@ -122,4 +118,93 @@
     </div>
   </div><!-- End Row-->
 
+</div>
+
+
+
+
+<div class="modal fade" id="leadstory">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create User Target</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     
+      <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="modal-body">
+        
+            <div class="row">
+                  
+
+                  <div class="form-group col-lg-6">
+                    <label for="input-1">User </label>
+                    <select class="form-control" formControlName="user_id"
+                    [ngClass]="{ 'is-invalid': submitted && f.user_id.errors }">
+                    <option></option>
+                    <ng-container *ngFor="let c of Users" >
+                           <option *ngIf="c.departmentId == 1 || c.departmentId == 2 "  value="{{c.id}}">{{c.firstName}} {{c.lastName}}</option>
+                    </ng-container>
+                    </select> 
+
+                    <div *ngIf="submitted && f.user_id.errors" class="invalid-feedback">
+                        <div *ngIf="f.user_id.errors.required">this field is required</div>        
+                    </div>
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <label for="input-1">Target Amount </label>
+                  
+                    <input type="text" class="form-control" formControlName="amount"                   
+                    (keypress)="utils.decimalsOnly($event,f.amount)"
+                    [ngClass]="{ 'is-invalid': submitted && f.amount.errors }" />
+                    
+                    <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+                        <div *ngIf="f.amount.errors.required">this field is required</div>        
+                    </div>
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <label for="input-1">Month </label>
+                    <select class="form-control" formControlName="monthId"
+                    [ngClass]="{ 'is-invalid': submitted && f.monthId.errors }">
+                      <option></option>
+                      <ng-container *ngFor="let c of allMonths;let i = index">
+                          <option value ="{{i+1}}">{{c}}</option>
+                        </ng-container>
+                     
+                    </select> 
+
+                    <div *ngIf="submitted && f.monthId.errors" class="invalid-feedback">
+                        <div *ngIf="f.monthId.errors.required">this field is required</div>        
+                    </div>
+                  </div>
+
+                  <div class="form-group col-lg-6">
+                    <label for="input-1">Year </label>
+                    <select class="form-control" formControlName="year"
+                    [ngClass]="{ 'is-invalid': submitted && f.year.errors }">
+                      <option></option>
+                      <option *ngFor="let c of year" value="{{c}}">{{c}}</option>
+                     
+                    </select> 
+
+                    <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
+                        <div *ngIf="f.year.errors.required">this field is required</div>        
+                    </div>
+                  </div>
+                 
+            </div>
+            
+            
+            
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button" (click)="resetForm()" class="btn btn-inverse-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+            <button class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+          </div>
+    </form>
+    </div>
+  </div>
 </div>

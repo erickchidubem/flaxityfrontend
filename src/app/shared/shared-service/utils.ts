@@ -53,6 +53,15 @@ export class Utils {
     invalidFormMessage(){
         this.toaster.Error("Some required fields are not filled properly");
     }
+    
+    
+    numberOnly(e): boolean {
+        var keyCode = (e.which) ? e.which : e.keyCode;
+        if ((keyCode >= 48 && keyCode <= 57) || (keyCode == 8))
+            return true;
+        else
+            return false;  
+    }
 
     decimalsOnly(evt,obj){
         var charCode = (evt.which) ? evt.which : evt.keyCode
@@ -66,13 +75,8 @@ export class Utils {
            return true
     }
 
-    numberOnly(e): boolean {
-        var keyCode = (e.which) ? e.which : e.keyCode;
-        if ((keyCode >= 48 && keyCode <= 57) || (keyCode == 8))
-            return true;
-        else
-            return false;  
-    }
+
+    
 
      Comma(Num) { //function to add commas to textboxes
         Num += '';
