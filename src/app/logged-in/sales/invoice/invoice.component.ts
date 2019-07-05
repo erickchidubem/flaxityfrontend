@@ -27,8 +27,10 @@ export class InvoiceComponent implements OnInit {
   finalTotal : any;
   userid : any;
   amountDue : any;
+  amountOwing : any;
 
   formcloseorder : FormGroup;
+  collectmoney : FormGroup;
   ngOnInit() {
     this.submitted = false;
     this.id = this.route.params['value'].id;
@@ -56,12 +58,32 @@ export class InvoiceComponent implements OnInit {
     // });  
   } 
  
+  get f2(){return this.collectmoney.controls;}
   generateForm(){
     
     this.formcloseorder = this.fb.group({
       id:this.id,
       date : ['',Validators.required],
     
+    }); 
+
+    this.collectmoney = this.fb.group({
+       id : [0],
+       salesId : this.id,
+       date : ['',Validators.required],
+       amount : ['', Validators.required],
+       note : ['', Validators.required],
+       paymentmode : ['', Validators.required],
+       paymenttype : [1]
+    });
+
+    this.collectmoney.valueChanges.subscribe(val => {
+      if (typeof val.amount === 'string') {
+        const maskedVal = this.utils.Comma(val.amount);
+        if (val.amount !== maskedVal) {
+          this.collectmoney.patchValue({amount: maskedVal});
+        }
+      }
     });
 
 
@@ -94,6 +116,7 @@ getSalesInfo(id){
     let dt = new Date (this.salesInfo.order_collect_date);
     dt.setDate(dt.getDate() + 30);
     this.amountDue = dt;
+    this.amountOwing = this.finalTotal - this.salesInfo.AmountCurrentlyPaid; 
     console.log(d)
   });
 } 
@@ -119,6 +142,58 @@ submitcloseorder(){
         console.log(d);
         if(d.error == false){
           $('#closeorder').modal("hide");
+          this.toaster.Success(d.message);
+          this.ngOnInit();
+        }else{
+          this.toaster.Error(d.message);
+        }
+        console.log(data);
+      }
+    );
+} 
+
+
+submitcollectmoney(){
+  this.submitted = true;
+  let amount = this.collectmoney.get('amount').value;
+  let re = /\,/gi;
+  let finalAmount = amount.replace(re,'');
+ 
+  let amountLeft = this.amountOwing - finalAmount;
+  console.log(amountLeft);
+
+  if(this.collectmoney.invalid){
+    this.toaster.Error("Please enter all required details.")
+    return;
+  }
+
+  if(finalAmount == 0){
+    this.toaster.Error("Please enter a price greater than Zero");
+    return;
+  }
+
+  if(amountLeft < 0){
+    this.toaster.Error("You are entering an amount more than the money the customer is owing, please enter something less or equal to");
+    return;
+  }
+
+  if(amountLeft == 0){
+    this.collectmoney.patchValue({paymenttype : 3});
+  }else{
+    this.collectmoney.patchValue({paymenttype : 2});
+  }
+
+
+  
+  let formData = JSON.stringify(this.collectmoney.value);
+  console.log(formData);
+    this.context.postWithToken(formData, 'sales/collectmoney').subscribe(
+      data=>{
+        this.utils.StopSpinner();
+        let d = <any>data;
+        console.log(d);
+        if(d.error == false){
+          $('#collectpayment').modal("hide");
           this.toaster.Success(d.message);
           this.ngOnInit();
         }else{

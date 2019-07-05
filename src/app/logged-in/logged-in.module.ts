@@ -25,6 +25,7 @@ const routes: Routes = [
     { path: 'settings', loadChildren : './settings/settings.module#SettingsModule'},
     { path: 'maintenance', loadChildren : './maintenance/maintenance.module#MaintenanceModule'},
     { path: 'billing', loadChildren : './billing/billing.module#BillingModule'},
+    { path: 'warehouse', loadChildren : './warehouse/warehouse.module#WarehouseModule'},
     {path: 'coming-soon', component : CommingSoonComponent}
 ]; 
 @NgModule({

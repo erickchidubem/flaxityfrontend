@@ -46,7 +46,7 @@
                       <!-- Boston, MA 94107<br> -->
                       Phone: {{salesInfo.phone}}<br>
                       Email: {{salesInfo.email}}<br/>
-                      <b>Invoice #{{salesInfo.salesid}}</b><br>
+                      <b><span *ngIf="salesInfo.order_collect == 0">Profoma</span> Invoice #{{salesInfo.salesid}}</b><br>
                       <b>Order ID:</b> {{salesInfo.ticketNo}}<br>
                     </address>
                   </div><!-- /.col -->
@@ -111,7 +111,7 @@
 
                           <tr>
                               <td colspan="5"><b><p style="text-align:right;color:red">Amount Owing :</p></b> </td>
-                              <td style="color: red">{{utils.getCurrency()}}{{finalTotal - salesInfo.AmountCurrentlyPaid  | number:'.2'}}</td>
+                              <td style="color: red">{{utils.getCurrency()}}{{this.amountOwing  | number:'.2'}}</td>
                           </tr>
                       
                       </tbody>
@@ -170,12 +170,13 @@
                  class="text-white btn btn-dark m-1" 
                  *ngIf="salesInfo.order_collect == 0 && salesInfo.createdBy == userid">
                  <i class="fa fa-print"></i> Close Order</a> 
-                <a routerLink="/access/delivery/"  target="_blank" *ngIf="salesInfo.order_collect > 0" class="btn btn-secondary m-1">
-                  <i class="fa fa-truck"></i> Generate Delivery Note</a>
+                <!-- <a routerLink="/access/delivery/"  target="_blank" *ngIf="salesInfo.order_collect > 0" class="btn btn-secondary m-1">
+                  <i class="fa fa-truck"></i> Generate Delivery Note</a> -->
              </div>
     <div class="col-lg-6">
     <div class="float-sm-right">
                  <button class="btn btn-success m-1" data-target="#collectpayment"
+                 *ngIf="amountOwing > 0"
                  data-toggle="modal" >
                  <i class="fa fa-credit-card"></i> Submit Payment
                 </button>
@@ -249,12 +250,14 @@
         </div>
          <!-- <div [innerHTML] = "storyInformation" style="text-align:center"></div> -->
         <div class="modal-body">
-          <form [formGroup]="formcloseorder" (ngSubmit)="submitcloseorder()">
+          <h3 style="text-align: center">AMOUNT YET TO BE PAID</h3>
+          <h1 style="text-align: center">{{utils.getCurrency()}}{{amountOwing | number:'.2'}}</h1>
+          <form [formGroup]="collectmoney" (ngSubmit)="submitcollectmoney()">
             <div class="form-group row">
                     <label for="input-21" class="col-sm-12 col-form-label">Date Collected</label>
                     <div class="input-group mb-3">
                        <input [owlDateTime]="dt3" formControlName ="date" readonly
-                          [ngClass]="{ 'is-invalid': submitted && f.date.errors }"
+                          [ngClass]="{ 'is-invalid': submitted && f2.date.errors }"
                             class="form-control" [min]="2/24/2019"
                           [owlDateTimeTrigger]="dt3" placeholder="Date Time"> 
                         <div class="input-group-append">
@@ -262,29 +265,65 @@
                       </div>
                     </div>
                     <owl-date-time #dt3 ></owl-date-time>
-                    <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
-                      <div *ngIf="f.date.errors.required">this field is required</div>        
+                    <div *ngIf="submitted && f2.date.errors" class="invalid-feedback">
+                      <div *ngIf="f2.date.errors.required">this field is required</div>        
                   </div>
            </div>
 
            <div class="form-group row">
-            <label for="input-21" class="col-sm-12 col-form-label">Amount Collected</label>
-            <div class="input-group mb-3">
-               <input type="text" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.date.errors }"
-                   placeholder="Amount Collected"> 
-               
-            </div>
-            <owl-date-time #dt3 ></owl-date-time>
-            <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
-              <div *ngIf="f.date.errors.required">this field is required</div>        
+                      <label for="input-21" class="col-sm-12 col-form-label">Amount Collected</label>
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" formControlName="amount"
+                        (keypress)="utils.decimalsOnly($event,f2.amount)"
+                            [ngClass]="{ 'is-invalid': submitted && f2.amount.errors }"
+                            placeholder="Amount Collected"> 
+                        
+                      </div>
+                     
+                      <div *ngIf="submitted && f2.amount.errors" class="invalid-feedback">
+                        <div *ngIf="f2.amount.errors.required">this field is required</div>        
+                    </div>
           </div>
-   </div>
-  
+
+          <div class="form-group row">
+              <label for="input-21" class="col-sm-12 col-form-label">Payment Mode</label>
+              <div class="input-group mb-3">
+                <select class="form-control" formControlName="paymentmode"
+               
+                    [ngClass]="{ 'is-invalid': submitted && f2.paymentmode.errors }"
+                    placeholder="Payment Mode"> 
+                 
+                            <option>BANK DEPOSIT</option>
+                            <option>BANK TRANSFER</option>
+                            <option>CASH</option>
+                            <option>CHEQUE</option>
+              
+                  </select>
+                
+              </div>
+             
+              <div *ngIf="submitted && f2.paymentmode.errors" class="invalid-feedback">
+                <div *ngIf="f2.paymentmode.errors.required">this field is required</div>        
+            </div>
+  </div>
+   <div class="form-group row">
+    <label for="input-21" class="col-sm-12 col-form-label">Note</label>
+    <div class="input-group mb-3">
+      
+           <textarea class="form-control" formControlName ="note"
+           [ngClass]="{ 'is-invalid': submitted && f2.amount.errors }"></textarea>
+       
+    </div>
+   
+    <div *ngIf="submitted && f2.note.errors" class="invalid-feedback">
+      <div *ngIf="f2.note.errors.required">this field is required</div>        
+  </div>
+</div>
+
 
 
            <div class="form-group">
-             <!-- <button class="btn btn-success">Collect Order</button> -->
+             <button class="btn btn-success">Collect Money</button>
            </div>
             </form>
             

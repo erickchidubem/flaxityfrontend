@@ -43,7 +43,7 @@
                       <!-- Boston, MA 94107<br> -->
                       Phone: {{salesInfo.phone}}<br>
                       Email: {{salesInfo.email}}<br/>
-                      <b>Invoice #{{salesInfo.salesid}}</b><br>
+                      <b><span *ngIf="salesInfo.order_collect == 0">Profoma</span>Invoice #{{salesInfo.salesid}}</b><br>
                       <b>Order ID:</b> {{salesInfo.ticketNo}}<br>
                     </address>
                   </div><!-- /.col -->
