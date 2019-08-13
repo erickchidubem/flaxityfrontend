@@ -11,6 +11,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { LSelect2Module } from 'ngx-select2';
+//import { ChartsModule } from 'ng2-charts';
+
 
 import {Constants} from '../app/shared/shared-service/constants';
 import {Utils} from '../app/shared/shared-service/utils';
@@ -45,6 +47,7 @@ import { DatePipe } from '@angular/common';
     CdkTableModule,
     NgbModule, SweetAlert2Module.forRoot(),
     LSelect2Module, 
+    //ChartsModule
   ],
   providers: [
     Constants,

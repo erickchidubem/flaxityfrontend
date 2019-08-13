@@ -15,10 +15,11 @@ export class SalesDashboardComponent implements OnInit {
   DateString : any;
   constructor(public datepipe : DatePipe) { 
     this.DateString =this.datepipe.transform(this.theDate,'yyyy-MM-dd');
+    console.log(this.DateString)
   }
 
   ngOnInit() {
     
   }
 
-}
+} 

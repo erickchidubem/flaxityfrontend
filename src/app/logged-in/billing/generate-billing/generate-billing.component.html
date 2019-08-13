@@ -1,3 +1,186 @@
-<p>
-  generate-billing works!
-</p>
+<div class="container-fluid">
+ 
+  <div class="row">
+         <div class="col-lg-12">
+           <div class="card">
+             <div class="card-header text-uppercase">{{editCreateHeader}} </div>
+             <div class="card-body">
+           
+              <div class="table-responsive">
+
+                <form [formGroup]="form" (ngSubmit)="submit()">
+
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="input-21" class="col-sm-3 col-form-label">BILLING START DATE</label>
+                  <br/>
+                  <div class="col-sm-9 input-group">
+                    <input [owlDateTime]="dt1" formControlName ="fromDate"
+                    [ngClass]="{ 'is-invalid': submitted && f.fromDate.errors }"
+                     class="form-control" [min]="2/24/2019"
+                    [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+                      <owl-date-time #dt1 [pickerType]="'calendar'" ></owl-date-time>
+                     
+                     <div *ngIf="submitted && f.fromDate.errors" class="invalid-feedback">
+                        <div *ngIf="f.fromDate.errors.required">this field is required</div>        
+                    </div>
+                  </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="input-21" class="col-sm-3 col-form-label">BILLING END DATE</label>
+                <br/>
+                <div class="col-sm-9 input-group">
+                  <input [owlDateTime]="dt2" formControlName ="toDate"
+                  [ngClass]="{ 'is-invalid': submitted && f.toDate.errors }"
+                   class="form-control" [min]="2/24/2019"
+                  [owlDateTimeTrigger]="dt2" placeholder="Date Time">
+                    <owl-date-time #dt2 [pickerType]="'calendar'" ></owl-date-time>
+                   
+                   <div *ngIf="submitted && f.toDate.errors" class="invalid-feedback">
+                      <div *ngIf="f.toDate.errors.required">this field is required</div>        
+                  </div>
+                </div>
+            </div>
+              </div>
+              
+              <table style="font-size: 13px" *ngIf="loadForm" class="table table-sm table-bordered display nowrap table  responsive nowrap table-bordered">
+             
+                      <ng-container formArrayName="billingDetails" *ngFor="let c of contractDetails;let i = index">
+                          <ng-container [formGroupName]="i">
+                            <tr *ngIf="i > 0">
+                                <td colspan="5">&nbsp;<br/>&nbsp;</td>
+                              </tr>
+                      <tr>
+                        <td width="2%" rowspan="3">{{i+1}}. </td>
+                        <th>PRODUCT NAME : {{c.productName}}</th>
+                        <th>MACHINE CODE : {{c.code}}</th>
+                        <th>SERIAL NO : {{c.serialNo}}</th>
+                        <th>RENTAL CHARGE : {{utils.getCurrency()}} {{c.rentalCharge | number:'.2'}}</th>
+                      </tr>
+                      <tr>
+
+                          <td>
+                            <b>COST MONO : </b>{{utils.getCurrency()}}{{c.cost_mono | number:'.2'}}<br/>
+                            <b>VOL MONO : </b>{{c.min_vol_mono | number:'.2'}} <br/>
+                          </td>
+                          <td>
+                              <b>EXCESS MONO COST : </b>{{utils.getCurrency()}}{{c.excess_cost_mono | number:'.2'}}<br/>
+                              <b>EXCESS MONO VOL : </b>{{c.excess_mono | number:'.2'}} <br/>
+                          </td>
+
+                          <td style="color: blue;">
+                              <b>COST COLOR : </b>{{utils.getCurrency()}}{{c.cost_color | number:'.2'}}<br/>
+                              <b>VOL COLOR : </b>{{c.min_vol_color | number:'.2'}}<br/>
+                          </td>
+                        
+                          <td style="color: blue;">
+                              <b>EXCESS COLOR COST : </b>{{utils.getCurrency()}}{{c.excess_cost_color | number:'.2'}}<br/>
+                              <b>EXCESS COLOR VOL: </b>{{c.excess_color | number:'.2'}}<br/>
+                          </td>
+                        </tr>
+
+                        <tr>
+                            <!-- <input type="hidden" value="{{}}" id="{{i}}"/> -->
+                          <input type="hidden" value="{{c.cost_mono}}" id="cost_mono{{i}}"/> <!--cost mono-->
+                          <input type="hidden" value="{{c.min_vol_mono}}" id="min_vol_mono{{i}}"/> <!--min vol mono-->
+                          <input type="hidden" value="{{c.excess_cost_mono}}" id="excess_cost_mono{{i}}"/> <!--cost mono-->
+                          <input type="hidden" value="{{c.excess_mono}}" id="excess_mono{{i}}"/> <!--min vol mono-->
+                          
+
+                          <input type="hidden" value="{{c.cost_color}}" id="cost_color{{i}}"/> <!--cost color-->
+                          <input type="hidden" value="{{c.min_vol_color}}" id="min_vol_color{{i}}"/> <!--min vol color-->
+                          <input type="hidden" value="{{c.excess_cost_color}}" id="excess_cost_color{{i}}"/> <!--cost color-->
+                          <input type="hidden" value="{{c.excess_color}}" id="excess_color{{i}}"/> <!--min vol color-->
+                          
+                          
+                            <th>
+                              PREVIOUS MONO MACHINE COUNT<br/>
+                            <input type="text" placeholder="PREVIOUS MONO COUNT" 
+                        
+                            formControlName ="previous_mono" value="{{c.current_mono}}" id="p_mono{{i}}" readonly class="form-control" />
+
+                            <!-- <span *ngIf="submitted && f.previous_mono.errors" class="invalid-feedback">
+                                <span *ngIf="f.previous_mono.errors.required">this field is required</span>        
+                            </span> -->
+                            
+                            CURRENT MONO MACHINE COUNT<br/>
+                            <input type="text" placeholder="CURRENT MONO COUNT" formControlName="total_mono" id="t_mono{{i}}" 
+                            [ngClass]="{ 'is-invalid': submitted && h[i].get('total_mono').errors }"
+                            (keyup)="calculateTotalMonoCount(i)" class="form-control"/>
+
+                            <span *ngIf="submitted && h[i].get('total_mono').errors" class="invalid-feedback">
+                                <span *ngIf="h[i].get('total_mono').errors.required">this field is required</span>    
+                                <span *ngIf="h[i].get('total_mono').errors.min">count must be >= the previous count</span>    
+                            </span>
+                            
+                            </th>
+                            <th>
+                              TOTAL MONO COUNT<br/>
+                              <input type="text" placeholder="TOTAL MONO COUNT" id="t_mono_count{{i}}" readonly class="form-control" />
+                              MONO AMOUNT GENERATED<br/>
+                              <input type="text" placeholder="TOTAL MONO AMOUNT" formControlName="amountMono" id="amount_mono{{i}}" readonly class="form-control" />
+                              
+                            </th>
+                              <th>
+                                  PREVIOUS COLOR COUNT<br/>
+                                <input type="text" placeholder="PREVIOUS COLOR COUNT" value="{{c.current_color}}" id="p_color{{i}}" readonly class="form-control"/>
+                                CURRENT COLOR COUNT<br/>
+                                  <input type="text" placeholder="CURRENT COLOR COUNT" 
+                                   [ngClass]="{ 'is-invalid': submitted && h[i].get('total_color').errors }"
+                                  formControlName="total_color" id="t_color{{i}}" (keyup)="calculateTotalColorCount(i)" class="form-control"/>
+                                      <span *ngIf="submitted && h[i].get('total_color').errors" class="invalid-feedback">
+                                            <span *ngIf="h[i].get('total_color').errors.required">this field is required</span> 
+                                            <span *ngIf="h[i].get('total_color').errors.min">count must be >= the previous count</span>        
+                                    </span>
+                                </th>
+ 
+                                <th>
+                                    TOTAL COLOR COUNT<br/>
+                              <input type="text" placeholder="TOTAL COLOR COUNT" id="t_color_count{{i}}" readonly class="form-control" />
+
+                              
+                              MONO AMOUNT GENERATED<br/>
+                              <input type="text" placeholder="TOTAL COLOR AMOUNT" formControlName="amountColor" id="amount_color{{i}}" readonly class="form-control" />
+                                    
+                                </th>
+                            
+                          </tr>
+                        
+                      </ng-container>
+                      </ng-container>
+               
+              </table>
+                      <br/>
+
+              
+
+                      <button class="btn btn-success col-md-3" >SUBMIT</button>
+                </form>
+           <hr/>
+           <br/>
+               
+         </div>
+
+         <!-- <br/>
+         <hr/>
+            <h6 style="text-align: center;">
+                <b>TOTAL MONTHLY VALUE : {{utils.getCurrency()}} {{contractData?.totalMonthlyValue | number:'.2'}}</b>
+        </h6>
+                <h6 style="text-align: center;">
+                {{utils.numberToWord(contractData?.totalMonthlyValue)}} {{utils.CurrencyName()}}
+                </h6>
+        <br/>
+        <hr/>
+              
+         <h6 style="text-align: center;">
+               <b>TOTAL WORTH : {{utils.getCurrency()}} {{contractData?.totalWorth | number:'.2'}}</b>
+       </h6>
+               <h6 style="text-align: center;">
+                  {{utils.numberToWord(contractData?.totalWorth)}} {{utils.CurrencyName()}}
+               </h6> -->
+           
+             </div>
+           </div>
+         </div>
+  </div>

@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewAllProductsComponent implements OnInit {
 
+  roleId = this.context.UserProfile().roleId;
   private heros$;
   superlatives$ = new BehaviorSubject<{[superlativeName: string]: string}>({});
   tableDataSource$ = new BehaviorSubject<any[]>([]);

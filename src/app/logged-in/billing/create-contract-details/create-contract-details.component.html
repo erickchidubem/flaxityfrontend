@@ -11,13 +11,17 @@
                <table style="font-size: 11px" class="table table-sm table-striped table-bordered display nowrap table  responsive nowrap table-bordered">
                   
                   <tr>
-                      <td colspan="3">
+                      <td colspan="4">
                           <button data-toggle="modal" (click)="generate()"
                            data-target="#leadcontact" class="btn btn-sm  btn-primary m-1">
                              Add Machine To Contract 
                           </button>
                        </td>
-                     <td colspan="14"></td>
+                     <td colspan="13">
+    <a routerLink="/access/billing/generate-billing/{{contractId}}" class="btn btn-sm  btn-success m-1">
+                       Generate Billing
+                     </a>
+                     </td>
                    
                    </tr>
                 

@@ -1,13 +1,4 @@
-<!---<div id="accordion1">
-<div class="card mb-2">
-    <div class="card-header">
-        <button class="btn btn-link shadow-none" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-          Lead Story Updates
-        </button>
-    </div>
 
-    <div id="collapse-1" class="collapse show" data-parent="#accordion1">
-      <div class="card-body">-->
       
         <div class="table-responsive" *ngIf="viewType == 0">
             <table class="table table-sm table-striped table-bordered">
@@ -20,11 +11,16 @@
                <tr>
                  <td colspan="4"> <h5>Lead Story Updates</h5></td>
                  <td>
-                    <button data-toggle="modal" (click)="generate()"
-                    *ngIf="createButton"
-                     data-target="#leadstory" class="btn  btn-primary m-1">
-                       Create 
-                    </button>
+                   <ng-container *ngIf="true">
+
+                          <button data-toggle="modal" (click)="generate()"
+                        *ngIf="createButton"
+                        data-target="#leadstory" class="btn  btn-primary m-1">
+                          Create 
+                        </button>
+
+                   </ng-container>
+                   
                  </td>
                </tr>
                <tr>
@@ -172,12 +168,7 @@
               </div>
             </div>
           </div>
-        </div><!-- End Row-->
-     <!-- </div>
-    </div>
-  </div>
-</div>-->
-
+        </div>
 
 <div class="modal fade" id="leadstory">
     <div class="modal-dialog modal-lg">

@@ -1,17 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
-import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
-import {CdkTableModule } from '@angular/cdk/table';
-import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
-import {CdkTableService} from '../../shared/shared-service/cdk-table';
+import {SharedModule} from '../../shared/shared.module';
 import { MakeSalesComponent } from './make-sales/make-sales.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { MySalesRecordComponent } from './my-sales-record/my-sales-record.component';
 
 
 const routes: Routes = [
@@ -22,17 +16,14 @@ const routes: Routes = [
     {path: 'invoice/:id', component: InvoiceComponent},
     {path : 'view-uncollected/:id', component : ViewOrdersComponent},
     {path : 'view-collected/:id/:name', component : ViewOrdersComponent},
+    {path : 'my-sales-record', component : MySalesRecordComponent}
   
 ]; 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     RouterModule.forChild(routes),
-    NgxUiLoaderModule,
-    ReactiveFormsModule,FormsModule,
-    NgbModule, SweetAlert2Module.forRoot(),
-    CdkTableModule,DlDateTimePickerDateModule,  
-    OwlDateTimeModule, OwlNativeDateTimeModule,
   ],
   exports : [RouterModule],
   declarations: [
@@ -41,7 +32,9 @@ const routes: Routes = [
    
     InvoiceComponent,
    
-    ViewOrdersComponent],
+    ViewOrdersComponent,
+   
+    MySalesRecordComponent],
 
 })
 export class SalesModule { }

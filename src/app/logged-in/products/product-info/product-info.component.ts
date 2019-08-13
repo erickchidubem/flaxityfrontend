@@ -14,7 +14,10 @@ declare var $:any;
   styleUrls: ['./product-info.component.css']
 })
 export class ProductInfoComponent implements OnInit {
-
+ 
+  roleId = this.context.UserProfile().roleId;
+  departmentId = this.context.UserProfile().departmentId;
+  store = this.context.UserProfile().store;
   id : any;
   editCreateHeader : string;
   productInfo : any;

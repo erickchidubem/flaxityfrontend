@@ -2,7 +2,7 @@
   <div class="col-md-8">
     
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4" *ngIf="userRole == 1">
       <div class="btn-group group-round btn-group-sm float-right">
           <button type="button" (click)="clickValue(1)" class="btn btn-info waves-effect waves-light">SALES</button>
           <button type="button" (click)="clickValue(2)" class="btn btn-success waves-effect waves-light">SERVICE</button>

@@ -38,6 +38,9 @@ export class MakeSalesComponent implements OnInit {
     countOnline : number = 0;
  
 
+    userId = this.context.UserProfile().id;
+    departmentId = this.context.UserProfile().departmentId;
+    roleId = this.context.UserProfile().roleId;
     
 
     submitted2 : boolean = false;
@@ -64,7 +67,64 @@ export class MakeSalesComponent implements OnInit {
   description = 'some description';
   servicecall_id : number = 0;
 
+
+  addVat(value){
+    console.log(value)
+    if(value ==0){
+      this.modifyTotal(0);
+    }
+  }
+
+  mod = 0;
+  modifyTotal(value){
+    this.mod = value;
+    this.ModifyList();
+  }
+
+  ModifyList(){
+
+    if(this.onLineList.length > 0){
+     
+          for(var i = 0; i < this.onLineList.length; i++){
+            console.log("good")
+            let d = (+this.onLineList[i].unitPrice) * 0.05
+            let e = (+this.onLineList[i].unitPrice) * 0.05263157895
+            console.log(this.onLineList[i].unitPrice)
+            console.log(d)
+            if(this.mod == 0){
+              this.onLineList[i].unitPrice = (+this.onLineList[i].unitPrice) + e;
+            }
+
+            if(this.mod == 1){
+              this.onLineList[i].unitPrice = (+this.onLineList[i].unitPrice) - d;
+            }
+            console.log(this.onLineList[i].unitPrice)
+          }
+         
+          console.log(this.onLineList)
+    }
+
+  
+    if(this.onArrayList.length > 0){
+          for(var i = 0; i < this.onArrayList.length; i++){
+            let d = (+this.onArrayList[i].unitPrice) * 0.05
+            let e = (+this.onArrayList[i].unitPrice) * 0.05263157895
+            if(this.mod == 0){
+              this.onArrayList[i].unitPrice = (+this.onArrayList[i].unitPrice) + e;
+            }
+
+            if(this.mod == 1){
+            this.onArrayList[i].unitPrice = (+this.onArrayList[i].unitPrice) - d;
+          }
+         
+        }
+    }
+    
+  }
+
 SubmitSales(){
+
+
 
 
 this.submitted2 = true;

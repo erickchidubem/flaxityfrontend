@@ -63,9 +63,11 @@ export class ServiceCallsComponent implements OnInit {
       subscribe( data => {
         let d = <any>data;
         this.allSales = d.data;
-        if(d.data == null){
+        if(d.data == null){ 
           this.allSales = {};
         }
+
+        
         this.heros$ = new BehaviorSubject<{[name: string]: any}>(this.allSales);
         this.cdktable.GenerateCDKTable(this.tableDataSource$,this.currentPage$, this.pageSize$,this.heros$,
         this.searchFormControl,this.sortKey$,this.sortDirection$,this.dataOnPage$)

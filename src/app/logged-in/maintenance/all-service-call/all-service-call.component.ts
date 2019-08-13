@@ -32,6 +32,6 @@ export class AllServiceCallComponent implements OnInit {
         this.info = d.data;
         console.log(d)
       });
-
+ 
   }
 }

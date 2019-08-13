@@ -29,6 +29,9 @@ export class InvoiceComponent implements OnInit {
   amountDue : any;
   amountOwing : any;
 
+  roleId = this.context.UserProfile().roleId;
+  departmentId = this.context.UserProfile().departmentId;
+
   formcloseorder : FormGroup;
   collectmoney : FormGroup;
   ngOnInit() {

@@ -40,10 +40,34 @@
              </div>
      </div>
 
+
+
+    <!---- END MENU DROP DOWN ---->
+
+    
+<!---- MENU DROP DOWN ---->
+<div class="user-details" *ngIf="processSales">
+        <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#sales-dropdown">
+                 <div class="media-body">
+                 <h6 class="side-user-name"><i class="zmdi zmdi-grid"></i><span> Process Sales</span></h6>
+                 </div>
+         </div>
+         <div id="sales-dropdown" class="collapse">
+             <ul class="user-setting-menu">
+                 <li *ngIf="makesSales"><a routerLink="/access/sales/make-sales"><i class="zmdi zmdi-long-arrow-right"></i> Make Sales</a></li>              
+                 <li *ngIf ="supplyTickets"><a routerLink="/access/sales/view-collected/4/ALL-COLLECTED"><i class="zmdi zmdi-long-arrow-right"></i>Supply Tickets</a></li>              
+                 <li *ngIf ="profomaInvoice"><a routerLink="/access/sales/view-uncollected/0"><i class="zmdi zmdi-long-arrow-right"></i>Profoma Invoices</a></li> 
+                 <li><a routerLink="/access/sales/my-sales-record"><i class="zmdi zmdi-long-arrow-right"></i>My Sales</a></li>              
+                              
+                
+             </ul>
+         </div>
+    </div>
+    
     <!---- END MENU DROP DOWN ---->
 
      <!---- MENU DROP DOWN ---->
-     <div class="user-details">
+     <div class="user-details" *ngIf="userManagement">
         <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#usermanage-dropdown">
                  <div class="media-body">
                  <h6 class="side-user-name"><i class="fa fa-user"></i><span> User Management</span></h6>
@@ -61,7 +85,7 @@
 <!---- END MENU DROP DOWN ---->
 
      <!---- MENU DROP DOWN ---->
-     <div class="user-details">
+     <div class="user-details" *ngIf="leadAndAccount">
             <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#account-dropdown">
                      <div class="media-body">
                      <h6 class="side-user-name"><i class="zmdi zmdi-layers"></i><span> Leads and Accounts</span></h6>
@@ -69,11 +93,11 @@
              </div>
              <div id="account-dropdown" class="collapse">
                  <ul class="user-setting-menu">
-                        <li><a routerLink="/access/lead/add-lead"><i class="fa fa-user-circle-o"></i>Create Lead</a></li>
-                     <li><a routerLink="/access/lead/view-all-lead"><i class="icon-user"></i>View All Leads</a></li>
+                    <li *ngIf="createLead"><a routerLink="/access/lead/add-lead"><i class="fa fa-user-circle-o"></i>Create Lead</a></li>
+                     <li *ngIf="viewAllLeads"><a routerLink="/access/lead/view-all-lead"><i class="icon-user"></i>View All Leads</a></li>
                      <li><a routerLink="/access/lead/view-my-lead"><i class="fa fa-address-book"></i>View My Leads</a></li>
-                    <li><a routerLink="/access/lead/view-all-account"><i class="fa fa-address-book-o"></i>View All Accounts</a></li>
-                    <li><a routerLink="/access/lead/all-leads-story"><i class="fa fa-user-circle-o"></i>Lead Story</a></li>
+                    <li *ngIf="viewAllAccounts"><a routerLink="/access/lead/view-all-account"><i class="fa fa-address-book-o"></i>View All Accounts</a></li>
+                    <li *ngIf="leadStory"><a routerLink="/access/lead/all-leads-story"><i class="fa fa-user-circle-o"></i>Lead Story</a></li>
                  </ul>
              </div>
      </div>
@@ -81,7 +105,7 @@
     <!---- END MENU DROP DOWN ---->
 
      <!---- MENU DROP DOWN ---->
-     <div class="user-details">
+     <div class="user-details" *ngIf="maintenance">
             <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#machine-dropdown">
                      <div class="media-body">
                      <h6 class="side-user-name"><i class="fa fa-forumbee"></i><span> Maintenance</span></h6>
@@ -89,12 +113,12 @@
              </div>
              <div id="machine-dropdown" class="collapse">
                  <ul class="user-setting-menu">
-                     <li><a routerLink="/access/maintenance/view-machine"><i class="zmdi zmdi-camera-rear"></i>View Machines</a></li>
-                     <li><a routerLink="/access/maintenance/add-machine"><i class="fa fa-ravelry"></i>Create Machine</a></li>
-                     <li><a routerLink="/access/maintenance/all-service-call"><i class="zmdi zmdi-phone-in-talk"></i>Service Calls</a></li>
-                    <li><a routerLink="/access/maintenance/view-all-account"><i class="zmdi zmdi-run"></i>Follow Up Call</a></li>
+                     <li *ngIf="viewMachine"><a routerLink="/access/maintenance/view-machine"><i class="zmdi zmdi-camera-rear"></i>View Machines</a></li>
+                     <li *ngIf="createMachine"><a routerLink="/access/maintenance/add-machine"><i class="fa fa-ravelry"></i>Create Machine</a></li>
+                     <li *ngIf="serviceCall"><a routerLink="/access/maintenance/all-service-call"><i class="zmdi zmdi-phone-in-talk"></i>Service Calls</a></li>
+                    <li *ngIf="followUpCall"><a routerLink="/access/maintenance/follow-up"><i class="zmdi zmdi-run"></i>Follow Up Call</a></li>
                  
-                    <li><a routerLink="/access/maintenance/make-service-call"><i class="zmdi zmdi-phone-ring"></i>Create Call</a></li>
+                    <li *ngIf="createCall"><a routerLink="/access/maintenance/make-service-call"><i class="zmdi zmdi-phone-ring"></i>Create Call</a></li>
                  </ul>
              </div>
      </div>
@@ -103,7 +127,7 @@
 
 
      <!---- MENU DROP DOWN ---->
-     <div class="user-details">
+     <div class="user-details" *ngIf="wareHouse">
         <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#warehouse-dropdown">
                  <div class="media-body">
                  <h6 class="side-user-name"><i class="zmdi zmdi-card-travel"></i><span> Ware House</span></h6>
@@ -111,12 +135,12 @@
          </div>
          <div id="warehouse-dropdown" class="collapse">
              <ul class="user-setting-menu">
-                 <li><a routerLink="/access/products/view-all-products"><i class="zmdi zmdi-long-arrow-right"></i> All Products</a></li>              
-                 <li><a routerLink="/access/products/create-product"><i class="zmdi zmdi-long-arrow-right"></i> Create Product</a></li>
-                 <li><a routerLink="/access/warehouse/ship-item"><i class="zmdi zmdi-long-arrow-right"></i> Ship Items</a></li>
+                 <li *ngIf="allProduct"><a routerLink="/access/products/view-all-products"><i class="zmdi zmdi-long-arrow-right"></i> All Products</a></li>              
+                 <li *ngIf="createProduct"><a routerLink="/access/products/create-product"><i class="zmdi zmdi-long-arrow-right"></i> Create Product</a></li>
+                 <li *ngIf="shipItem"><a routerLink="/access/warehouse/ship-item"><i class="zmdi zmdi-long-arrow-right"></i> Ship Items</a></li>
              </ul>
          </div>
- </div>
+ </div> 
 
  
 <!-- <div class="user-details">
@@ -128,29 +152,9 @@
              </div>
      </div>
 </div> -->
-<!---- MENU DROP DOWN ---->
-<div class="user-details">
-    <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#sales-dropdown">
-             <div class="media-body">
-             <h6 class="side-user-name"><i class="zmdi zmdi-grid"></i><span> Process Sales</span></h6>
-             </div>
-     </div>
-     <div id="sales-dropdown" class="collapse">
-         <ul class="user-setting-menu">
-             <li><a routerLink="/access/sales/make-sales"><i class="zmdi zmdi-long-arrow-right"></i> Make Sales</a></li>              
-             <li><a routerLink="/access/sales/view-collected/4/ALL-COLLECTED"><i class="zmdi zmdi-long-arrow-right"></i>Supply Tickets</a></li>              
-             <li><a routerLink="/access/sales/view-uncollected/0"><i class="zmdi zmdi-long-arrow-right"></i>Profoma Invoices</a></li> 
-             <!-- <li><a routerLink="/access/products/view-all-products"><i class="zmdi zmdi-long-arrow-right"></i>Payment Reconciliation</a></li>              
-                          -->
-            
-         </ul>
-     </div>
-</div>
-
-<!---- END MENU DROP DOWN ---->
 
 <!---- MENU DROP DOWN ---->
-<div class="user-details">
+<div class="user-details" *ngIf="contractBilling">
     <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#billing-dropdown">
              <div class="media-body">
              <h6 class="side-user-name"><i class="fa fa-handshake-o"></i><span> Contract Billing</span></h6>
@@ -158,9 +162,9 @@
      </div>
      <div id="billing-dropdown" class="collapse">
          <ul class="user-setting-menu">
-             <li><a routerLink="/access/billing/create-contract"><i class="zmdi zmdi-long-arrow-right"></i>Create Contract</a></li>              
-             <li><a routerLink="/access/billing/all-contracts"><i class="zmdi zmdi-long-arrow-right"></i>View Contract</a></li>              
-             <li><a routerLink="/access/billing/all-billing"><i class="zmdi zmdi-long-arrow-right"></i>View Billings</a></li>              
+             <li *ngIf="createContract"><a routerLink="/access/billing/create-contract"><i class="zmdi zmdi-long-arrow-right"></i>Create Contract</a></li>              
+             <li *ngIf="viewContract"><a routerLink="/access/billing/all-contracts"><i class="zmdi zmdi-long-arrow-right"></i>View Contract</a></li>              
+             <li *ngIf="viewBilling"><a routerLink="/access/billing/all-billing"><i class="zmdi zmdi-long-arrow-right"></i>View Billings</a></li>              
             
          </ul>
      </div>
@@ -169,7 +173,7 @@
 <!---- END MENU DROP DOWN ---->
 
   <!---- MENU DROP DOWN ---->
-  <div class="user-details">
+  <div class="user-details" *ngIf="settings">
     <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#settings-dropdown">
              <div class="media-body">
              <h6 class="side-user-name"><i class="icon-settings icons"></i><span>Settings</span></h6>

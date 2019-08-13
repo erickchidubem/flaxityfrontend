@@ -9,7 +9,7 @@
                 <tr>
                     <th scope="row">PRODUCT NAME</th>
                     <td scope="col" colspan="3">{{productInfo?.productName}}</td>
-                  
+                   
                   </tr>
                   <tr>
                     <th scope="row">PRODUCT CODE</th>
@@ -21,12 +21,18 @@
                       <th scope="row">SELLING PRICE</th>
                       <td scope="col">{{utils.getCurrency()}}{{productInfo?.sellingPrice | number:'.2'}}</td>
                       <th scope="row">COST PRICE</th>
-                      <td scope="col">{{utils.getCurrency()}}{{productInfo?.costPrice | number:'.2'}}</td>
+                      <td scope="col">
+                       <ng-container *ngIf="roleId==1">
+                         {{utils.getCurrency()}}{{productInfo?.costPrice | number:'.2'}}
+                       </ng-container> 
+                      </td>
                     </tr>
                   <tr>
                     <td colspan="3"></td>
                    
-                    <td> <a routerLink="/access/products/edit-product/{{productInfo?.id}}" class="btn btn-rounded btn-sm btn-warning">Edit Product Info</a></td>
+                    <td> 
+                      <a *ngIf="roleId == 1" routerLink="/access/products/edit-product/{{productInfo?.id}}" class="btn btn-rounded btn-sm btn-warning">Edit Product Info</a>
+                    </td>
                   </tr>
               
                  
@@ -45,7 +51,7 @@
                    <h4 class="mb-0 py-3 text-primary">{{productInfo?.store1}}</h4>
                    </div>
                 
-                  <div class="row">
+                  <div class="row" *ngIf="roleId==1 || (departmentId==8 && store == 1)">
                     <div class="col-md-6"> 
                       <span class="float-left">
 

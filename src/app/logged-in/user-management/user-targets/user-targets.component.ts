@@ -105,7 +105,7 @@ export class UserTargetsComponent implements OnInit {
   getAllUsersTarget(id:any){
 
     this.utils.StartSpinner();
-      this.context.getWithToken('/'+id,'user/userTarget').
+      this.context.getWithToken('/'+id+'/0','user/userTarget').
       subscribe( data => {
         let d = <any>data;
         this.alllead = d.data;

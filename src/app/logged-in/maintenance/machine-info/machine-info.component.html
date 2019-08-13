@@ -11,7 +11,7 @@
 
                 <tr>
                     <td colspan="3"><h4>{{leadInfo.name | uppercase}} </h4></td>
-                    <td><a routerLink="/access/maintenance/edit-machine/{{leadInfo.id}}" class="btn btn-sm btn-round  waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
+                    <td><a *ngIf="(departmentId == 4) ||(roleId == 1) || (designationId == 5)" routerLink="/access/maintenance/edit-machine/{{leadInfo.id}}" class="btn btn-sm btn-round  waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
                 </tr>
               <tr>
                 <td style=" width:30%"><b>MACHINE CODE : </b></td>

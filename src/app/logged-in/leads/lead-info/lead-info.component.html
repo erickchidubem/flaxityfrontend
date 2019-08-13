@@ -34,7 +34,9 @@
 
                       <tr>
                           <td colspan="3"><h4>{{leadInfo.name | uppercase}} </h4></td>
-                          <td><a routerLink="/access/lead/edit-lead/{{leadInfo.id}}" class="btn btn-sm btn-round  waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
+                          <td><a routerLink="/access/lead/edit-lead/{{leadInfo.id}}"
+                            *ngIf="userId == leadInfo?.sales_Assign"
+                             class="btn btn-sm btn-round waves-effect waves-light m-1 btn-warning">Edit Profile</a></td>
                       </tr>
                     <tr>
                       <td style=" width:30%"><b>SALES STAGE : </b></td>

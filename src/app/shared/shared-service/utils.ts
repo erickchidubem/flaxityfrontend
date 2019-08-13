@@ -76,6 +76,29 @@ export class Utils {
     }
 
 
+    divideNumbersForPercentage(upper,lower){
+        if(lower == 0 || lower == null){
+            return 'N/A';
+        }else{
+             let b = "secondary";
+            let n = (upper/lower) * 100;
+            if(n < 30){
+                b = "danger"
+            }else if(n < 50){
+                b = "warning"
+            }else if (n < 70){
+                b = "info"
+            }else if (n > 69 ){
+                b = "success"
+            }else{
+                b = "primary"
+            }
+
+           return  `<i class="bg-${b}"></i>`; 
+          
+        }
+    }
+
     
 
      Comma(Num) { //function to add commas to textboxes

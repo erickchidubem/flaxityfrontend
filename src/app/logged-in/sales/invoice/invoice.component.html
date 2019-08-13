@@ -3,8 +3,11 @@
           <!-- Content Header (Page header) -->
           <section class="content-header">
             <h3>
-              Invoice
-              <small>#{{salesInfo.salesid}}</small>
+                <span *ngIf="salesInfo.order_collect == 0">Profoma Invoice</span>
+                <span *ngIf="salesInfo.order_collect == 1">Supply Ticket</span>
+                <span *ngIf="salesInfo.order_collect > 1">Invoice</span> 
+         
+              <small>  #{{salesInfo.salesid}}</small>
             </h3>
           </section>
 
@@ -46,7 +49,10 @@
                       <!-- Boston, MA 94107<br> -->
                       Phone: {{salesInfo.phone}}<br>
                       Email: {{salesInfo.email}}<br/>
-                      <b><span *ngIf="salesInfo.order_collect == 0">Profoma</span> Invoice #{{salesInfo.salesid}}</b><br>
+                      <b>
+                        <span *ngIf="salesInfo.order_collect == 0">Profoma Invoice</span>
+                        <span *ngIf="salesInfo.order_collect == 1">Supply Ticket</span>
+                        <span *ngIf="salesInfo.order_collect > 1">Invoice</span> #{{salesInfo.salesid}}</b><br>
                       <b>Order ID:</b> {{salesInfo.ticketNo}}<br>
                     </address>
                   </div><!-- /.col -->
@@ -176,7 +182,7 @@
     <div class="col-lg-6">
     <div class="float-sm-right">
                  <button class="btn btn-success m-1" data-target="#collectpayment"
-                 *ngIf="amountOwing > 0"
+                 *ngIf="amountOwing > 0 && ((roleId == 1) || (departmentId == 7))"
                  data-toggle="modal" >
                  <i class="fa fa-credit-card"></i> Submit Payment
                 </button>

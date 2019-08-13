@@ -9,6 +9,7 @@ import { MachineInfoComponent } from './machine-info/machine-info.component';
 import { MakeServiceCallComponent } from './make-service-call/make-service-call.component';
 import { AllServiceCallComponent } from './all-service-call/all-service-call.component';
 import { ViewServiceCallComponent } from './view-service-call/view-service-call.component';
+import { FollowUpComponent } from './follow-up/follow-up.component';
 
 const routes: Routes = [ 
     {path : 'view-machine', component : ViewMachineComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
     {path : 'make-service-call', component : MakeServiceCallComponent },
     {path : 'edit-service-call/:id', component : MakeServiceCallComponent},
     {path : 'view-service-call/:id', component : ViewServiceCallComponent},
-    {path : 'all-service-call', component : AllServiceCallComponent}
+    {path : 'all-service-call', component : AllServiceCallComponent},
+    {path : 'follow-up', component : FollowUpComponent}
  ]; 
 
 @NgModule({
@@ -32,7 +34,7 @@ const routes: Routes = [
   declarations: [
     AddMachineComponent,ViewMachineComponent,
     MachineInfoComponent, MakeServiceCallComponent, 
-    AllServiceCallComponent, ViewServiceCallComponent
+    AllServiceCallComponent, ViewServiceCallComponent, FollowUpComponent
   ],
 
 })

@@ -12,7 +12,7 @@
    </div>
    <div class="col-sm-3">
      <div class="btn-group float-sm-right">
-      <a  routerLink="/access/products/create-product" class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i> Create New Product</a>
+      <a *ngIf="roleId == 1"  routerLink="/access/products/create-product" class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i> Create New Product</a>
      
     </div>
    </div>

@@ -2,18 +2,14 @@
         <div class="container-fluid">
     
             <!--Start Dashboard Content-->
-      
-        
-               <app-sales-quick-flash [userId]="userId" [theDate]="DateString"></app-sales-quick-flash>
-        
+               <app-sales-quick-flash [userId]="userId" [theDate]="DateString"></app-sales-quick-flash>  
                <!--End Row-->
-      
-          
-        <div class="row">
+
+               <app-monthly-sales-against-target [userId]="userId"></app-monthly-sales-against-target>
+        <div class="row"> 
             <div class="col-12 col-lg-12 col-xl-12">
                <app-lead-funnel-chart [userId]="userId" [viewType]="viewType"></app-lead-funnel-chart>
            </div>
-  
            <div class="col-12 col-lg-12 col-xs-12">
               <app-sales-trend-line-chart></app-sales-trend-line-chart>
            </div>
@@ -78,9 +74,9 @@
                </div>
             </div>
           </div><!--End Row-->
-        
+         
           <div class="table-responsive">
-              <app-lead-sales [userId]="0" [accountId]="0" [serviceId]="0"></app-lead-sales>
+              <app-lead-sales [userId]="userId" [accountId]="0" [serviceId]="0"></app-lead-sales>
            </div>
         
         <!--End Row-->

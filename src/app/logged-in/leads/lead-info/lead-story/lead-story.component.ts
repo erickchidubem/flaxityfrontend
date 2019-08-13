@@ -18,7 +18,7 @@ export class LeadStoryComponent implements OnInit {
 @Input() userId : any;
 @Input() viewType : any;
 @Input() departmentId : any;
-
+ 
 
 private heros$;
 superlatives$ = new BehaviorSubject<{[superlativeName: string]: string}>({});
@@ -73,8 +73,11 @@ sortDirection$ = new BehaviorSubject<string>('asc');
       subscribe( data => {
         let d = <any>data;
         this.leadStoryInfo = d.data;
+        if(d.data == null){
+        //  this.leadStoryInfo = {}
+        }
 
-        this.heros$ = new BehaviorSubject<{[name: string]: any}>(d.data);
+        this.heros$ = new BehaviorSubject<{[name: string]: any}>(this.leadStoryInfo);
         this.cdktable.GenerateCDKTable(this.tableDataSource$,this.currentPage$, this.pageSize$,this.heros$,
         this.searchFormControl,this.sortKey$,this.sortDirection$,this.dataOnPage$)
         console.log(d)

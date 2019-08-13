@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-4 col-lg-4">
+        <div class="card">
+            <div class="card-header border-0">Target for Year {{targetHeader}}
+                <div class="card-action">
+                        <div class="dropdown">
+                       <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                        <i class="icon-options"></i>
+                       </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                        <ng-container *ngFor="let c of year" >
+                              <a class="dropdown-item" (click)="setJustTargetYear(c)" href="javascript:void();">{{c}}</a>
+                        </ng-container>
+                      
+                     
+                         </div>
+                        </div>
+                    </div>
+               </div>
+        <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+              <ng-container *ngFor="let c of targetInfo; let i = index">
+                  <ng-container *ngIf="(i%2)==0">
+                      <h6 class="mb-0">{{c.amount | number:'.2'}}</h6>
+                      <small>{{c.monthname}}</small>
+                      <hr/>
+                  </ng-container>
+              </ng-container>
+                
+          </div>
+
+          <div class="col-md-6">
+              <ng-container *ngFor="let c of targetInfo; let i = index">
+                  <ng-container *ngIf="(i%2)==1">
+                      <h6 class="mb-0">{{c.amount | number:'.2'}}</h6>
+                      <small>{{c.monthname}}</small>
+                      <hr/>
+                  </ng-container>
+              </ng-container>
+                
+          </div>
+        </div>
+        
+
+           
+
+           
+          </div>
+          </div>
+      </div>
+   <div class="col-8 col-lg-8">
+      <div class="card">
+        <div class="card-header border-0">
+          Sales Made for the year {{SalesYearHeader}}
+       <div class="card-action">
+              <div class="dropdown">
+              <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+               <i class="icon-options"></i>
+              </a>
+               <div class="dropdown-menu dropdown-menu-right">
+                  <ng-container *ngFor="let c of year" >
+                      <a class="dropdown-item" (click)="setSalesYear(c)" href="javascript:void();">{{c}}</a>
+                </ng-container>
+                </div>
+               </div>
+              </div>
+      </div>
+          <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                   <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Period</th>
+                      <th>Target</th>
+                      <th>Sold</th>
+                      <th>Paid</th>
+                      <th>Status</th>
+                    </tr>
+                    </thead>
+            <tbody>
+              <tr *ngFor="let c of targetInfo2">
+                     <td> {{c.adminCreateSales}} </td>
+                      <td>{{c.themonthname}} {{c.theYear}}</td>
+                     <td>{{c.Target | number:'.2'}}</td>
+                     <td>{{c.FinalAmount | number:'.2'}}</td>
+                     <td>{{c.totalAmountPaid | number:'.2'}}</td>
+                     <td>
+                       <span class="badge-dot">
+                         <!-- <span [InnerHTML]="utils.divideNumbersForPercentage(c.FinalAmount,c.Target)"></span>
+                         -->
+                         {{((c.FinalAmount/c.Target) * 100) | number:'.2'}} %
+                       </span>
+                     </td>
+                     <!-- <td>
+              <div class="progress shadow" style="height: 4px;">
+                           <div class="progress-bar gradient-ibiza" role="progressbar" style="width: 60%"></div>
+                        </div>
+                     </td>
+           <td>10 July 2018</td> -->
+                    </tr>
+       
+                  
+                  
+                  </tbody>
+                
+                </table>
+                </div>
+      </div>
+    </div>
+    
+   </div><!--End Row-->

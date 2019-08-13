@@ -8,13 +8,15 @@ import { AddMachineContractComponent } from './add-machine-contract/add-machine-
 import {GenerateBillingComponent} from './generate-billing/generate-billing.component';
 import { CreateContractDetailsComponent } from './create-contract-details/create-contract-details.component';
 import { AllContractsComponent } from './all-contracts/all-contracts.component';
+import { AllBillingComponent } from './all-billing/all-billing.component';
 const routes: Routes = [ 
     {path : 'create-contract', component : CreateContractComponent },
     {path : 'edit-contract/:id', component : CreateContractComponent },
     {path : 'view-contract-info/:id/:id2', component : CreateContractComponent },
     {path : 'add-machine', component : AddMachineContractComponent},
     {path : 'generate-billing/:id', component : GenerateBillingComponent},
-    {path : 'all-contracts', component : AllContractsComponent}
+    {path : 'all-contracts', component : AllContractsComponent},
+    {path : 'all-billing', component : AllBillingComponent}
    
  ]; 
 
@@ -31,7 +33,8 @@ const routes: Routes = [
       AddMachineContractComponent,
       GenerateBillingComponent,
       CreateContractDetailsComponent,
-      AllContractsComponent
+      AllContractsComponent,
+      AllBillingComponent
 ],
 
 })

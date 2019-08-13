@@ -16,6 +16,9 @@ export class MachineInfoComponent implements OnInit {
   leadInfo : any=[];
   id : any = this.route.params['value'].id;
   myaccountId : any;
+  departmentId = this.context.UserProfile().departmentId;
+  designationId = this.context.UserProfile().designationId;
+  roleId = this.context.UserProfile().roleId;
 
   tbPercentage ="30%";
   ngOnInit() {

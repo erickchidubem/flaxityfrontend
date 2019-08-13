@@ -9,9 +9,9 @@ import {CdkTableModule } from '@angular/cdk/table';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { ToastrModule } from 'ngx-toastr';
-//import { NgSelectModule } from '@ng-select/ng-select';
 
- 
+
+
 import  {SelectModule} from 'ng-select';
 import { LeadContactComponent } from './../shared/shared-components/lead-contact/lead-contact.component';
 import { LeadSalesComponent } from './../shared/shared-components/lead-sales/lead-sales.component';
@@ -21,6 +21,7 @@ import { AllContractInfoComponent } from './shared-components/all-contract-info/
 import { LeadFunnelChartComponent } from './shared-components/charts/lead-funnel-chart/lead-funnel-chart.component';
 import { SalesTrendLineChartComponent } from './shared-components/charts/sales-trend-line-chart/sales-trend-line-chart.component';
 import { SalesQuickFlashComponent } from './shared-components/charts/sales-quick-flash/sales-quick-flash.component';
+import { MonthlySalesAgainstTargetComponent } from './shared-components/charts/monthly-sales-against-target/monthly-sales-against-target.component';
 
 
 
@@ -37,6 +38,7 @@ import { SalesQuickFlashComponent } from './shared-components/charts/sales-quick
       PasswordStrengthMeterModule,
       ToastrModule.forRoot(),
       SelectModule
+      
      // HttpClientModule,HttpModule
     ],
     exports : [
@@ -48,6 +50,7 @@ import { SalesQuickFlashComponent } from './shared-components/charts/sales-quick
         LeadFunnelChartComponent,
         SalesTrendLineChartComponent,
         SalesQuickFlashComponent,
+        MonthlySalesAgainstTargetComponent,
         CommonModule,
         NgxUiLoaderModule,
         ReactiveFormsModule,FormsModule,
@@ -62,7 +65,7 @@ import { SalesQuickFlashComponent } from './shared-components/charts/sales-quick
        LeadContactComponent,  LeadSalesComponent, 
        LeadSalesComponentComponent, ServiceCallsComponent,
         AllContractInfoComponent, LeadFunnelChartComponent, 
-        SalesTrendLineChartComponent, SalesQuickFlashComponent, 
+        SalesTrendLineChartComponent, SalesQuickFlashComponent, MonthlySalesAgainstTargetComponent, 
   ],
   
   })

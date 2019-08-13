@@ -18,6 +18,7 @@ export class AddLeadsComponent implements OnInit {
  
     Industry :any;
     Users : any;
+    UsersSales : any;
     LeadSource : any;
     SalesStage : any;
     submitted : boolean =false;
@@ -179,6 +180,12 @@ export class AddLeadsComponent implements OnInit {
       subscribe( data => {
         let d = <any>data;
         this.Users = d.data;
+        if(this.context.UserProfile().roleId == 1)
+        {
+          this.UsersSales = d.data;
+        }else{
+          this.UsersSales = d.data.filter(x=>x.id == this.context.UserProfile().id);
+        }
         console.log(d)
         this.utils.StopSpinner();
       }); 

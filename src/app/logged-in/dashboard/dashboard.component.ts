@@ -10,10 +10,12 @@ export class DashboardComponent implements OnInit {
 
   userId : any;
   viewType : any;
+  userRole : any;
   ngOnInit() {
    
     let dptId  = this.context.UserProfile().departmentId;
     this.userId = this.context.UserProfile().id;
+    this.userRole = this.context.UserProfile().roleId;
 
     if(dptId == 1){
       this.viewType == 1;
