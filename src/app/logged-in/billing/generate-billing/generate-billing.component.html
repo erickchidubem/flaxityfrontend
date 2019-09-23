@@ -95,7 +95,7 @@
                           
                           
                             <th>
-                              PREVIOUS MONO MACHINE COUNT<br/>
+                              PREVIOUS MONO COUNT<br/>
                             <input type="text" placeholder="PREVIOUS MONO COUNT" 
                         
                             formControlName ="previous_mono" value="{{c.current_mono}}" id="p_mono{{i}}" readonly class="form-control" />
@@ -104,9 +104,10 @@
                                 <span *ngIf="f.previous_mono.errors.required">this field is required</span>        
                             </span> -->
                             
-                            CURRENT MONO MACHINE COUNT<br/>
+                            CURRENT MONO COUNT<br/>
                             <input type="text" placeholder="CURRENT MONO COUNT" formControlName="total_mono" id="t_mono{{i}}" 
-                            [ngClass]="{ 'is-invalid': submitted && h[i].get('total_mono').errors }"
+                            [ngClass]="{ 'is-invalid': submitted && h[i].get('total_mono').errors }" 
+                            (keypress)="utils.numberOnly($event)" 
                             (keyup)="calculateTotalMonoCount(i)" class="form-control"/>
 
                             <span *ngIf="submitted && h[i].get('total_mono').errors" class="invalid-feedback">
@@ -127,7 +128,8 @@
                                 <input type="text" placeholder="PREVIOUS COLOR COUNT" value="{{c.current_color}}" id="p_color{{i}}" readonly class="form-control"/>
                                 CURRENT COLOR COUNT<br/>
                                   <input type="text" placeholder="CURRENT COLOR COUNT" 
-                                   [ngClass]="{ 'is-invalid': submitted && h[i].get('total_color').errors }"
+                                   [ngClass]="{ 'is-invalid': submitted && h[i].get('total_color').errors }" 
+                                   (keypress)="utils.numberOnly($event)" 
                                   formControlName="total_color" id="t_color{{i}}" (keyup)="calculateTotalColorCount(i)" class="form-control"/>
                                       <span *ngIf="submitted && h[i].get('total_color').errors" class="invalid-feedback">
                                             <span *ngIf="h[i].get('total_color').errors.required">this field is required</span> 

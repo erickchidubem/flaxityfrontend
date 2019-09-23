@@ -85,16 +85,79 @@ export class PrimarySidebarComponent implements OnInit {
         this.maintenance = true;
         this.viewMachine = true;
        // this.createMachine = true;
-        this.serviceCall = true;
         this.followUpCall = true;
         //this.createCall = true;
 
         if(this.designationId == 5){
-
+          this.serviceCall = true;
         }
       }
+
+
+      if(this.departmentId == 4){
+                this.leadAndAccount = true;
+                this.createLead = true;
+                this.viewAllLeads = true;
+                this.viewAllAccounts = true;
+                this.leadStory = true;
+
+                this.maintenance = true;
+                this.viewMachine = true;
+                this.createMachine = true;
+                this.serviceCall = true;
+                this.followUpCall = true;
+                this.createCall = true;
+
+
+              this.wareHouse = true;
+              this.allProduct = true;
+             // this.createProduct = true;
+            //  this.shipItem= true;
+              
+              this.processSales= true;
+              this.makesSales= true;
+             // this.supplyTickets= true;
+            //  this.profomaInvoice= true;
+              
+              this.contractBilling = true;
+              this.createContract = true;
+              this.viewContract= true;
+              this.viewBilling = true;
+
+            //  this.settings  = true;
+           //   this.categorySetting = true;
+      }
+
+      if(this.departmentId == 6){
+        this.userManagement = true;
+  
+      }
+
+      if(this.departmentId == 7){
+
+        this.processSales= true;
+        //this.makesSales= true;
+        this.supplyTickets= true;
+        this.profomaInvoice= true;
+       
+        this.contractBilling = true;
+       // this.createContract = true;
+        this.viewContract= true;
+        this.viewBilling = true;
+   
+  
+      }
+
+      if(this.departmentId == 8){
+
+          this.wareHouse = true;
+          this.allProduct = true;
+          this.createProduct = true;
+          this.shipItem= true;
+
+      }
     }
-  }
+  } 
 
   userManagement : boolean = false;
 

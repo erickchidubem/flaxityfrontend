@@ -79,7 +79,7 @@ export class MakeSalesComponent implements OnInit {
   modifyTotal(value){
     this.mod = value;
     this.ModifyList();
-  }
+  } 
 
   ModifyList(){
 

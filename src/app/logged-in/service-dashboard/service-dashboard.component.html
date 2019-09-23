@@ -6,7 +6,7 @@
                     <div class="card-body">
                         <div class="media align-items-center">
                             <div class="media-body text-left">
-                                <h4 class="mb-0 text-white">1</h4>
+                                <h4 class="mb-0 text-white">{{data1?._account}}</h4>
                                 <span class="text-white">Total Accounts</span>
                             </div>
                             <div class="align-self-center w-icon">
@@ -19,11 +19,12 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 col-lg-6 col-xl-3 border-white-2">
                     <div class="card-body">
                         <div class="media align-items-center">
                             <div class="media-body text-left">
-                                <h4 class="mb-0 text-white">25</h4>
+                                <h4 class="mb-0 text-white">{{data1?._machine}}</h4>
                                 <span class="text-white">Total Machines</span>
                             </div>
                             <div class="align-self-center w-icon">
@@ -40,7 +41,7 @@
                     <div class="card-body">
                         <div class="media align-items-center">
                             <div class="media-body text-left">
-                                <h4 class="mb-0 text-white">23</h4>
+                                <h4 class="mb-0 text-white">{{data1?._totalCalls}}</h4>
                                 <span class="text-white">Total Calls</span>
                             </div>
                             <div class="align-self-center w-icon">
@@ -57,7 +58,7 @@
                     <div class="card-body">
                         <div class="media align-items-center">
                             <div class="media-body text-left">
-                                <h4 class="mb-0 text-white">16</h4>
+                                <h4 class="mb-0 text-white">{{data1?._closedCalls}}</h4>
                                 <span class="text-white">Total Resolved</span>
                             </div>
                             <div class="align-self-center w-icon">
@@ -73,14 +74,15 @@
             </div>
         </div>
      </div>
+
     <div class="row mt-3">
-      <div class="col-12 col-lg-6 col-xl-3">
+      <div class="col-12 col-lg-6 col-xl-4">
         <div class="card gradient-scooter">
          <div class="card-body">
             <div class="media align-items-center">
               <div class="w-icon"><i class="fa fa-comments-o text-white"></i></div>
               <div class="media-body ml-3 border-left-xs border-white-2">
-                <h4 class="mb-0 ml-3 text-white">1</h4>
+                <h4 class="mb-0 ml-3 text-white">{{data1?._contract}}</h4>
                 <p class="mb-0 ml-3 extra-small-font text-white">Contracts</p>
               </div>
             </div>
@@ -88,13 +90,13 @@
         </div>
        </div>
   
-       <div class="col-12 col-lg-6 col-xl-3">
+       <div class="col-12 col-lg-6 col-xl-4">
         <div class="card gradient-bloody">
          <div class="card-body">
             <div class="media align-items-center">
               <div class="w-icon"><i class="fa fa-question-circle-o text-white"></i></div>
               <div class="media-body ml-3 border-left-xs border-white-2">
-                <h4 class="mb-0 ml-3 text-white">87,254</h4>
+                <h4 class="mb-0 ml-3 text-white">{{data1?._billingRevenue | number:'.2'}}</h4>
                 <p class="mb-0 ml-3 extra-small-font text-white">Billing Revenue</p>
               </div>
             </div>
@@ -102,13 +104,13 @@
         </div>
        </div>
   
-       <div class="col-12 col-lg-6 col-xl-3">
+       <div class="col-12 col-lg-6 col-xl-4">
         <div class="card gradient-quepal">
          <div class="card-body">
             <div class="media align-items-center">
               <div class="w-icon"><i class="fa fa-bar-chart text-white"></i></div>
               <div class="media-body ml-3 border-left-xs border-white-2">
-                <h4 class="mb-0 ml-3 text-white">39,856</h4>
+                <h4 class="mb-0 ml-3 text-white">{{data1?._costService | number:'.2'}}</h4>
                 <p class="mb-0 ml-3 extra-small-font text-white">Service Revenue</p>
               </div>
             </div>
@@ -116,7 +118,7 @@
         </div>
        </div>
   
-       <div class="col-12 col-lg-6 col-xl-3">
+       <!-- <div class="col-12 col-lg-6 col-xl-3">
         <div class="card gradient-blooker">
          <div class="card-body">
             <div class="media align-items-center">
@@ -128,7 +130,7 @@
             </div>
           </div>
         </div>
-       </div>
+       </div> -->
   
      </div><!--End Row-->
      
@@ -184,7 +186,7 @@
      <!--End Row-->
   
      <div class="row">
-       <div class="col-12 col-lg-8 col-xl-8">
+       <!-- <div class="col-12 col-lg-8 col-xl-8">
          <div class="card">
           <div class="card-header">Customer Satisfaction 2019
          <div class="card-action">
@@ -193,11 +195,7 @@
             <i class="icon-options"></i>
            </a>
             <div class="dropdown-menu dropdown-menu-right">
-            <!-- <a class="dropdown-item" href="javascript:void();">Action</a>
-            <a class="dropdown-item" href="javascript:void();">Another action</a>
-            <a class="dropdown-item" href="javascript:void();">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:void();">Separated link</a> -->
+           
             </div>
           </div>
             </div>
@@ -235,11 +233,7 @@
             <i class="icon-options"></i>
            </a>
             <div class="dropdown-menu dropdown-menu-right">
-            <!-- <a class="dropdown-item" href="javascript:void();">Action</a>
-            <a class="dropdown-item" href="javascript:void();">Another action</a>
-            <a class="dropdown-item" href="javascript:void();">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:void();">Separated link</a> -->
+      
             </div>
           </div>
             </div>
@@ -275,7 +269,7 @@
           
          </div>
          </div>
-       </div>
+       </div> -->
 
        <div class="table-responsive">
           <app-lead-sales [userId]="0" [accountId]="0" [serviceId]="-1"></app-lead-sales>
