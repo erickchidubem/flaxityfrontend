@@ -1,3 +1,189 @@
-<p>
-  ship-items works!
-</p>
+<div class="container-fluid">
+
+  <div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header text-uppercase">Ship Item To Customers</div>
+      <div class="card-body">
+      <!-- <form [formGroup]="form" (ngSubmit)="Register()">
+        -->
+        <div class="card">
+          
+            <div class="card-body">
+      <form>
+            <div class="row"> 
+                <div class="col-sm-6">
+                    <label>ACCOUNT NAME</label>
+                    <select class="form-control" [(ngModel)]="accountId"
+                    (change)="getAllInoviceInformation($event.target.value)"
+                    [disabled]="!enableMachinesCategory"
+                    name="accountId" >
+                        <option value="0"></option>
+                        <ng-container *ngFor="let c of alllead">
+                            <!-- <ng-container *ngIf="(c.sales_Assign == userId) || (c.service_Assign == userId)"> -->
+                                <option value="{{c.id}}">{{c.name}}</option>
+                            <!-- </ng-container> -->
+                          
+                        </ng-container>
+                       
+              </select>
+           
+                </div>
+                <div class="col-sm-6">
+                  <label>INVOICE NUMBER</label>
+                  <select class="form-control"  [disabled]="!enableMachinesCategory"
+                     (change)="getSalesInfo($event.target.value)" [(ngModel)]="machineId" name="machineId" required >
+                        <option *ngFor="let c of salesInfoList" value="{{c.id}}">{{c?.salesid}}</option>
+                   </select>
+                </div>
+            </div>
+      </form>
+     
+       </div>
+       </div>
+      
+        
+     
+         <div class="table-responsive" *ngIf="showDataTable">
+            <table class="table table-bordered  table-striped">
+              <thead>
+                <tr>
+                  <th colspan="7">
+
+                      <h5 style="text-align: center">{{salesInfo.name}}</h5>
+                      <h4 style="text-align: center">INVOICE No.: {{salesInfo.salesid}}</h4>
+                      <h5 style="text-align: center">COLLECTION STAGE: {{salesInfo.ordercollectstage}}</h5>
+                  
+                  
+                  </th>
+                </tr>
+                <tr>
+                  <th>#</th>
+                  <th>Category</th>
+                  <th>Product</th>
+                  <!-- <th>Unit Price</th> -->
+                  <th>Ask Qty</th>
+                  <!-- <th>Total Amount</th> -->
+                  <th>Qty Released</th>
+                  <th>Qty To Released</th>
+                  <th width="5%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <ng-container *ngFor="let c of onLineList;let i=index">
+                  <tr>
+                      <td>{{i+1}}.</td>
+                      <td>{{c.category}}</td>
+                      <td>{{c.productName}}</td>
+                      <!-- <td> {{utils.getCurrency()}} {{c?.unitPrice | number:'.2'}}</td> -->
+                      <td>{{c.qty}}</td>
+                      <td></td>
+                      <td><input type="text" class="form-control" /></td>
+                      <!-- <td> {{utils.getCurrency()}} {{c?.unitPrice*c.qty | number :'.2'}}</td> -->
+                      <td>
+                          <!-- <button (click)="deleteFromArray(c.productId)" type="button" class="btn btn-sm btn-danger waves-effect waves-light m-1"> <i class="fa fa-trash-o"></i> </button> -->
+                      </td>
+                  </tr>
+          </ng-container>
+      
+                    <!-- <ng-container *ngFor="let c of onArrayList;let i=index">
+                          <tr>
+                              <td>{{countOnline+i+1}}.</td>
+                              <td>{{c.category}}</td>
+                              <td>{{c.productName}}</td>
+                              <td> {{utils.getCurrency()}} {{c?.unitPrice | number:'.2'}}</td>
+                              <td>{{c.qty}}</td>
+                              <td> {{utils.getCurrency()}} {{c?.unitPrice*c.qty | number :'.2'}}</td>
+                              <td>
+                                  <button (click)="deleteFromArray(c.productId)" type="button" class="btn btn-sm btn-danger waves-effect waves-light m-1"> <i class="fa fa-trash-o"></i> </button>
+                              </td>
+                          </tr>
+                  </ng-container> -->
+                    <!-- <tr>
+                        <td colspan="5" style="text-align:right">Total Amount</td>
+                        
+                        <td> {{utils.getCurrency()}} {{FinalTotalAmount | number :'.2'}}</td>
+                        <td></td>
+                      </tr>
+  
+                      <tr>
+                        <td colspan="5" style="text-align:right">Discount</td>
+                        
+                        <td>
+                          <input class="form-control" type="text" [(ngModel)]="discount"
+                          
+                          (keypress)="utils.numberOnly($event)" [required]>
+                             
+                        </td>
+                        <td></td>
+                      </tr>
+  
+                      <tr>
+                        <td colspan="5" style="text-align:right">V.A.T </td>
+                        
+                        <td>
+                          
+                          <select class="form-control" (change)="addVat($event.target.value)" [(ngModel)]="vat">
+                            <option value="0">NO VAT</option>
+                            <option value="0.05">ADD VAT</option>
+                          </select>
+                             
+                        </td>
+                        <td></td>
+                      </tr>
+  
+                      <tr *ngIf="vat ==0.05">
+                          <td colspan="5" style="text-align:right">V.A.T TYPE </td>
+                          
+                          <td>
+                            
+                            <select class="form-control" (change)="modifyTotal($event.target.value)">
+                              <option value="0">ADD EXTRA</option>
+                              <option value="1">FIT-IN AMOUNT</option>
+                             
+                            </select>
+                               
+                          </td>
+                          <td></td>
+                        </tr> -->
+  
+                      <!-- <tr>
+                          <td colspan="5" style="text-align:right">Discount</td>
+                          
+                          <td> {{utils.getCurrency()}} {{FinalTotalAmount | number :'.2'}}</td>
+                          <td></td>
+                        </tr> -->
+  
+              </tbody>
+           </table>
+        </div>
+  
+        <div class="row">
+            <div class="col-md-6">
+              &nbsp;
+            </div>
+            <div class="col-md-6">
+                &nbsp;
+              </div>           
+            </div>
+          </div>
+       
+      <div class="row">
+        <div class="col-md-10">
+          &nbsp;
+        </div>
+        <div class="col-md-2">
+            <button (click)="SubmitSales()" class="btn btn-outline-primary btn-lg waves-effect waves-light m-1">
+                Save
+              </button>
+            
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      </div>
+      </div>
+  </div>
+  </div>
+      

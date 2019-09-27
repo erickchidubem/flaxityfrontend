@@ -109,15 +109,18 @@
                             </td>
                           </tr>
 
+                        <ng-container *ngIf="salesInfo.order_collect > 0">
+
                           <tr>
                               <td colspan="5"><b><p style="text-align:right">Amount Paid :</p></b> </td>
                               <td>{{utils.getCurrency()}}{{salesInfo.AmountCurrentlyPaid  | number:'.2'}}</td>
                           </tr>
 
-                          <tr>
+                          <tr >
                               <td colspan="5"><b><p style="text-align:right;color:red">Amount Owing :</p></b> </td>
                               <td style="color: red">{{utils.getCurrency()}}{{finalTotal - salesInfo.AmountCurrentlyPaid  | number:'.2'}}</td>
                           </tr>
+                        </ng-container>
                       
                       </tbody>
                     </table>
