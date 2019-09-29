@@ -13,7 +13,7 @@ const routes: Routes = [
     {path: 'edit-user/:id', component : CreateUserComponent},
     {path: 'change-password', component : ChangePasswordComponent},
     {path : 'user-tagert', component : UserTargetsComponent},
-    {path : 'user-profile/:id', component : UserInfoComponent}
+    {path : 'user-profile/:id/:name', component : UserInfoComponent}
 ]; 
 
 @Pipe({ name: 'myPipe'})

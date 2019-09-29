@@ -24,7 +24,7 @@
 			    <div class="list-group">
               <ng-container *ngFor="let c of users; let i = index,lst as isLast">
       
-                    <a routerLink="/access/users/user-info/{{c.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <a routerLink="/access/users/user-profile/{{c.id}}/{{c.lastName}} {{c.firstName}}" class="list-group-item list-group-item-action flex-column align-items-start">
                       <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{c.lastName}} {{c.firstName}}</h5>
                         <small class="text-muted">

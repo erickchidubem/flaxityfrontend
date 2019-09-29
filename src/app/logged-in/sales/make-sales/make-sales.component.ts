@@ -220,6 +220,31 @@ console.log(formData);
   }
 
 
+  deleteFromOnlineArray(pid,id){
+
+
+  
+      this.utils.StartSpinner();
+        this.context.getWithToken(id,'sales/deletesalesitem/').
+        subscribe( data => {
+          let d = <any>data;
+
+          
+                  let index =this.onLineList.find(x=>x.productId == pid);
+                  console.log(index.finalTotal);
+                  console.log(index)
+                  console.log(this.onLineList)
+                  this.onLineList = this.utils.removeArray(this.onLineList,index);
+                  console.log(this.onLineList)
+                  this.FinalTotalAmount = this.FinalTotalAmount-index.finalTotal;
+                  this.startCounter = this.startCounter - 1; 
+                  console.log(d)
+                  this.toaster.Success(d.message)
+                  this.utils.StopSpinner();
+        }); 
+  }
+ 
+
   deleteFromArray(id){
     let index =this.onArrayList.find(x=>x.productId == id);
     console.log(index.finalTotal);
@@ -302,15 +327,22 @@ console.log(formData);
 
 
   addSalesFromDB(d :any){
-    for(let i=0; i < d.length; i++){
-      console.log(d);
-      this.onLineList.push({
-        id : d[i].id,category : d[i].category,productId : d[i].products_id, 
-        productName : d[i].productName,
-        unitPrice:d[i].amount,qty : d[i].qty,finalTotal : d[i].total
-      })
-      this.FinalTotalAmount = parseFloat(this.FinalTotalAmount) + parseFloat(d[i].total); 
+    console.log(d)
+    if(d != null){
+
+      for(let i=0; i < d.length; i++){
+        console.log(d);
+        this.onLineList.push({
+          id : d[i].id,category : d[i].category,productId : d[i].products_id, 
+          productName : d[i].productName,
+          unitPrice:d[i].amount,qty : d[i].qty,finalTotal : d[i].total
+        })
+        this.FinalTotalAmount = parseFloat(this.FinalTotalAmount) + parseFloat(d[i].total); 
+      }
+
+
     }
+   
     this.countOnline = d.length;
  }
 

@@ -22,6 +22,7 @@ import { LeadFunnelChartComponent } from './shared-components/charts/lead-funnel
 import { SalesTrendLineChartComponent } from './shared-components/charts/sales-trend-line-chart/sales-trend-line-chart.component';
 import { SalesQuickFlashComponent } from './shared-components/charts/sales-quick-flash/sales-quick-flash.component';
 import { MonthlySalesAgainstTargetComponent } from './shared-components/charts/monthly-sales-against-target/monthly-sales-against-target.component';
+import { SalesDashboardComponent } from '../logged-in/sales-dashboard/sales-dashboard.component';
 
 
 
@@ -50,7 +51,9 @@ import { MonthlySalesAgainstTargetComponent } from './shared-components/charts/m
         LeadFunnelChartComponent,
         SalesTrendLineChartComponent,
         SalesQuickFlashComponent,
+
         MonthlySalesAgainstTargetComponent,
+        SalesDashboardComponent,
         CommonModule,
         NgxUiLoaderModule,
         ReactiveFormsModule,FormsModule,
@@ -66,6 +69,7 @@ import { MonthlySalesAgainstTargetComponent } from './shared-components/charts/m
        LeadSalesComponentComponent, ServiceCallsComponent,
         AllContractInfoComponent, LeadFunnelChartComponent, 
         SalesTrendLineChartComponent, SalesQuickFlashComponent, MonthlySalesAgainstTargetComponent, 
+        SalesDashboardComponent,
   ],
   
   })

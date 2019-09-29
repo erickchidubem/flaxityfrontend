@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ContextService } from 'src/app/shared/shared-service/context.service';
 import { Utils } from 'src/app/shared/shared-service/utils';
 import { ToasterService } from 'src/app/shared/shared-service/toaster.service';
@@ -52,6 +52,11 @@ export class ShipItemsComponent implements OnInit {
         this.generateForm();
         this.getAllSalesInformation();
         let id = this.route.params['value'].id; 
+
+        this.lb1 = "DRIVER/CONTACT NAME";
+        this.lb2 = "WAYBILL/DRIVER NUMBER";
+        this.lb3 = "MOTOR PARK ADDRESS / VEHICLE NO";
+        this.lb4 = "SENDER NAME";
   }
 
   SalesId :number = 0;
@@ -179,17 +184,61 @@ console.log(formData);
     );
 }
 
+// generateForm(contractId){
+
+//   this.form = this.fb.group({
+//     id : 0,
+//     contractId : [contractId],
+//     fromDate : ['', [Validators.required]],
+//     toDate : ['', [Validators.required]],
+//     billingDetails : this.fb.array([])
+//   });
+// }
   generateForm(){
     this.form = this.fb.group({
-      id : ['0'],
-      category : ['',Validators.required],
-      product : ['', Validators.required],
-      unitPrice : ['',Validators.required],
-      qty : ['',Validators.required],
+      sales_id : [], 
+      delivery_status : ["IN TRANSIT"], 
+      delivery_option : ["", [Validators.required]], 
+      delivery_address : ["", [Validators.required]],
+      store : ["1"],
+      column1 : [''],
+      column2 : [''],
+      column3 : [''],
+      column4 : [''],
+      deliveryDetails : this.fb.array([])
     });
   }
-
   get f(){return this.form.controls;}
+  get h(){ 
+    var arrayControl = this.form.get('deliveryDetails') as FormArray;
+    return arrayControl.controls;
+  }
+
+  populateFormArray(item){
+    console.log(item)
+    const creds = this.form.controls.deliveryDetails as FormArray;
+
+    if(item != null){
+     // this.loadForm = true;
+      let yourStoreQty = item.store1;
+      let maxQtyValue = 0;
+      let yetToDeliver = item.qty - item.soldOutQty;
+      if(yourStoreQty > yetToDeliver){
+        maxQtyValue = yetToDeliver
+      }else if(yetToDeliver > yourStoreQty){
+        maxQtyValue = yourStoreQty
+      }
+        creds.push(this.fb.group({
+          product_id : [item.products_id], soldOutQty : [item.soldOutQty],
+          availableQty : [yourStoreQty], askQty : [item.qty],
+          qty : ["0.00",[Validators.required,Validators.max(maxQtyValue)]],
+          yetToDeliver : yetToDeliver
+       
+        }));
+
+    }
+  }
+
 
   enableMachinesCategory : boolean = true;
  
@@ -215,24 +264,10 @@ console.log(formData);
   }
 
 
-  deleteFromArray(id){
-    // let index =this.onArrayList.find(x=>x.productId == id);
-    // console.log(index.finalTotal);
-    // console.log(index)
-    // console.log(this.onArrayList)
-    // this.onArrayList = this.utils.removeArray(this.onArrayList,index);
-    // console.log(this.onArrayList)
-    
-    // this.FinalTotalAmount = this.FinalTotalAmount-index.finalTotal;
-    // this.startCounter = this.startCounter - 1; 
-  }
-
-  getSellingPrice(value){
-    // let product = value.split('|');
-    // let my_price = product[2];
-    // this.form.patchValue({unitPrice : my_price})
-
-  }
+lb1 : string;
+lb2 : string;
+lb3 : string;
+lb4 : string;
 
   getsubCategory(thisvalue){
     let id = thisvalue.split('|')[0];
@@ -322,9 +357,17 @@ console.log(formData);
       this.onLineList.push({
         id : d[i].id,category : d[i].category,productId : d[i].products_id, 
         productName : d[i].productName,
-        unitPrice:d[i].amount,qty : d[i].qty,finalTotal : d[i].total
+        unitPrice:d[i].amount,qty : d[i].qty,finalTotal : d[i].total,
+        soldOutQty : d[i].soldOutQty
       })
+
+      this.populateFormArray(d[i]);
       this.FinalTotalAmount = parseFloat(this.FinalTotalAmount) + parseFloat(d[i].total); 
+    }
+   
+    console.log(this.onLineList)
+    for(var i = 0; i < this.onLineList.length; i++){
+      this.populateFormArray(this.onLineList[i]);
     }
     this.countOnline = d.length;
  }
@@ -333,6 +376,13 @@ console.log(formData);
 
   getSalesInfo(id){
     console.log(id)
+    this.form.reset();
+    this.generateForm();
+    this.fb.array([])
+    let creds = this.form.controls.deliveryDetails as FormArray;
+    creds.reset();
+    this.onLineList = [];
+    console.log(creds)
     this.context.getWithToken(id,'sales/getsinglesales/').
     subscribe( data => {
       this.showDataTable = true;
@@ -344,10 +394,54 @@ console.log(formData);
       this.machineId = d.data.salesInfo.machine_id;
       this.discount = d.data.salesInfo.discount;
       this.vat = d.data.salesInfo.vat;
-
+      this.form.patchValue({sales_id : id})
       this.addSalesFromDB(d.data.salesdetails); 
       console.log(d)
     });
+  }
+
+  submit(){
+    this.submitted = true;
+    let formData = JSON.stringify(this.form.value);
+    console.log(formData)
+    if(this.form.invalid){
+      this.utils.invalidFormMessage();
+      return;
+    }
+
+    this.context.postWithToken(formData, 'product/createshipitemlog').subscribe(
+      data=>{
+        this.utils.StopSpinner();
+        let d = <any>data;
+        console.log(d);
+        if(d.error == false){
+          this.toaster.Success(d.message);
+          this.router.navigate(['/access/sales/invoice/'+d.sales_id])
+      
+          
+        }else{
+          this.toaster.Error(d.message);
+        }
+        console.log(data);
+      }, err => {
+        this.utils.StopSpinner();
+       
+        if(err.status == 422){
+          this.toaster.Error(err.error.message);
+        }
+        console.log('Error Message : '+err.message);
+        console.log('Error : '+err.status);
+        console.log( err.error);   
+
+        }
+    );
+  //  let formData = JSON.stringify(this.form.value);
+  //  console.log(formData)
+
+
+
+   // this.processBIllingInformation(this.formData)
+    
   }
 
   addProduct(){

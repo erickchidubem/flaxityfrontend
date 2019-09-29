@@ -10,7 +10,7 @@
         <div class="card">
           
             <div class="card-body">
-      <form>
+    
             <div class="row"> 
                 <div class="col-sm-6">
                     <label>ACCOUNT NAME</label>
@@ -37,18 +37,17 @@
                    </select>
                 </div>
             </div>
-      </form>
+     
      
        </div>
        </div>
       
-        
-     
+       <form [formGroup]="form" (ngSubmit)="submit()">
          <div class="table-responsive" *ngIf="showDataTable">
             <table class="table table-bordered  table-striped">
               <thead>
                 <tr>
-                  <th colspan="7">
+                  <th colspan="8">
 
                       <h5 style="text-align: center">{{salesInfo.name}}</h5>
                       <h4 style="text-align: center">INVOICE No.: {{salesInfo.salesid}}</h4>
@@ -56,7 +55,7 @@
                   
                   
                   </th>
-                </tr>
+                </tr> 
                 <tr>
                   <th>#</th>
                   <th>Category</th>
@@ -65,121 +64,109 @@
                   <th>Ask Qty</th>
                   <!-- <th>Total Amount</th> -->
                   <th>Qty Released</th>
+                  <th>Available Qty</th>
                   <th>Qty To Released</th>
                   <th width="5%"></th>
                 </tr>
               </thead>
               <tbody>
                 
-                <ng-container *ngFor="let c of onLineList;let i=index">
-                  <tr>
-                      <td>{{i+1}}.</td>
-                      <td>{{c.category}}</td>
-                      <td>{{c.productName}}</td>
-                      <!-- <td> {{utils.getCurrency()}} {{c?.unitPrice | number:'.2'}}</td> -->
-                      <td>{{c.qty}}</td>
-                      <td></td>
-                      <td><input type="text" class="form-control" /></td>
-                      <!-- <td> {{utils.getCurrency()}} {{c?.unitPrice*c.qty | number :'.2'}}</td> -->
-                      <td>
-                          <!-- <button (click)="deleteFromArray(c.productId)" type="button" class="btn btn-sm btn-danger waves-effect waves-light m-1"> <i class="fa fa-trash-o"></i> </button> -->
-                      </td>
-                  </tr>
-          </ng-container>
-      
-                    <!-- <ng-container *ngFor="let c of onArrayList;let i=index">
-                          <tr>
-                              <td>{{countOnline+i+1}}.</td>
-                              <td>{{c.category}}</td>
-                              <td>{{c.productName}}</td>
-                              <td> {{utils.getCurrency()}} {{c?.unitPrice | number:'.2'}}</td>
-                              <td>{{c.qty}}</td>
-                              <td> {{utils.getCurrency()}} {{c?.unitPrice*c.qty | number :'.2'}}</td>
-                              <td>
-                                  <button (click)="deleteFromArray(c.productId)" type="button" class="btn btn-sm btn-danger waves-effect waves-light m-1"> <i class="fa fa-trash-o"></i> </button>
-                              </td>
+                <ng-container formArrayName="deliveryDetails" *ngFor="let c of onLineList;let i=index">
+                     <ng-container [formGroupName]="i"> 
+                       <ng-container *ngIf="i>-1">
+                              <tr>
+                                  <td>{{i+1}}.</td>
+                                  <td>{{c.category}}</td>
+                                  <td>{{c.productName}}</td>
+                                  <!-- <td> {{utils.getCurrency()}} {{c?.unitPrice | number:'.2'}}</td> -->
+                                  <td>{{c.qty}}</td>
+                                  <td>{{c.soldOutQty}}</td>
+                                  <td><input type="text" disabled class="form-control" formControlName="availableQty"/></td>
+                                  <td><input type="text" class="form-control" formControlName="qty" 
+                                    [ngClass]="{ 'is-invalid': submitted && h[i].get('qty').errors }" 
+                              (keypress)="utils.numberOnly($event)" />
+                              <span *ngIf="submitted && h[i].get('qty').errors" class="invalid-feedback">
+                                  <span *ngIf="h[i].get('qty').errors.required">this field is required</span>    
+                                  <span *ngIf="h[i].get('qty').errors.max">Please check the quantity you are trying to give out</span>    
+                              </span>
+                            </td>
+                                  <!-- <td> {{utils.getCurrency()}} {{c?.unitPrice*c.qty | number :'.2'}}</td> -->
+                                  <td>
+                                      <!-- <button (click)="deleteFromArray(c.productId)" type="button" class="btn btn-sm btn-danger waves-effect waves-light m-1"> <i class="fa fa-trash-o"></i> </button> -->
+                                  </td>
                           </tr>
-                  </ng-container> -->
-                    <!-- <tr>
-                        <td colspan="5" style="text-align:right">Total Amount</td>
-                        
-                        <td> {{utils.getCurrency()}} {{FinalTotalAmount | number :'.2'}}</td>
-                        <td></td>
-                      </tr>
-  
-                      <tr>
-                        <td colspan="5" style="text-align:right">Discount</td>
-                        
-                        <td>
-                          <input class="form-control" type="text" [(ngModel)]="discount"
-                          
-                          (keypress)="utils.numberOnly($event)" [required]>
-                             
-                        </td>
-                        <td></td>
-                      </tr>
-  
-                      <tr>
-                        <td colspan="5" style="text-align:right">V.A.T </td>
-                        
-                        <td>
-                          
-                          <select class="form-control" (change)="addVat($event.target.value)" [(ngModel)]="vat">
-                            <option value="0">NO VAT</option>
-                            <option value="0.05">ADD VAT</option>
-                          </select>
-                             
-                        </td>
-                        <td></td>
-                      </tr>
-  
-                      <tr *ngIf="vat ==0.05">
-                          <td colspan="5" style="text-align:right">V.A.T TYPE </td>
-                          
-                          <td>
-                            
-                            <select class="form-control" (change)="modifyTotal($event.target.value)">
-                              <option value="0">ADD EXTRA</option>
-                              <option value="1">FIT-IN AMOUNT</option>
-                             
+                       </ng-container>
+                     
+                     </ng-container> 
+                
+          </ng-container>
+                    <tr>
+                          <td colspan="3"> DELIVERY ADDRESS  </td>
+                          <td colspan="4"> <textarea class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.delivery_address.errors }" 
+                            formControlName="delivery_address"></textarea> </td>
+                          <td></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3"> DELIVERY OPTIONS  </td>
+                        <td colspan="4"> 
+                            <select class="form-control" [ngClass]="{ 'is-invalid': submitted && f.delivery_option.errors }" 
+                            formControlName="delivery_option">
+                              <option value="">--SELECT OPTION--</option>
+                              <option value ="IN HOUSE PICK-UP">IN HOUSE PICK-UP</option>
+                              <option value ="DELIVERY INTRA-STATE (BY ROAD)">DELIVERY INTRA-STATE (BY ROAD)</option>
+                              <option value ="DELIVERY INTER-STATE (BY ROAD)">DELIVERY INTER-STATE (BY ROAD)</option>
+                              <option value ="DELIVERY INTER-STATE (BY AIR)">DELIVERY INTER-STATE (BY AIR)</option>
+                              <option value ="DELIVERY INTERNATIONAL (BY ROAD)">DELIVERY INTERNATIONAL (BY ROAD)</option>
+                              <option value ="DELIVERY INTERNATIONAL (BY AIR)">DELIVERY INTERNATIONAL (BY AIR)</option>
                             </select>
-                               
-                          </td>
+                        </td>
+                        <td></td>
+                  </tr>
+
+                  <ng-container>
+                      <tr>
+                          <td colspan="3"> {{lb1}}  </td>
+                          <td colspan="4"> <input type="text" class="form-control" formControlName="column1"/> </td>
                           <td></td>
-                        </tr> -->
-  
-                      <!-- <tr>
-                          <td colspan="5" style="text-align:right">Discount</td>
-                          
-                          <td> {{utils.getCurrency()}} {{FinalTotalAmount | number :'.2'}}</td>
-                          <td></td>
-                        </tr> -->
-  
+                    </tr>
+                    <tr>
+                        <td colspan="3"> {{lb2}}  </td>
+                        <td colspan="4"> <input type="text" class="form-control" formControlName="column2"/> </td>
+                        <td></td>
+                  </tr>
+                  <tr>
+                      <td colspan="3"> {{lb3}}  </td>
+                      <td colspan="4"> <input type="text" class="form-control" formControlName="column3"/> </td>
+                      <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3"> {{lb4}}  </td>
+                    <td colspan="4"> <input type="text" class="form-control" formControlName="column4"/> </td>
+                    <td></td>
+              </tr>
+                  </ng-container>
               </tbody>
            </table>
         </div>
   
-        <div class="row">
-            <div class="col-md-6">
-              &nbsp;
-            </div>
-            <div class="col-md-6">
-                &nbsp;
-              </div>           
-            </div>
-          </div>
+                     <br/><br/><hr/>
+        
        
       <div class="row">
         <div class="col-md-10">
           &nbsp;
         </div>
         <div class="col-md-2">
-            <button (click)="SubmitSales()" class="btn btn-outline-primary btn-lg waves-effect waves-light m-1">
-                Save
+            <button class="btn btn-outline-primary btn-lg waves-effect waves-light m-1">
+                Ship Items
               </button>
             
         </div>
       </div>
+
+    </form>
       <div class="clearfix"></div>
       
       </div>
