@@ -115,7 +115,7 @@
               </ng-container>
                       <ng-container cdkColumnDef="name">
                           <th cdk-header-cell *cdkHeaderCellDef>Account Name</th>
-                          <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/lead/view-lead/{{row?.id}}">{{row?.name}}</a></td>
+                          <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/lead/view-lead/{{row?.account_id}}">{{row?.name}}</a></td>
                       </ng-container>
                   
                       <ng-container cdkColumnDef="createdDate">
@@ -125,7 +125,7 @@
 
                       <ng-container cdkColumnDef="proposedDate">
                           <th cdk-header-cell *cdkHeaderCellDef>Date Propose</th>
-                          <td cdk-cell *cdkCellDef="let row">{{row?.createdDate | date:'dd-MMMM-yyyy hh:mm a'}}</td>
+                          <td cdk-cell *cdkCellDef="let row">{{row?.proposedRevisitDate | date:'dd-MMMM-yyyy hh:mm a'}}</td>
                       </ng-container> 
                  
                       

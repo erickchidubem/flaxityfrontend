@@ -73,7 +73,7 @@
                     <th cdk-header-cell *cdkHeaderCellDef>Name</th>
                     <td cdk-cell *cdkCellDef="let row"><a routerLink="/access/lead/view-lead/{{row.id}}">{{row.name}}</a></td>
                 </ng-container>
-            
+              
                 <ng-container cdkColumnDef="createdDate">
                     <th cdk-header-cell *cdkHeaderCellDef>Date Created</th>
                     <td cdk-cell *cdkCellDef="let row">{{row.createdDate | date:'dd-MMMM-yyyy'}}</td>

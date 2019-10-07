@@ -46,7 +46,7 @@ export class ViewAllLeadsComponent implements OnInit {
       this.context.getWithToken('','account/viewallleads').
       subscribe( data => {
         let d = <any>data;
-        this.alllead = d.data;
+        this.alllead = d.data; 
         if(d.data == null){
           this.alllead = {};
         }

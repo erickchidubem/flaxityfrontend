@@ -186,7 +186,7 @@
                       <td>
                         
                         <select class="form-control" (change)="addVat($event.target.value)" [(ngModel)]="vat">
-                          <option value="0">NO VAT</option>
+                          <option value="0" selected>NO VAT</option>
                           <option value="0.05">ADD VAT</option>
                         </select>
                            
@@ -200,7 +200,7 @@
                         <td>
                           
                           <select class="form-control" (change)="modifyTotal($event.target.value)">
-                            <option value="0">ADD EXTRA</option>
+                            <option value="0" selected>ADD EXTRA</option>
                             <option value="1">FIT-IN AMOUNT</option>
                            
                           </select>
