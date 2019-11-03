@@ -129,7 +129,7 @@ sortDirection$ = new BehaviorSubject<string>('asc');
     this.storyInformation += "<b> Prepared By : </b>"+d.admin_name+"";
     this.storyInformation += "<p><b> Initial Sales Stage : </b>"+d.initial_salesstage+" - "+d.initialSalesStage+"% <b>Created Date : </b>"+d.createdDate+"</p>";
     this.storyInformation += "<p><b> Description : </b><br/>"+d.firstDescription+"</p>";
-    if(d.proposedRevisitDate=='0000-00-00 00:00:00'){   
+    if(d.proposedRevisitDate !='0000-00-00 00:00:00'){   
         this.storyInformation += "<p><b> Proposed Revisit Date : </b> "+d.proposedRevisitDate+"</p>";
     }
   

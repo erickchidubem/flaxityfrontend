@@ -124,7 +124,7 @@
 
                           <ng-container *ngIf="row.proposedRevisitDate!='0000-00-00 00:00:00'">
                               <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-primary m-1" *ngIf="row.revisit == 0 && row.requiredTimeToUpdate < 400">
-                                Pending Revisit in {{c.whenToRevisit}} hr(s)
+                                Pending Revisit in {{row.whenToRevisit}} hr(s)
                               </a>
                               <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-danger m-1" *ngIf="row.revisit == 0 && row.requiredTimeToUpdate > 400">Did not Revisit </a>
                               <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-success m-1" *ngIf="row.revisit == 1">Visited</a>
@@ -151,12 +151,12 @@
                       <ng-container cdkColumnDef="proposedDate">
                           <th cdk-header-cell *cdkHeaderCellDef>Date Propose</th>
                           <td cdk-cell *cdkCellDef="let row">
-                          <ng-container *ngIf="row?.proposedDate">
-                              <ng-container *ngIf="c.proposedRevisitDate!='0000-00-00 00:00:00'">
-                                  {{c.proposedRevisitDate | date:'EEEE, d, MMMM, yyyy hh:mm a'}}
+                          <!-- <ng-container *ngIf="row.proposedRevisitDate"> -->
+                              <ng-container *ngIf="row.proposedRevisitDate!='0000-00-00 00:00:00'">
+                                  {{row.proposedRevisitDate | date:'EEEE, d, MMMM, yyyy hh:mm a'}}
                               </ng-container>
                               
-                          </ng-container> 
+                          <!-- </ng-container>  -->
                           </td>
                       </ng-container> 
                  
