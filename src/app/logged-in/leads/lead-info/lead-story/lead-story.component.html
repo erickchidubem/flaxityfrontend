@@ -38,15 +38,30 @@
              <ng-container *ngFor="let c of leadStoryInfo; let i = index,lst as isLast">
                <tr>
                  <th scope="row">{{i+1}}.</th>
-                 <td>
-                    <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-primary m-1" *ngIf="c.revisit == 0 && c.requiredTimeToUpdate < 72">
-                      Pending Revisit in {{c.whenToRevisit}} hr(s)
-                    </a>
-                    <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-danger m-1" *ngIf="c.revisit == 0 && c.requiredTimeToUpdate > 72">Did not Revisit </a>
-                    <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-success m-1" *ngIf="c.revisit == 1">Visited</a>
+                 <td>  
+                   
+                  <ng-container *ngIf="c.proposedRevisitDate!='0000-00-00 00:00:00'">
+                      <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-primary m-1" *ngIf="c.revisit == 0 && c.requiredTimeToUpdate < 400">
+                        Pending Revisit in {{c.whenToRevisit}} hr(s)
+                      </a>
+                      <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-danger m-1" *ngIf="c.revisit == 0 && c.requiredTimeToUpdate > 400">Did not Revisit </a>
+                      <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-success m-1" *ngIf="c.revisit == 1">Visited</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="c.proposedRevisitDate=='0000-00-00 00:00:00'">
+                      <a routerLink="/access/lead/view-lead/{{c.account_id}}" data-toggle="modal" (click)="generateStoryInfo(c)" data-target="#leadstory" class="badge badge-secondary m-1" >
+                       No need to Revist
+                      </a>
+                  </ng-container>
+                   
                   </td>
                  <td>{{c.createdDate | date:'EEEE, d, MMMM, yyyy'}}</td>
-                 <td>{{c.proposedRevisitDate | date:'EEEE, d, MMMM, yyyy'}}</td>
+                 <td>
+                  <ng-container *ngIf="c.proposedRevisitDate!='0000-00-00 00:00:00'">
+                      {{c.proposedRevisitDate | date:'EEEE, d, MMMM, yyyy'}}
+                  </ng-container>
+                 
+                  </td>
                  <td>
                     <span class="text-white btn btn-rounded btn-sm {{c.initial_stagecolor}}">
                         {{c.initial_salesstage}} 
@@ -106,12 +121,22 @@
                       <th cdk-header-cell *cdkHeaderCellDef></th>
                       <td cdk-cell *cdkCellDef="let row">
 
-                            <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-primary m-1" *ngIf="row.revisit == 0 && row.requiredTimeToUpdate < 72">
-                              Pending Revisit in {{row.whenToRevisit}} hr(s)
-                            </a>
-                            <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-danger m-1" *ngIf="row.revisit == 0 && row.requiredTimeToUpdate > 72">Did not Revisit </a>
-                            <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-success m-1" *ngIf="row.revisit == 1">Visited</a>
-                </td>
+
+                          <ng-container *ngIf="row.proposedRevisitDate!='0000-00-00 00:00:00'">
+                              <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-primary m-1" *ngIf="row.revisit == 0 && row.requiredTimeToUpdate < 400">
+                                Pending Revisit in {{c.whenToRevisit}} hr(s)
+                              </a>
+                              <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-danger m-1" *ngIf="row.revisit == 0 && row.requiredTimeToUpdate > 400">Did not Revisit </a>
+                              <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-success m-1" *ngIf="row.revisit == 1">Visited</a>
+                          </ng-container>
+        
+                          <ng-container *ngIf="row.proposedRevisitDate=='0000-00-00 00:00:00'">
+                              <a routerLink="/access/lead/all-leads-story" data-toggle="modal" (click)="generateStoryInfo(row)" data-target="#leadstory" class="badge badge-secondary m-1" >
+                               No need to Revist
+                              </a>
+                          </ng-container>
+
+                   </td>
               </ng-container>
                       <ng-container cdkColumnDef="name">
                           <th cdk-header-cell *cdkHeaderCellDef>Account Name</th>
@@ -125,7 +150,14 @@
 
                       <ng-container cdkColumnDef="proposedDate">
                           <th cdk-header-cell *cdkHeaderCellDef>Date Propose</th>
-                          <td cdk-cell *cdkCellDef="let row">{{row?.proposedRevisitDate | date:'dd-MMMM-yyyy hh:mm a'}}</td>
+                          <td cdk-cell *cdkCellDef="let row">
+                          <ng-container *ngIf="row?.proposedDate">
+                              <ng-container *ngIf="c.proposedRevisitDate!='0000-00-00 00:00:00'">
+                                  {{c.proposedRevisitDate | date:'EEEE, d, MMMM, yyyy hh:mm a'}}
+                              </ng-container>
+                              
+                          </ng-container> 
+                          </td>
                       </ng-container> 
                  
                       

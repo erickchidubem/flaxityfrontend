@@ -106,7 +106,7 @@ sortDirection$ = new BehaviorSubject<string>('asc');
       id : [0],
       account_id : [acc_id],
       salesstage : ['',Validators.required],
-      proposedRevisitDate : ['',Validators.required],
+      proposedRevisitDate : [''],
       firstDescription : ['',Validators.required]
     });
   }
@@ -129,8 +129,13 @@ sortDirection$ = new BehaviorSubject<string>('asc');
     this.storyInformation += "<b> Prepared By : </b>"+d.admin_name+"";
     this.storyInformation += "<p><b> Initial Sales Stage : </b>"+d.initial_salesstage+" - "+d.initialSalesStage+"% <b>Created Date : </b>"+d.createdDate+"</p>";
     this.storyInformation += "<p><b> Description : </b><br/>"+d.firstDescription+"</p>";
-    this.storyInformation += "<p><b> Proposed Revisit Date : </b> "+d.proposedRevisitDate+"</p>";
+    if(d.proposedRevisitDate=='0000-00-00 00:00:00'){   
+        this.storyInformation += "<p><b> Proposed Revisit Date : </b> "+d.proposedRevisitDate+"</p>";
+    }
   
+    if(d.proposedRevisitDate=='0000-00-00 00:00:00'){
+      this.formShow = false;
+    }
     if(d.revisit == 1){
       
       this.formShow = false;     
@@ -155,7 +160,7 @@ sortDirection$ = new BehaviorSubject<string>('asc');
     } 
 
   }
-
+ 
 
 
   resetForm(){
