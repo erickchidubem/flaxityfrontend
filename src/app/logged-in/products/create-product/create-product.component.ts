@@ -134,7 +134,10 @@ export class CreateProductComponent implements OnInit {
     console.log(id);
      
       this.form.patchValue({product_sub_id : ""})
-    this.productTypeLoad =this.productType2.filter(x=>x.product_type_id == id);
+      if(this.productType2 != null){
+        this.productTypeLoad =this.productType2.filter(x=>x.product_type_id == id);
+      }
+   
   }
 
   GetProductType(){

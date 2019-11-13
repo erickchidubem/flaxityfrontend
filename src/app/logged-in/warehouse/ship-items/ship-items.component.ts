@@ -271,7 +271,10 @@ lb4 : string;
 
   getsubCategory(thisvalue){
     let id = thisvalue.split('|')[0];
-    this.allProductSelect =this.allProduct.filter(x=>x.product_type_id == id);
+    if(this.allProduct!= null){
+       this.allProductSelect =this.allProduct.filter(x=>x.product_type_id == id);
+   
+    }
     this.form.patchValue({unitPrice:'',qty : ''});
   }
 
@@ -279,7 +282,10 @@ lb4 : string;
   getInvoiceInformations(thisvalue){ 
     this.machineId = 0;
     if(thisvalue){
-      this.leadMachine =this.allMachines.filter(x=>x.account_id == thisvalue);
+      if(this.allMachines!= null){
+        this.leadMachine =this.allMachines.filter(x=>x.account_id == thisvalue);
+      }
+      
     }
   }
 

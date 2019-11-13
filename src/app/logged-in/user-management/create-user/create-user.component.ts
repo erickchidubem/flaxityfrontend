@@ -39,7 +39,10 @@ export class CreateUserComponent implements OnInit {
 
   getDesignation(id){
     console.log(id);
-    this.pr_desig =this.designation.filter(x=>x.dptID == id);
+    if(this.designation!= null){
+      this.pr_desig =this.designation.filter(x=>x.dptID == id);
+    }
+    
   }
  
   getDepartments(){

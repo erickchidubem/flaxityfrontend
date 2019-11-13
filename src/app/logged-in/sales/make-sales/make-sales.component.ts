@@ -266,21 +266,27 @@ console.log(formData);
 
   getsubCategory(thisvalue){
     let id = thisvalue.split('|')[0];
-    this.allProductSelect =this.allProduct.filter(x=>x.product_type_id == id);
-    this.form.patchValue({unitPrice:'',qty : ''});
+    if(this.allProduct != null){
+      this.allProductSelect =this.allProduct.filter(x=>x.product_type_id == id);
+      this.form.patchValue({unitPrice:'',qty : ''});
+    }
+   
   }
 
 
   getMachines(thisvalue){ 
     this.machineId = 0;
     if(thisvalue){
-      this.leadMachine =this.allMachines.filter(x=>x.account_id == thisvalue);
+      if(this.allMachines != null){
+        this.leadMachine =this.allMachines.filter(x=>x.account_id == thisvalue);
+      }
+     
     }
   }
 
   alllead : any=[];
-  allMachines : any[];
-  leadMachine : any[];
+  allMachines : any=[];
+  leadMachine : any=[];
   productType : any=[];
   allProduct : any=[];
   allProductSelect : any=[];

@@ -184,7 +184,10 @@ export class AddLeadsComponent implements OnInit {
         {
           this.UsersSales = d.data;
         }else{
-          this.UsersSales = d.data.filter(x=>x.id == this.context.UserProfile().id);
+          if(d.data!= null){
+             this.UsersSales = d.data.filter(x=>x.id == this.context.UserProfile().id);
+          }
+         
         }
         console.log(d)
         this.utils.StopSpinner();
