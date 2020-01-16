@@ -65,7 +65,7 @@
                   <!-- <th>Total Amount</th> -->
                   <th>Qty Released</th>
                   <th>Available Qty</th>
-                  <th>Qty To Released</th>
+                  <th>Give Out</th>
                   <th width="5%"></th>
                 </tr>
               </thead>
@@ -82,7 +82,7 @@
                                   <td>{{c.qty}}</td>
                                   <td>{{c.soldOutQty}}</td>
                                   <td><input type="text" disabled class="form-control" formControlName="availableQty"/></td>
-                                  <td><input type="text" class="form-control" formControlName="qty" 
+                                  <td><input type="text" class="form-control" formControlName="qty" [attr.disabled]="h[i].get('yetToDeliver').value == 0 ? true : null"
                                     [ngClass]="{ 'is-invalid': submitted && h[i].get('qty').errors }" 
                               (keypress)="utils.numberOnly($event)" />
                               <span *ngIf="submitted && h[i].get('qty').errors" class="invalid-feedback">
@@ -93,7 +93,7 @@
                                   <!-- <td> {{utils.getCurrency()}} {{c?.unitPrice*c.qty | number :'.2'}}</td> -->
                                   <td>
                                       <!-- <button (click)="deleteFromArray(c.productId)" type="button" class="btn btn-sm btn-danger waves-effect waves-light m-1"> <i class="fa fa-trash-o"></i> </button> -->
-                                  </td>
+                                  </td> 
                           </tr>
                        </ng-container>
                      
