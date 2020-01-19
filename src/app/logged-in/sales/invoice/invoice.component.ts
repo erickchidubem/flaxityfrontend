@@ -41,7 +41,7 @@ export class InvoiceComponent implements OnInit {
     this.getUserInformation();
     this.generateForm();
   }
-
+ 
 
   public captureScreen()  
   {  
@@ -102,13 +102,16 @@ export class InvoiceComponent implements OnInit {
       }); 
   }
 
+paymentHistory : any=[]
+deliveryNote : any=[]
 getSalesInfo(id){
   this.context.getWithToken(id,'sales/getsinglesales/').
   subscribe( data => {
     let d = <any>data;
     this.salesInfo = d.data.salesInfo;
     this.salesDetails = d.data.salesdetails;
-
+    this.paymentHistory = d.data.payment_history;
+    this.deliveryNote = d.data.delivery_note;
     if(this.salesInfo.vat > 0){
       this.vat = this.salesInfo.vat * (this.salesInfo.TotalPrice - this.salesInfo.discount)
     }else{

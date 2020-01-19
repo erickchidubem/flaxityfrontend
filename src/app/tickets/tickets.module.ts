@@ -5,12 +5,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { ServiceTicketComponent } from './service-ticket/service-ticket.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { SupplyTicketsComponent } from './supply-tickets/supply-tickets.component';
+import { DeliveryTicketComponent } from './delivery-ticket/delivery-ticket.component';
 
 
 const routes: Routes = [
   
     { path:'invoice/:id', component : InvoiceComponent },
-    { path : 'service-call/:id', component:ServiceTicketComponent}
+    { path : 'service-call/:id', component:ServiceTicketComponent},
+    { path : 'delivery-note/:id/:salesid', component : DeliveryTicketComponent}
     
  ]; 
 
@@ -27,7 +29,7 @@ const routes: Routes = [
  
   declarations: [
     
-   ServiceTicketComponent,InvoiceComponent,SupplyTicketsComponent
+   ServiceTicketComponent,InvoiceComponent,SupplyTicketsComponent, DeliveryTicketComponent
 ],
 
 })

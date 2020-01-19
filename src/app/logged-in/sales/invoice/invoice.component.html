@@ -125,48 +125,7 @@
                   </div><!-- /.col -->
                 </div><!-- /.row -->
             </div>
-            <div class="row">
-              <!-- accepted payments column -->
-              <div class="col-lg-6 payment-icons">
-                <p class="lead">Payment Methods:</p>
-                <!-- <img src="assets/images/payment-icons/visa-dark.png" alt="Visa">
-                <img src="assets/images/payment-icons/mastro-dark.png" alt="Mastercard">
-                <img src="assets/images/payment-icons/american-dark.png" alt="American Express">
-                <img src="assets/images/payment-icons/paypal-dark.png" alt="Paypal"> -->
-                <p class="bg-light p-2 mt-3 rounded">
-                  <!-- Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                 -->
-                </p>
-              </div><!-- /.col -->
-              <div class="col-lg-6">
-                <!-- <p class="lead" *ngIf="salesInfo.order_collect > 0 ">Amount Due : {{amountDue | date:'EEEE, dd, MMMM, yyyy'}}</p> -->
-              
-              
-                <div class="table-responsive">
-                  <!-- <table class="table">
-                    <tbody>
-      <tr>
-                      <th style="width:50%">Subtotal:</th>
-                      <td>$250.30</td>
-                    </tr>
-                    <tr>
-                      <th>Tax (9.3%)</th>
-                      <td>$10.34</td>
-                    </tr>
-                    <tr>
-                      <th>Shipping:</th>
-                      <td>$5.80</td>
-                    </tr>
-                    <tr>
-                      <th>Total:</th>
-                      <td>$265.24</td>
-                    </tr>
-                  </tbody>
-      </table> -->
-                </div>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
- 
+            
             <!-- this row will not appear when printing -->
             <hr>
             <div class="row no-print">
@@ -194,6 +153,91 @@
     </div>
               </div>
             </div>
+
+
+            <div class="row">
+              <!-- accepted payments column -->
+              <div class="col-lg-12 payment-icons"><br/><br/>
+                <p class="lead">Payment Break down:</p>
+              
+                <p class="bg-light p-2 mt-3 rounded">
+                
+                </p>
+
+
+
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th>Collected By</th>
+                        <th>Payment Mode</th>
+                        <th>Date Collected</th>
+                        <th>Amount</th>
+                        <th>Note</th>
+                      </tr>
+                        <tr *ngFor="let c of paymentHistory">
+                            <td>{{c.Admin}}</td>
+                            <td>{{c.paymentmode}}</td>
+                            <td>{{c.collectedDate | date:'EEEE, MMM, dd, yyyy'}}</td>
+                            <td>{{utils.getCurrency()}}{{c.amount | number:'.2'}}</td>
+                            <td>{{c.note}}</td>
+                          </tr>
+                        
+                  </tbody>
+      </table>
+                </div>
+
+
+             
+              </div><!-- /.col -->
+
+
+
+              <div class="col-lg-12 payment-icons"><br/><br/>
+                <p class="lead">Delivery Note:</p>
+              
+                <p class="bg-light p-2 mt-3 rounded">
+                
+                </p>
+
+
+
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th>Delivery Option</th>
+                        <th>Delivery Status</th>
+                        <th>Date Created</th>
+                        <th>Delivery Address</th>
+                        <th></th>
+                      </tr>
+                        <tr *ngFor="let c of deliveryNote">
+                            <td>{{c.delivery_option}}</td>
+                            <td>{{c.delivery_status}}</td>
+                            <td>{{c.createdDate | date:'EEEE, MMM, dd, yyyy'}}</td>
+                            <td>{{c.delivery_address}}</td>
+                            <td><a  routerLink="/ticket/delivery-note/{{c?.id}}/{{salesInfo.id}}"
+                              target="_blank"
+              class="btn btn-success">view</a> &nbsp;&nbsp;
+              <!-- <a href="" class="btn btn-warning">update</a> -->
+            </td>
+                          </tr>
+                        
+                  </tbody>
+      </table>
+                </div>
+
+
+             
+              </div><!-- /.col -->
+           
+
+
+
+            </div><!-- /.row -->
+ 
           </section><!-- /.content -->
   </div>
 </div>
